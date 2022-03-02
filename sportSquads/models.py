@@ -40,10 +40,13 @@ class Team(models.Model):
     name = models.CharField(max_length=64, unique=True)
     image = models.ImageField(blank=True)
     description = models.TextField()
-    location = models.CharField(128)
+    location = models.CharField(max_length=128)
     sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
-    manager = models.ForeignKey(User, on_delete=models.CASCADE)
-    members_with_roles = models.ManyToManyField(User, through="TeamUserMembership")
+
+    # related name is so that django can distinguish between the two FKs
+    manager = models.ForeignKey(User, on_delete=models.CASCADE, related_name="manager")
+    members_with_roles = models.ManyToManyField(User, through="TeamUserMembership", related_name="member_with_roles")
+
     available_roles = models.JSONField()
     name_slug = models.SlugField(unique=True)   # team name appears in some urls so slugging it
 
