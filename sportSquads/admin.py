@@ -1,3 +1,8 @@
 from django.contrib import admin
+from sportSquads.models import User, Sport, Team
 
-# Register your models here.
+
+admin.site.register(User)
+admin.site.register(Sport)
+admin.site.register(Team)
+
