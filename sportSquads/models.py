@@ -15,15 +15,11 @@ class UserProfile(models.Model):
         return self.user.username
 
 
-def get_sentinel_user():
-    return get_user_model().objects.get_or_create(username="deleted")[0]
-
-
 class Sport(models.Model):
     name = models.CharField(max_length=64, unique=True)
     image = models.ImageField(blank=True)
     description = models.TextField()
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET(get_sentinel_user()))
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     roles = models.JSONField()
     name_slug = models.SlugField(unique=True)   # sport name appears in some urls so slugging it
 
