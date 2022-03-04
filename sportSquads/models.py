@@ -8,7 +8,7 @@ from django.contrib.auth import get_user_model
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(blank=True)
+    profile_picture = models.ImageField(upload_to='profile_images', blank=True)
     bio = models.TextField()
 
     def __str__(self):
@@ -17,9 +17,9 @@ class UserProfile(models.Model):
 
 class Sport(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(upload_to='sport_images', blank=True)
     description = models.TextField()
-    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
+    author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
     roles = models.JSONField()
     name_slug = models.SlugField(unique=True)   # sport name appears in some urls so slugging it
 
@@ -34,10 +34,10 @@ class Sport(models.Model):
 
 class Team(models.Model):
     name = models.CharField(max_length=64, unique=True)
-    image = models.ImageField(blank=True)
+    image = models.ImageField(upload_to='team_images', blank=True)
     description = models.TextField()
     location = models.CharField(max_length=128)
-    sport = models.ForeignKey(Sport, on_delete=models.CASCADE)
+    sport = models.ForeignKey(Sport, on_delete=models.PROTECT)
 
     # related name is so that django can distinguish between the two FKs
     manager = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="manager")
