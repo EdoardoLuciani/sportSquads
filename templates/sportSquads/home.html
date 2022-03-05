@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<link rel="stylesheet" type="text/css" href="test.css">
+</head>
+
+<h1>sportSquads</h1>
+
+<div class=s><h2><p style="text-align:center">sports</p></h2></div>
+
+<div>
+  <a href="{% url 'sportSquads:view_all_sports' sport.slug %}">View all Sports
+    </a>
+<div>
+
+<div class="box">
+      <h2>Sports</h2>
+    {% if sports %}
+      <ul>  
+      {% for sport in sports %}
+        <li class="sport">
+          <a href="{% url 'sportSquads:show_sport' sport.slug %}">
+            {{ sport.name }}
+        </li>
+      {% endfor %}
+      </ul>
+    {% else %}
+      <strong>There are no sports.</strong>
+    {% endif %}
+
+    </div>
+
+
+  </body>
+</html>
