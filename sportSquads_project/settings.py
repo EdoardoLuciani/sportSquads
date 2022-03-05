@@ -19,6 +19,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Path to store dynamic files in
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
+# Path to store the template files in
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 # Setting the variables used by django to store dynamic files
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -62,7 +65,7 @@ ROOT_URLCONF = 'sportSquads_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ TEMPLATE_DIR ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
