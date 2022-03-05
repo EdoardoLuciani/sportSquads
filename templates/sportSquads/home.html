@@ -16,7 +16,7 @@
       <ul>  
       {% for sport in sports %}
         <li class="sport">
-          <a href="{% url 'sportSquads:show_sport' Sport.name_slug %}">
+          <a href="{% url 'show_sport' sport.name_slug %}">
             {{ sport.name }}
         </li>
       {% endfor %}
