@@ -42,13 +42,13 @@ def show_sport(request,sport_name_slug):
         teams = team.objects.filter(team=team)
 
         #Adds our results list to the template context under name pages.
-        context_dict['teams'] = teams
+        context_dict['sports'] = sports
         #We also add the category objects from
         #the database to the context dictionary
         #We'll use this in the template to verify that the category exists.
         context_dict['teams'] = teams
         
-    except Category.DoesNotExist:
+    except Sport.DoesNotExist:
         #we get here if we didnt find the specified category
         #dont do anything -
         #the template will display "no categort" message
