@@ -1,3 +1,6 @@
+# Some directory created by OSX that we don't need
+.DS_Store
+
 # Django dynamic files
 media
 
