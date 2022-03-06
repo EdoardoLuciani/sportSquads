@@ -1,3 +1,10 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
+
+
+
+
 <!DOCTYPE html>
 <html>
 
@@ -5,15 +12,16 @@
 <body>
 <h1>sportSquads</h1>
 
+<div class=s> <h2> All Sports</h2>
+</div>
 
 
-
-<div class="box">
-      <h2> All Sports</h2>
+<div >
+      
     {% if sports %}
       <ul>  
       {% for sport in sports %}
-        <li class="sport">
+        <li>
           <a href="{% url 'show_sport' sport.name_slug %}">
             {{ sport.name }}
         </li>

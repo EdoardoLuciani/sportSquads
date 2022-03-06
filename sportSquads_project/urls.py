@@ -16,9 +16,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from sportSquads import views
+from django.urls import include
+
+
+#app_name = "sportSquads"
 
 urlpatterns = [
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('allsports', views.allsports, name='allsports'),
     path('sport/<slug:sport_name_slug>/',
