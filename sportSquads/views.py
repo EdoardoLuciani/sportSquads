@@ -58,3 +58,14 @@ def show_sport(request,sport_name_slug):
     #Go render the response and return it to the client.
     return render(request, 'sportSquads/sport.html', context=context_dict)
 
+
+def allsports(request):
+
+    sport_list = Sport.objects.all()
+    context_dict = {}
+    context_dict['sports']=sport_list
+    
+    response = render(request, "sportSquads/allsports.html", context=context_dict)
+
+    return response
+    

@@ -20,6 +20,8 @@ from sportSquads import views
 urlpatterns = [
     #path('admin/', admin.site.urls),
     path('', views.home, name='home'),
+    path('allsports', views.allsports, name='allsports'),
     path('sport/<slug:sport_name_slug>/',
          views.show_sport, name='show_sport'),
+    
 ]

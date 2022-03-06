@@ -2,9 +2,7 @@
 
 
 
-
-
-div {
+div.h {
 	border:  2px solid black;
 	margin:  20px;
 	}
@@ -20,7 +18,7 @@ div.s {
 
 	
 div.box {	
-   position: relative;
+  position: relative;
 	below: 300px;
 	background: lightblue;
 		}  
