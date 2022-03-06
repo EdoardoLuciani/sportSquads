@@ -1,12 +1,10 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
-
 from sportSquads.models import Sport
 from sportSquads.models import Team
 
-
-#from sportSquads.forms import CategoryForm
+from sportSquads.forms import UserForm, UserProfileForm
 #from django.shortcuts import redirect
 
 from django.urls import reverse
@@ -69,3 +67,31 @@ def allsports(request):
 
     return response
     
+def sign_up(request):
+    registered = False
+    if request.method == 'POST':
+        user_form = UserForm(request.POST)
+        user_profile_form = UserProfileForm(request.POST)
+
+        if user_form.is_valid() and user_profile_form.is_valid():
+            user = user_form.save(commit=False)
+            user.set_password(user.password)
+            user.save()
+
+            profile = user_profile_form.save(commit=False)
+            profile.user = user
+
+            if 'profile_picture' in request.FILES:
+                profile.profile_picture = request.FILES['profile_picture']
+            profile.save()
+            registered = True
+        else:
+            print(user_form.errors, user_profile_form.errors)
+    else:
+        user_form = UserForm()
+        user_profile_form = UserProfileForm()
+    
+    return render(request, 'sportSquads/sign_up.html', context = {
+        'user_form' : user_form,
+        'user_profile_form' : user_profile_form,
+        'registered' : registered})

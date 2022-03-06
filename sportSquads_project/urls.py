@@ -25,7 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('allsports', views.allsports, name='allsports'),
-    path('sport/<slug:sport_name_slug>/',
-         views.show_sport, name='show_sport'),
-    
+    path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
+    path('sign-up', views.sign_up, name='sign_up'),
 ]

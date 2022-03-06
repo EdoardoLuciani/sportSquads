@@ -1,0 +1,16 @@
+{% extends 'sportSquads/base.html' %}
+
+{% block body_block %}
+    {% if registered %}
+        <strong>Thanks for registering!</strong>
+        <a href="{% url 'home' %}">Return to the homepage.</a><br />
+    {% else %}
+        <h1>Create a new account</h1>
+        <form id="user_form" method="post" action="{% url 'sign_up' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ user_form.as_p }}
+            {{ user_profile_form.as_p }}
+            <input type="submit" name="submit" value="Register" />
+        </form>
+    {% endif %}
+{% endblock %}
