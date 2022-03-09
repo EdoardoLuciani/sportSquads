@@ -12,23 +12,23 @@
 <body>
 <h1>sportSquads</h1>
 
-<div class=s> <h2> All Sports</h2>
+<div class=s> <h2> All Teams</h2>
 </div>
 
 
 <div >
       
-    {% if sports %}
+    {% if teams %}
       <ul>  
-      {% for sport in sports %}
+      {% for team in teams %}
         <li>
-          <a href="{% url 'show_sport' sport.name_slug %}">
-            {{ sport.name }}
+          <a href="{% url 'show_team' team.name_slug %}">
+            {{ team.name }}
         </li>
       {% endfor %}
       </ul>
     {% else %}
-      <strong>There are no sports.</strong>
+      <strong>There are no teams.</strong>
     {% endif %}
 
     </div>
