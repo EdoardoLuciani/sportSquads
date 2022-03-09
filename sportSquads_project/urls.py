@@ -19,8 +19,6 @@ from sportSquads import views
 from django.urls import include
 
 
-#app_name = "sportSquads"
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
@@ -28,6 +26,5 @@ urlpatterns = [
     path('sport/<slug:sport_name_slug>/',
          views.show_sport, name='show_sport'),
     path('team/<slug:team_name_slug>/',
-         views.show_team, name='show_team'),
-    
+         views.show_team, name='show_team'),    
 ]
