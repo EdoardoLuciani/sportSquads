@@ -19,6 +19,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Path to store dynamic files in
 MEDIA_DIR = os.path.join(BASE_DIR, 'media')
 
+# Path to store static files in
+STATIC_DIR = os.path.join(BASE_DIR, 'static')
+
+# Path to store the template files in
+TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
+
 # Setting the variables used by django to store dynamic files
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
@@ -62,7 +68,7 @@ ROOT_URLCONF = 'sportSquads_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ TEMPLATE_DIR ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,7 +90,7 @@ WSGI_APPLICATION = 'sportSquads_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 
@@ -124,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS = [STATIC_DIR, ]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

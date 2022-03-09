@@ -15,7 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from sportSquads import views
+from django.urls import include
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.home, name='home'),
+    path('all_teams', views.all_teams, name='all_teams'),
+    path('sport/<slug:sport_name_slug>/',
+         views.show_sport, name='show_sport'),
+    path('team/<slug:team_name_slug>/',
+         views.show_team, name='show_team'),    
 ]
