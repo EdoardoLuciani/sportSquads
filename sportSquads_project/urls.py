@@ -19,12 +19,11 @@ from sportSquads import views
 from django.urls import include
 
 
-#app_name = "sportSquads"
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-    path('allsports', views.allsports, name='allsports'),
-    path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
     path('sign-up', views.sign_up, name='sign_up'),
+    path('all_teams', views.all_teams, name='all_teams'),
+    path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
+    path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
 ]
