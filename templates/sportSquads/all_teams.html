@@ -1,38 +1,28 @@
+{% extends 'sportSquads/base.html' %}
+
 {% load static %}
 
 <link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
 
-
-
-
-<!DOCTYPE html>
-<html>
-
-
-<body>
-<h1>sportSquads</h1>
-
-<div class=s> <h2> All Teams</h2>
-</div>
-
-
-<div >
-      
-    {% if teams %}
-      <ul>  
-      {% for team in teams %}
-        <li>
-          <a href="{% url 'show_team' team.name_slug %}">
-            {{ team.name }}
-        </li>
-      {% endfor %}
-      </ul>
-    {% else %}
-      <strong>There are no teams.</strong>
-    {% endif %}
-
-    </div>
-
-
-  </body>
-</html>
+{% block body_block %}
+    <body>
+        <h1>sportSquads</h1>
+        <div class=s>
+            <h2>All Teams</h2>
+        </div>
+        <div>
+            {% if teams %}
+            <ul>
+                {% for team in teams %}
+                <li>
+                    <a href="{% url 'show_team' team.name_slug %}">
+                    {{ team.name }}
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %}
+                <strong>There are no teams.</strong>
+            {% endif %}
+        </div>
+    </body>
+{% endblock %}

@@ -1,48 +1,35 @@
 {% extends 'sportSquads/base.html' %}
+
 {% load static %}
 
-
-
-
 {% block title_block %}
-  Homepage
+    Homepage
 {% endblock %}
 
-
 {% block body_block %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
-<h1>sportSquads</h1>
-
-<div class=s ><h2><p style="text-align:center">Sports</p></h2>
-</div>
-
-
-<div>
-   <a href="{% url 'all_teams'%}">View all Teams
-     </a>
- <div>
-
-
-
-<div class="box">
-      <h2>Sports</h2>
-    {% if sports %}
-      <ul>  
-      {% for sport in sports %}
-        <li class="sport">
-          <a href="{% url 'show_sport' sport.name_slug %}">
-            <p style="text-align:center">{{ sport.name }}</p>
-        </li>
-      {% endfor %}
-      </ul>
-    {% else %}
-      <strong>There are no sports.</strong>
-    {% endif %}
-
+    <link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
+    <h1>sportSquads</h1>
+    <div class=s>
+        <h2>
+            <p style="text-align:center">Sports</p>
+        </h2>
     </div>
-
-
-
-
-
-  {% endblock %}
+    <div>
+        <a href="{% url 'all_teams'%}">View all Teams</a>
+    <div>
+    <div class="box">
+        <h2>Sports</h2>
+        {% if sports %}
+        <ul>
+            {% for sport in sports %}
+            <li class="sport">
+                <a href="{% url 'show_sport' sport.name_slug %}">
+                <p style="text-align:center">{{ sport.name }}</p>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no sports.</strong>
+        {% endif %}
+    </div>
+{% endblock %}
