@@ -85,6 +85,17 @@ def contact_us(request):
     return render(request, 'sportSquads/contact_us.html')
     
 def add_new_sport(request):
-    context_dict = {}
-    return render(request, "sportSquads/add_new_sport.html", context=context_dict)
+    form = SportForm()
+
+    if request.method == "POST":
+        form = SportForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect("/sportSquads/")
+        else:
+            print(form.errors)
+
+
+    return render(request, "sportSquads/add_new_sport.html", {'form': form})
 
