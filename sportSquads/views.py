@@ -57,17 +57,15 @@ def sign_up(request):
         'registered' : registered})
 
 
+# @login_required()
 def add_new_sport(request):
-    form = SportForm()
+    form = SportForm(author=request.user, data=request.POST)
 
-    if request.method == "POST":
-        form = SportForm(request.POST)
-
-        if form.is_valid():
-            form.save(commit=True)
-            return redirect("/sportSquads/")
-        else:
-            print(form.errors)
+    if form.is_valid():
+        form.save()
+        return redirect("/sportSquads/")
+    else:
+        print(form.errors)
 
 
     return render(request, "sportSquads/add_new_sport.html", {'form': form})

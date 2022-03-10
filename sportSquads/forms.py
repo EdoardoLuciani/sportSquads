@@ -3,7 +3,19 @@ from django import forms
 from sportSquads.models import Sport, Team, UserProfile
 from django.contrib.auth.models import User
 
+
 class SportForm(forms.ModelForm):
+    def __init__(self, **kwargs):
+        self.author = kwargs.pop('author', None)
+        super(SportForm, self).__init__(**kwargs)
+
+    def save(self, commit=True):
+        obj = super(SportForm, self).save(commit=False)
+        obj.author = self.author
+        if commit:
+            obj.save()
+        return obj
+
     name = forms.CharField(max_length=64,
                            help_text="Name of Sport: ")
     image = forms.ImageField(required=False,
@@ -13,7 +25,6 @@ class SportForm(forms.ModelForm):
 
     class Meta:
         model = Sport
-        exclude = ('author',)
         fields = ('name', 'image', 'description', 'roles')
 
 
