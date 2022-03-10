@@ -1,16 +1,19 @@
 from django.shortcuts import render
+from django.http import JsonResponse
 from sportSquads.forms import UserForm, UserProfileForm
 from sportSquads.models import Sport,Team
 
 def home(request):
-    sport_list = Sport.objects.all()
-    team_list =  Team.objects.all()
+    sport_list = Sport.objects.all()[:10]
 
     context_dict = {}
-    context_dict['sports']=sport_list
-    context_dict['teams']=team_list
+    context_dict['sports'] = sport_list
 
     return render(request, "sportSquads/home.html", context=context_dict)
+
+def home_get_10_more_sports(request, starting_idx):
+    sport_list = (Sport.objects.all()[starting_idx: 10 + starting_idx]).values()
+    return JsonResponse({'sports': list(sport_list)})
 
 
 def show_sport(request, sport_name_slug):

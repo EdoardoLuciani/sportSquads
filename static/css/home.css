@@ -20,7 +20,7 @@ div#box {
     grid-template-columns: auto auto auto auto;
     column-gap: 15px;
     row-gap: 15px;
-    height: 300px;
+    height: 700px;
 }
 
 .sport {
