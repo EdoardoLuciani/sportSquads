@@ -1,0 +1,12 @@
+:root{
+	--main_colour: #f5b942;
+	--secondary_colour: #7b33d4;
+	--secondary_colour2: #6b1ec9;
+}
+
+
+body {
+	background-color: var(--main_colour);
+	font-family: Verdana;
+}
+
