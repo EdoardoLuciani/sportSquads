@@ -1,6 +1,10 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-from sportSquads.forms import UserForm, UserProfileForm
+from django.shortcuts import render, redirect
+from django.http import JsonResponse, HttpResponse
+from django.urls import reverse
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib import messages
+from sportSquads.forms import *
 from sportSquads.models import Sport,Team
 
 def home(request):
@@ -62,19 +66,19 @@ def sign_up(request):
 
 def user_login(request):
     if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(username=username, password=password)
-
-        if user:
-            if user.is_active:
-                login(request,user)
-                return redirect(reverse('sportSquads:index'))
+        user_login_form = AuthenticationForm(request, data=request.POST)
+        
+        if user_login_form.is_valid():
+            user = authenticate(username=user_login_form.cleaned_data['username'], password=user_login_form.cleaned_data['password'])
+            if user:
+                login(request, user)
+                return redirect(reverse('home'))
             else:
-                return HttpResponse("Invalid login details supplied.")
-    else:
-        return render(request, 'sportSquads/login.html')
+                return HttpResponse("Invalid login details")
+        else:
+            return HttpResponse("Invalid login details")
+
+    return render(request, 'sportSquads/login.html', context= { 'user_login_form' : AuthenticationForm()})    
 
 
 def contact_us(request):
