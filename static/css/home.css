@@ -4,16 +4,14 @@ div.h {
 }
 
 div.s {	
-    position: relative;
-	bottom: 5px; 
+	margin-bottom: 5px; 
 	height:  40px;
 	background: cadetblue;
 }
 
 div.box {	
-    position: relative;
 	background: lightblue;
-    overflow-y: hidden;
+    overflow-y: scroll;
 }
 
 #grid-container {
@@ -22,6 +20,7 @@ div.box {
     grid-template-columns: auto auto auto auto;
     column-gap: 15px;
     row-gap: 15px;
+    height: 300px;
 }
 
 .sport {
