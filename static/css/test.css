@@ -1,48 +1,32 @@
-<style type="text/css">
-
-
-
 div.h {
-	border:  2px solid black;
+    border:  2px solid black;
 	margin:  20px;
-	}
+}
 
 div.s {	
-  position: relative;
+    position: relative;
 	bottom: 5px; 
 	height:  40px;
 	background: cadetblue;
 }
 
-
-	
 div.box {	
-  position: relative;
-	below: 300px;
+    position: relative;
 	background: lightblue;
-		}  
-  
-
-/*.container {
-  background-color: Blue;
-  margin: 0 auto;
-  font-size: 0;
-}*/
-
-
-.sport {
-  box-sizing: border-box; 
-  color: Black;
-  display: inline-block;
-  border: 5px solid black;
-  height: %;
-  width: 24%;
-  font-size: 20px;
-  overflow: hidden;
+    overflow-y: hidden;
 }
 
+#grid-container {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    column-gap: 15px;
+    row-gap: 15px;
+}
 
-</style>
-
-
-
+.sport {
+    border: 5px solid black;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}
