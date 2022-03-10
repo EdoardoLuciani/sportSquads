@@ -69,6 +69,7 @@
 				min-width: 120px;
 				animation-name: drop;
 				animation-duration: 0.2s;
+				z-index: 1;
 			}
 			
 			@keyframes drop {
@@ -100,14 +101,14 @@
 	</head>
 	<body>
 		<div class = "hingebar">
-			<a class="icon left" href=""><img src="home.jpg" alt="HOME"></a>
+			<a class="icon left" href="{% url 'home' %}"><img src="home.jpg" alt="HOME"></a>
 			<img class="icon left" src="logo.jpg" alt="LOGO">
 			
 			<div class="dropdown icon right">
 				<button class="dropbtn"><img src="profile.jpg" alt="USER"</button>
 				<div class="dropdown-content">
 					<a href="">Login</a>
-					<a href="">Sign up</a>
+					<a href="{% url 'sign_up'%}">Sign up</a>
 					<a href="">Account Details</a>
 					<a href="">Sign out</a>
 				</div>
