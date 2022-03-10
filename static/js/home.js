@@ -9,7 +9,7 @@ $(document).ready(function() {
     var elem_count = 10;
     var end_reached = false;
     var request_in_progress = false;
-    function home_get_10_more_sports() {
+    function home_get_more_sports_while_scroll_end() {
         if (!end_reached && !request_in_progress) {
             var request = $.ajax({
                 url: '/home_get_10_more_sports/' + elem_count,
@@ -30,12 +30,12 @@ $(document).ready(function() {
                     end_reached = true;
                 }
                 else if (scrollbar_at_end()) {
-                    home_get_10_more_sports()
+                    home_get_more_sports_while_scroll_end()
                 }
             });
         }
     }
 
-    $('#box').ready(home_get_10_more_sports);
-    $('#box').scroll(home_get_10_more_sports);
+    $('#box').ready(home_get_more_sports_while_scroll_end);
+    $('#box').scroll(home_get_more_sports_while_scroll_end);
 });
