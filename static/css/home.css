@@ -1,0 +1,31 @@
+div.h {
+    border:  2px solid black;
+	margin:  20px;
+}
+
+div.s {	
+	margin-bottom: 5px; 
+	height:  40px;
+	background: cadetblue;
+}
+
+div#box {	
+	background: lightblue;
+    overflow-y: scroll;
+}
+
+#grid-container {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    column-gap: 15px;
+    row-gap: 15px;
+    height: 700px;
+}
+
+.sport {
+    border: 5px solid black;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}

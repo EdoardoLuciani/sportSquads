@@ -116,8 +116,13 @@ def populate():
             "roles": {"opposite": "1", "setter": "1"},
         },
     ]
+
     for sport_data in sports_data:
-        add_sport(**sport_data)
+        # Adding each sport 30 times so that we can have a lot of teams and test the infinite scrolling
+        for i in range(30):
+            sport_data_to_add = sport_data.copy()
+            sport_data_to_add["name"] = f"{sport_data['name']}-{i}"
+            add_sport(**sport_data_to_add)
 
     team_images_initial_path = "./populate_sportSquads_files/team_images/"
     teams_data = [
