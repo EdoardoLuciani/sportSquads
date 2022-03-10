@@ -22,13 +22,13 @@
     <div class="box">
         <h2>Sports</h2>
         {% if sports %}
-        <div id="grid-container">
-            {% for sport in sports %}
-                <div class="sport">
-                    <a href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
-                </div>
-            {% endfor %}
-        </div>
+            <div id="grid-container">
+                {% for sport in sports %}
+                    <div class="sport">
+                        <a href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
         {% else %}
             <strong>There are no sports.</strong>
         {% endif %}
