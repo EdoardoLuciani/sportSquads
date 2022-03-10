@@ -9,7 +9,7 @@ div.s {
 	background: cadetblue;
 }
 
-div.box {	
+div#box {	
 	background: lightblue;
     overflow-y: scroll;
 }

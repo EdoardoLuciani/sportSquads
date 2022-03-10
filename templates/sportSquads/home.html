@@ -8,6 +8,7 @@
 
 {% block body_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/home.js' %}"></script>
 
     <h1>sportSquads</h1>
@@ -19,7 +20,7 @@
     <div>
         <a href="{% url 'all_teams'%}">View all Teams</a>
     </div>
-    <div class="box">
+    <div id="box">
         <h2>Sports</h2>
         {% if sports %}
             <div id="grid-container">
