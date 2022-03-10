@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from sportSquads.forms import UserForm, UserProfileForm
+from sportSquads.forms import UserForm, UserProfileForm, SportForm
 from sportSquads.models import Sport,Team
 
 def home(request):
@@ -58,6 +58,17 @@ def sign_up(request):
 
 
 def add_new_sport(request):
-    context_dict = {}
-    return render(request, "sportSquads/add_new_sport.html", context=context_dict)
+    form = SportForm()
+
+    if request.method == "POST":
+        form = SportForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=True)
+            return redirect("/sportSquads/")
+        else:
+            print(form.errors)
+
+
+    return render(request, "sportSquads/add_new_sport.html", {'form': form})
 
