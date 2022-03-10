@@ -20,7 +20,6 @@ $(document).ready(function() {
             request.done(function(data) {
                 request_in_progress = false;
 
-                console.log(data);
                 sports_data = data["sports"];
                 for (var i = 0; i < sports_data.length; i++) {
                     $('#grid-container').append('<div class="sport"> <a href="/sports/' + sports_data[i].name_slug + '">' + sports_data[i].name + '</a> </div>');
