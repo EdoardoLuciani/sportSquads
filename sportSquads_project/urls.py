@@ -24,6 +24,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('sign-up', views.sign_up, name='sign_up'),
     path('all_teams', views.all_teams, name='all_teams'),
+    path('contact_us', views.contact_us, name='contact_us'),
     path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
 ]

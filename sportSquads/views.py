@@ -55,3 +55,8 @@ def sign_up(request):
         'user_form' : user_form,
         'user_profile_form' : user_profile_form,
         'registered' : registered})
+
+
+def contact_us(request):
+    return render(request, 'sportSquads/contact_us.html')
+    
