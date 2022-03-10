@@ -58,3 +58,25 @@ def sign_up(request):
         'user_form' : user_form,
         'user_profile_form' : user_profile_form,
         'registered' : registered})
+
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request,user)
+                return redirect(reverse('sportSquads:index'))
+            else:
+                return HttpResponse("Invalid login details supplied.")
+    else:
+        return render(request, 'sportSquads/login.html')
+
+
+def contact_us(request):
+    return render(request, 'sportSquads/contact_us.html')
+    

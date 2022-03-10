@@ -4,6 +4,7 @@ div.h {
 }
 
 div.s {	
+    z-index: -1;
 	margin-bottom: 5px; 
 	height:  40px;
 	background: cadetblue;

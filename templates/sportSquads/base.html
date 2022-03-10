@@ -58,6 +58,7 @@
 			}
 			
 			.dropdown-content {
+				z-index: 1;
 				position: absolute;
 				top: -20px;
 				right: 0px;
@@ -107,7 +108,7 @@
 			<div class="dropdown icon right">
 				<button class="dropbtn"><img src="profile.jpg" alt="USER"</button>
 				<div class="dropdown-content">
-					<a href="">Login</a>
+					<a href="{% url 'login'%}">Login</a>
 					<a href="{% url 'sign_up'%}">Sign up</a>
 					<a href="">Account Details</a>
 					<a href="">Sign out</a>
@@ -120,7 +121,7 @@
 				<button class="dropbtn">=</button>
 				<div class="dropdown-content">
 					<a href="{% url 'all_teams'%}">All Teams</a>
-					<a href="">Contact Us</a>
+					<a href="{% url 'contact_us'%}">Contact Us</a>
 				</div>
 			</div>
 
