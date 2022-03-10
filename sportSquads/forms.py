@@ -5,6 +5,14 @@ from django.contrib.auth.models import User
 
 class SportForm(forms.ModelForm):
     pass
+    # name = forms.CharField(max_length=64)
+    # image = forms.ImageField(required=False)
+    # description = forms.TextField()
+    # roles = forms.JSONField()
+    #
+    # class Meta:
+    #     model = Sport
+    #     fields = ('name', 'image', 'description', '')
 
 class TeamForm(forms.ModelForm):
     pass

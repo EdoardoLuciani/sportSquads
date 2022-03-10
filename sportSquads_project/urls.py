@@ -32,4 +32,5 @@ urlpatterns = [
     path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
 
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
+    path('add-sport', views.add_new_sport, name='add_new_sport')
 ]

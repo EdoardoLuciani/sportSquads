@@ -57,7 +57,7 @@ def sign_up(request):
     else:
         user_form = UserForm()
         user_profile_form = UserProfileForm()
-    
+
     return render(request, 'sportSquads/sign_up.html', context = {
         'user_form' : user_form,
         'user_profile_form' : user_profile_form,
@@ -84,3 +84,7 @@ def user_login(request):
 def contact_us(request):
     return render(request, 'sportSquads/contact_us.html')
     
+def add_new_sport(request):
+    context_dict = {}
+    return render(request, "sportSquads/add_new_sport.html", context=context_dict)
+
