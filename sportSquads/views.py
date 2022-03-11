@@ -110,6 +110,5 @@ def add_new_sport(request):
     else:
         print(form.errors)
 
-
     return render(request, "sportSquads/add_new_sport.html", {'form': form})
 

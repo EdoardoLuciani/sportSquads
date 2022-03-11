@@ -16,12 +16,6 @@ class SportForm(forms.ModelForm):
             obj.save()
         return obj
 
-    name = forms.CharField(max_length=64,
-                           help_text="Name of Sport: ")
-    image = forms.ImageField(required=False,
-                             help_text="Image (Optional) ")
-    description = forms.CharField(help_text="Description of sport ")
-    roles = forms.CharField(help_text="Roles ")
 
     class Meta:
         model = Sport

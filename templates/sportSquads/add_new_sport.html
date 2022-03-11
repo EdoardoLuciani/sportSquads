@@ -10,10 +10,7 @@
     <h1>Add a New Sport</h1>
     <form id="add_new_sport" method="post" action = "/add-sport/">
         {% csrf_token %}
-        {% for field in form.visible_fields %}
-            {{ field.errors }}
-            {{ field.help_text}}{{field }} <br />
-        {% endfor %}
-        <input type="submit", name="submit", value="Add New Sport" />
+        {{ form.as_p}}
+        <input type="submit" name="submit" value="Add New Sport" />
     </form>
 {% endblock %}
