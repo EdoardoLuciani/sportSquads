@@ -12,7 +12,10 @@ def home(request):
 
     return render(request, "sportSquads/home.html", context=context_dict)
 
-
+def account_information(request):
+    context_dict = {}
+    return render(request, "sportSquads/account_information.html", context=context_dict)
+    
 def show_sport(request, sport_name_slug):
     context_dict = {}
     return render(request, 'sportSquads/sport.html', context=context_dict)
