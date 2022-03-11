@@ -20,7 +20,7 @@ class Sport(models.Model):
     image = models.ImageField(upload_to='sport_images', blank=True)
     description = models.TextField()
     author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
-    roles = models.JSONField(blank=True, null=True)
+    positions = models.IntegerField(default=5)
     name_slug = models.SlugField(unique=True)   # sport name appears in some urls so slugging it
 
     def save(self, *args, **kwargs):
@@ -43,7 +43,7 @@ class Team(models.Model):
     manager = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="manager")
     members_with_roles = models.ManyToManyField(UserProfile, through="TeamUserMembership", related_name="member_with_roles")
 
-    available_roles = models.JSONField()
+    positions_available = models.IntegerField(default=5)
     name_slug = models.SlugField(unique=True)   # team name appears in some urls so slugging it
 
     def save(self, *args, **kwargs):
