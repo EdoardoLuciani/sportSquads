@@ -9,9 +9,24 @@ class SportForm(forms.ModelForm):
         self.author = kwargs.pop('author', None)
         super(SportForm, self).__init__(**kwargs)
 
+        self.fields['role_0'] = forms.CharField(max_length=64, required=False)
+
+    def clean(self):
+        roles = {
+            'roles' : {}
+        }
+
+        i = 0
+        while self.cleaned_data.get(f'role_{i}'):
+            roles['roles'][self.cleaned_data[f'role_{i}']] = 69
+            i += 1
+
+        self.cleaned_data['roles'] = roles
+
     def save(self, commit=True):
         obj = super(SportForm, self).save(commit=False)
         obj.author = self.author
+        obj.roles = self.cleaned_data['roles']
         if commit:
             obj.save()
         return obj
@@ -19,7 +34,7 @@ class SportForm(forms.ModelForm):
 
     class Meta:
         model = Sport
-        fields = ('name', 'image', 'description', 'positions')
+        fields = ('name', 'image', 'description')
 
 
 class TeamForm(forms.ModelForm):
@@ -29,10 +44,9 @@ class TeamForm(forms.ModelForm):
 class UserForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput())
     
-    
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email', 'password')
+        fields = ('username', 'first_name', 'last_name', 'email')
         
         
 class UserProfileForm(forms.ModelForm):

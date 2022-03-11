@@ -58,9 +58,7 @@ def sign_up(request):
             profile.save()
             registered = True
 
-            new_user = authenticate(username=user_form.cleaned_data['username'],
-                                password=user_form.cleaned_data['password'])
-            login(request, new_user)
+            login(request, user)
         else:
             print(user_form.errors, user_profile_form.errors)
     else:
@@ -76,7 +74,6 @@ def sign_up(request):
 def user_login(request):
     if request.method == 'POST':
         user_login_form = AuthenticationForm(request, data=request.POST)
-        
         if user_login_form.is_valid():
             user = authenticate(username=user_login_form.cleaned_data['username'],
                                 password=user_login_form.cleaned_data['password'])
@@ -106,8 +103,7 @@ def contact_us(request):
 @login_required
 def add_new_sport(request):
     user = User.objects.get(id=request.user.id)
-    profile = UserProfile.objects.filter(user=user).get()
-    form = SportForm(author=profile, data=request.POST)
+    form = SportForm(author=UserProfile.objects.get(user=user), data=request.POST)
 
     if form.is_valid():
         form.save()
