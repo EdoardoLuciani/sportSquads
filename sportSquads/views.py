@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from sportSquads.forms import *
-from sportSquads.models import Sport, Team
+from sportSquads.models import Sport, Team, UserProfile
 from django.contrib.auth.decorators import login_required
 
 
@@ -102,11 +102,13 @@ def contact_us(request):
 
 @login_required
 def add_new_sport(request):
-    form = SportForm(author=request.user, data=request.POST)
+    user = User.objects.get(id=request.user.id)
+    profile = UserProfile.objects.filter(user=user).get()
+    form = SportForm(author=profile, data=request.POST)
 
     if form.is_valid():
         form.save()
-        return redirect("/sportSquads/")
+        return redirect(reverse('home'))
     else:
         print(form.errors)
 

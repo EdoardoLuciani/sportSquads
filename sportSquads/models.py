@@ -20,7 +20,7 @@ class Sport(models.Model):
     image = models.ImageField(upload_to='sport_images', blank=True)
     description = models.TextField()
     author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
-    roles = models.JSONField()
+    roles = models.JSONField(blank=True, null=True)
     name_slug = models.SlugField(unique=True)   # sport name appears in some urls so slugging it
 
     def save(self, *args, **kwargs):

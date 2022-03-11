@@ -19,7 +19,7 @@ class SportForm(forms.ModelForm):
 
     class Meta:
         model = Sport
-        fields = ('name', 'image', 'description', 'roles')
+        fields = ('name', 'image', 'description')
 
 
 class TeamForm(forms.ModelForm):
