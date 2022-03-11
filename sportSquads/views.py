@@ -58,6 +58,9 @@ def sign_up(request):
             profile.save()
             registered = True
 
+            new_user = authenticate(username=user_form.cleaned_data['username'],
+                                password=user_form.cleaned_data['password'])
+            login(request, new_user)
         else:
             print(user_form.errors, user_profile_form.errors)
     else:
