@@ -46,9 +46,7 @@ def sign_up(request):
         user_profile_form = UserProfileForm(request.POST)
 
         if user_form.is_valid() and user_profile_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user.password)
-            user.save()
+            user = user_form.save()
 
             profile = user_profile_form.save(commit=False)
             profile.user = user
@@ -74,6 +72,7 @@ def sign_up(request):
 def user_login(request):
     if request.method == 'POST':
         user_login_form = AuthenticationForm(request, data=request.POST)
+
         if user_login_form.is_valid():
             user = authenticate(username=user_login_form.cleaned_data['username'],
                                 password=user_login_form.cleaned_data['password'])

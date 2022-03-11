@@ -2,6 +2,7 @@ from django import forms
 
 from sportSquads.models import Sport, Team, UserProfile
 from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
 
 class SportForm(forms.ModelForm):
@@ -41,12 +42,10 @@ class TeamForm(forms.ModelForm):
     pass
 
 
-class UserForm(forms.ModelForm):
-    password = forms.CharField(widget=forms.PasswordInput())
-    
+class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ('username', 'first_name', 'last_name', 'email')
+        fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
         
         
 class UserProfileForm(forms.ModelForm):
