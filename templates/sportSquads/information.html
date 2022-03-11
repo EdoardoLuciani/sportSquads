@@ -1,0 +1,18 @@
+{% extends 'sportSquads/base.html' %}
+{% load static %}
+
+{% block body_block %}
+	<link rel="stylesheet" type="text/css" href="{% static 'css/information_display.css' %}">
+	<style>
+		z-index: -1;
+	</style>
+	<div class="info  shadow" style="margin-top: 0px">
+		{% block top_block %}		
+		{% endblock %}
+	</div>
+	<div class="info  shadow" style="height: 960px;">
+		{% block bottom_block %}
+		{% endblock %}
+	</div>
+{% endblock %}
+
