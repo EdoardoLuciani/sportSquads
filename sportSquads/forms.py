@@ -11,6 +11,7 @@ class SportForm(forms.ModelForm):
         super(SportForm, self).__init__(**kwargs)
 
         self.fields['role_0'] = forms.CharField(max_length=64, required=False)
+        self.fields['role_0_count'] = forms.IntegerField(min_value=1, required=False)
 
     def clean(self):
         roles = {
@@ -19,7 +20,7 @@ class SportForm(forms.ModelForm):
 
         i = 0
         while self.cleaned_data.get(f'role_{i}'):
-            roles['roles'][self.cleaned_data[f'role_{i}']] = 69
+            roles['roles'][self.cleaned_data[f'role_{i}']] = self.cleaned_data[f'role_{i}_count']
             i += 1
 
         self.cleaned_data['roles'] = roles
