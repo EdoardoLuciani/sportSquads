@@ -1,9 +1,7 @@
-import django.contrib.auth.models
 from django.db import models
 from django.template.defaultfilters import slugify
 from django.contrib.auth.models import User
 from django.conf import settings
-from django.contrib.auth import get_user_model
 
 
 class UserProfile(models.Model):

@@ -19,3 +19,12 @@ class UserProfileForm(forms.ModelForm):
     class Meta:
         model = UserProfile
         fields = ('profile_picture', 'bio')
+
+search_team_form_filters = [
+    ('1', 'Team name'),
+    ('2', 'Team description'),
+    ('3', 'Team location'),
+]
+class SearchTeamForm(forms.Form):
+    search_text = forms.CharField(label='Write here your search words', max_length=100)
+    filters_team_name = forms.MultipleChoiceField(label='Select at least one filter', choices=search_team_form_filters, widget=forms.CheckboxSelectMultiple())

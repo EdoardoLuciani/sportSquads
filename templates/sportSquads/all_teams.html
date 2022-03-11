@@ -14,6 +14,13 @@
         <div class=s>
             <h2>All Teams</h2>
         </div>
+
+        <form id="search_team_form" method="post" action="{% url 'all_teams' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ search_team_form.as_p }}
+            <input type="submit" name="submit" value="Search" />
+        </form>
+
         <div>
             {% if teams %}
             <ul>
@@ -25,7 +32,7 @@
                 {% endfor %}
             </ul>
             {% else %}
-                <strong>There are no teams.</strong>
+                <strong>No teams match your search criteria</strong>
             {% endif %}
         </div>
     </body>
