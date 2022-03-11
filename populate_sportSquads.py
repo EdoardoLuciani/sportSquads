@@ -127,7 +127,7 @@ def populate():
     team_images_initial_path = "./populate_sportSquads_files/team_images/"
     teams_data = [
         {
-            "name": "YoMama",
+            "name": "YoMama meme",
             "image_path": os.path.join(team_images_initial_path, "yo_mama.jpg"),
             "description": "We are NOT motivated",
             "location": "somewhere",
@@ -136,6 +136,17 @@ def populate():
             "members_with_roles": [
                 (User.objects.get(username="Willem_Dafoe").userprofile, "manager"),
                 (User.objects.get(username="JohnWilliamson69").userprofile, "goalkeeper")
+            ],
+        },
+        {
+            "name": "NFTLosersGang",
+            "image_path": None,
+            "description": "We just sell NFTs for the meme",
+            "location": "the internet",
+            "sport": Sport.objects.get(name="Volleyball"),
+            "manager": User.objects.get(username="JohnWilliamson69").userprofile,
+            "members_with_roles": [
+                (User.objects.get(username="JohnWilliamson69").userprofile, "opposite")
             ],
         }
     ]

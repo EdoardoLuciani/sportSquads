@@ -26,8 +26,28 @@ def show_sport(request, sport_name_slug):
 
 
 def all_teams(request):
-    context_dict = {}
-    context_dict['teams'] = Team.objects.all()
+    if request.method == 'POST':
+        search_team_form = SearchTeamForm(request.POST)
+        if search_team_form.is_valid():
+            form_filters_list = search_team_form.cleaned_data['filters_team_name']
+
+            teams_query_set = Team.objects.none()
+            if '1' in form_filters_list:
+                teams_query_set |= Team.objects.filter(name__icontains=search_team_form.cleaned_data['search_text'])
+            if '2' in form_filters_list:
+                teams_query_set |= Team.objects.filter(description__icontains=search_team_form.cleaned_data['search_text'])
+            if '3' in form_filters_list:
+                teams_query_set |= Team.objects.filter(location__icontains=search_team_form.cleaned_data['search_text'])
+
+            context_dict = {
+                'search_team_form' : search_team_form,
+                'teams' : teams_query_set
+            }
+            return render(request, "sportSquads/all_teams.html", context=context_dict)
+    
+    context_dict = {
+        'search_team_form' : SearchTeamForm(initial = {'filters_team_name': search_team_form_filters[0]})
+    }
     return render(request, "sportSquads/all_teams.html", context=context_dict)
   
 def show_team(request, team_name_slug):
