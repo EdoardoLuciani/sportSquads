@@ -108,10 +108,13 @@
 			<div class="dropdown icon right">
 				<button class="dropbtn"><img src="profile.jpg" alt="USER"</button>
 				<div class="dropdown-content">
-					<a href="{% url 'login'%}">Login</a>
+					{% if user.is_authenticated %}
+						<a href="">Account Details</a>
+						<a href="logout/">Sign out</a>
+					{% else %}
+						<a href="{% url 'login'%}">Login</a>
 					<a href="{% url 'sign_up'%}">Sign up</a>
-					<a href="">Account Details</a>
-					<a href="">Sign out</a>
+					{% endif %}
 				</div>
 			</div>
 			

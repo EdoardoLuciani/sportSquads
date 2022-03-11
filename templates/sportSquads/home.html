@@ -22,6 +22,10 @@
     </div>
     <div id="box">
         <h2>Sports</h2>
+        {% if user.is_authenticated %}
+            <a href="{% url 'add_new_sport'  %}">Add New Sport</a> <br />
+        {% endif %}
+
         {% if sports %}
             <div id="grid-container">
                 {% for sport in sports %}

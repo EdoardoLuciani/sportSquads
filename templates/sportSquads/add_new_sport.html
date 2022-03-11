@@ -8,7 +8,7 @@
 
 {% block body_block %}
     <h1>Add a New Sport</h1>
-    <form id="add_new_sport" method="post" action = "/sportSquads/add-sport/">
+    <form id="add_new_sport" method="post" action = "/add-sport/">
         {% csrf_token %}
         {% for field in form.visible_fields %}
             {{ field.errors }}

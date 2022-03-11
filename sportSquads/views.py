@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from sportSquads.forms import *
-from sportSquads.models import Sport,Team
+from sportSquads.models import Sport, Team
+from django.contrib.auth.decorators import login_required
+
 
 def home(request):
     sport_list = Sport.objects.all()[:10]
@@ -14,6 +16,7 @@ def home(request):
     context_dict['sports'] = sport_list
 
     return render(request, "sportSquads/home.html", context=context_dict)
+
 
 def home_get_10_more_sports(request, starting_idx):
     sport_list = (Sport.objects.all()[starting_idx: 10 + starting_idx]).values()
@@ -29,11 +32,13 @@ def all_teams(request):
     context_dict = {}
     context_dict['teams'] = Team.objects.all()
     return render(request, "sportSquads/all_teams.html", context=context_dict)
-  
+
+
 def show_team(request, team_name_slug):
     context_dict = {}
     return render(request, 'sportSquads/team.html', context=context_dict)
-    
+
+
 def sign_up(request):
     registered = False
     if request.method == 'POST':
@@ -52,6 +57,7 @@ def sign_up(request):
                 profile.profile_picture = request.FILES['profile_picture']
             profile.save()
             registered = True
+
         else:
             print(user_form.errors, user_profile_form.errors)
     else:
@@ -69,22 +75,32 @@ def user_login(request):
         user_login_form = AuthenticationForm(request, data=request.POST)
         
         if user_login_form.is_valid():
-            user = authenticate(username=user_login_form.cleaned_data['username'], password=user_login_form.cleaned_data['password'])
+            user = authenticate(username=user_login_form.cleaned_data['username'],
+                                password=user_login_form.cleaned_data['password'])
             if user:
-                login(request, user)
-                return redirect(reverse('home'))
-            else:
-                return HttpResponse("Invalid login details")
+                if user.is_active:
+
+                    login(request, user)
+                    return redirect(reverse('home'))
+                else:
+                    return HttpResponse("Your account has been disabled")
         else:
             return HttpResponse("Invalid login details")
 
-    return render(request, 'sportSquads/login.html', context= { 'user_login_form' : AuthenticationForm()})    
+    return render(request, 'sportSquads/login.html', context={'user_login_form': AuthenticationForm()})    
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('home'))
 
 
 def contact_us(request):
     return render(request, 'sportSquads/contact_us.html')
-    
-# @login_required()
+
+
+@login_required
 def add_new_sport(request):
     form = SportForm(author=request.user, data=request.POST)
 
