@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib import messages
 from sportSquads.forms import *
-from sportSquads.models import Sport,Team
+from sportSquads.models import Sport, Team, UserProfile
+from django.contrib.auth.decorators import login_required
+
 
 def home(request):
     sport_list = Sport.objects.all()[:10]
@@ -14,6 +16,7 @@ def home(request):
     context_dict['sports'] = sport_list
 
     return render(request, "sportSquads/home.html", context=context_dict)
+
 
 def home_get_10_more_sports(request, starting_idx):
     sport_list = (Sport.objects.all()[starting_idx: 10 + starting_idx]).values()
@@ -60,11 +63,13 @@ def all_teams(request):
         'search_team_form' : SearchTeamForm(initial = {'filters_team_name': search_team_form_filters[0]})
     }
     return render(request, "sportSquads/all_teams.html", context=context_dict)
-  
+
+
 def show_team(request, team_name_slug):
     context_dict = {}
     return render(request, 'sportSquads/team.html', context=context_dict)
-    
+
+
 def sign_up(request):
     registered = False
     if request.method == 'POST':
@@ -72,9 +77,7 @@ def sign_up(request):
         user_profile_form = UserProfileForm(request.POST)
 
         if user_form.is_valid() and user_profile_form.is_valid():
-            user = user_form.save(commit=False)
-            user.set_password(user.password)
-            user.save()
+            user = user_form.save()
 
             profile = user_profile_form.save(commit=False)
             profile.user = user
@@ -83,12 +86,14 @@ def sign_up(request):
                 profile.profile_picture = request.FILES['profile_picture']
             profile.save()
             registered = True
+
+            login(request, user)
         else:
             print(user_form.errors, user_profile_form.errors)
     else:
         user_form = UserForm()
         user_profile_form = UserProfileForm()
-    
+
     return render(request, 'sportSquads/sign_up.html', context = {
         'user_form' : user_form,
         'user_profile_form' : user_profile_form,
@@ -98,20 +103,46 @@ def sign_up(request):
 def user_login(request):
     if request.method == 'POST':
         user_login_form = AuthenticationForm(request, data=request.POST)
-        
+
         if user_login_form.is_valid():
-            user = authenticate(username=user_login_form.cleaned_data['username'], password=user_login_form.cleaned_data['password'])
+            user = authenticate(username=user_login_form.cleaned_data['username'],
+                                password=user_login_form.cleaned_data['password'])
             if user:
-                login(request, user)
-                return redirect(reverse('home'))
-            else:
-                return HttpResponse("Invalid login details")
+                if user.is_active:
+
+                    login(request, user)
+                    return redirect(reverse('home'))
+                else:
+                    return HttpResponse("Your account has been disabled")
         else:
             return HttpResponse("Invalid login details")
 
-    return render(request, 'sportSquads/login.html', context= { 'user_login_form' : AuthenticationForm()})    
+    return render(request, 'sportSquads/login.html', context={'user_login_form': AuthenticationForm()})    
+
+
+@login_required
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('home'))
 
 
 def contact_us(request):
     return render(request, 'sportSquads/contact_us.html')
-    
+
+
+@login_required
+def add_new_sport(request):
+    user_profile = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+
+    if request.method == 'POST':
+        form = SportForm(author=user_profile, data=request.POST)
+        
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.save()
+            return redirect(reverse('home'))
+        else:
+            print(form.errors)
+
+    return render(request, "sportSquads/add_new_sport.html", {'form': SportForm(author=user_profile)})
+

@@ -18,6 +18,7 @@ from django.urls import path
 from sportSquads import views
 from django.urls import include
 
+app_name = 'sportSquads'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -33,4 +34,7 @@ urlpatterns = [
 
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
     path('account', views.account_information, name='account_information'),
+    path('add-sport/', views.add_new_sport, name='add_new_sport'),
+    path('logout/', views.user_logout, name='logout'),
+    
 ]
