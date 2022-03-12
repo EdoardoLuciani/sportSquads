@@ -1,3 +1,4 @@
+from webbrowser import get
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse
@@ -22,6 +23,23 @@ def home_get_10_more_sports(request, starting_idx):
 
 def show_sport(request, sport_name_slug):
     context_dict = {}
+
+    try:
+        sport = Sport.objects.get(name_slug=sport_name_slug)
+
+        teams = Team.objects.filter(sport=sport)[:10]
+
+
+        context_dict['sport'] = sport
+
+        context_dict['teams'] = teams
+
+    except Sport.DoesNotExist:
+
+        context_dict['sport'] = None
+
+        context_dict['teams'] = None
+
     return render(request, 'sportSquads/sport.html', context=context_dict)
 
 
