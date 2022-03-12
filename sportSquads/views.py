@@ -101,14 +101,17 @@ def contact_us(request):
 
 @login_required
 def add_new_sport(request):
-    user = User.objects.get(id=request.user.id)
-    form = SportForm(author=UserProfile.objects.get(user=user), data=request.POST)
+    user_profile = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
 
-    if form.is_valid():
-        form.save()
-        return redirect(reverse('home'))
-    else:
-        print(form.errors)
+    if request.method == 'POST':
+        form = SportForm(author=user_profile, data=request.POST)
+        
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.save()
+            return redirect(reverse('home'))
+        else:
+            print(form.errors)
 
-    return render(request, "sportSquads/add_new_sport.html", {'form': form})
+    return render(request, "sportSquads/add_new_sport.html", {'form': SportForm(author=user_profile)})
 

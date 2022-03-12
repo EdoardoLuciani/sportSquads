@@ -1,6 +1,6 @@
 $(document).ready(function() { 
 
-    $('#add_new_sport').on('keypress', 'p:nth-last-of-type(2)', function() {
+    $('#add_new_sport').on('input', 'p:nth-last-of-type(2)', function() {
         if ($(this).find('input').val().length > 0) {
             var idx = parseInt($(this).find('label').text().slice(5).slice(0,-1)) + 1;
     
