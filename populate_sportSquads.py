@@ -131,7 +131,7 @@ def populate():
             "image_path": os.path.join(team_images_initial_path, "yo_mama.jpg"),
             "description": "We are NOT motivated",
             "location": "somewhere",
-            "sport": Sport.objects.get(name="Football"),
+            "sport": Sport.objects.get(name="Football-0"),
             "manager": User.objects.get(username="Willem_Dafoe").userprofile,
             "members_with_roles": [
                 (User.objects.get(username="Willem_Dafoe").userprofile, "manager"),
@@ -143,7 +143,7 @@ def populate():
             "image_path": None,
             "description": "We just sell NFTs for the meme",
             "location": "the internet",
-            "sport": Sport.objects.get(name="Volleyball"),
+            "sport": Sport.objects.get(name="Volleyball-0"),
             "manager": User.objects.get(username="JohnWilliamson69").userprofile,
             "members_with_roles": [
                 (User.objects.get(username="JohnWilliamson69").userprofile, "opposite")
