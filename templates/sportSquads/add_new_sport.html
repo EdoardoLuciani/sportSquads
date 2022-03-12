@@ -7,10 +7,13 @@
 {% endblock %}
 
 {% block body_block %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/add_new_sport.js' %}"></script>
+
     <h1>Add a New Sport</h1>
     <form id="add_new_sport" method="post" action = "/add-sport/">
         {% csrf_token %}
-        {{ form.as_p}}
+        {{ form.as_p }}
         <input type="submit" name="submit" value="Add New Sport" />
     </form>
 {% endblock %}
