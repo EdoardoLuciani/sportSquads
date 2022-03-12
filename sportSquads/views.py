@@ -22,13 +22,10 @@ def home_get_10_more_sports(request, starting_idx):
 
 def show_sport(request, sport_name_slug):
     context_dict = {}
-
+    
     try:
-        sport = Sport.objects.get(name_slug=sport_name_slug)
-        teams = Team.objects.filter(sport=sport)[:10]
-
-        context_dict['sport'] = sport
-        context_dict['teams'] = teams
+        context_dict['sport'] = Sport.objects.get(name_slug=sport_name_slug)
+        context_dict['teams'] = Team.objects.filter(sport=context_dict['sport'])[:10]
     except:
         pass
 
