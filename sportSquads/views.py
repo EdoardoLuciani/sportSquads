@@ -26,6 +26,13 @@ def account_information(request):
     
 def show_sport(request, sport_name_slug):
     context_dict = {}
+    
+    try:
+        context_dict['sport'] = Sport.objects.get(name_slug=sport_name_slug)
+        context_dict['teams'] = Team.objects.filter(sport=context_dict['sport'])[:10]
+    except:
+        pass
+
     return render(request, 'sportSquads/sport.html', context=context_dict)
 
 
