@@ -22,7 +22,7 @@ $(document).ready(function() {
 
                 sports_data = data["sports"];
                 for (var i = 0; i < sports_data.length; i++) {
-                    $('#grid-container').append('<div class="sport"> <a href="/sports/' + sports_data[i].name_slug + '">' + sports_data[i].name + '</a> </div>');
+                    $('#grid-container').append('<div class="sport"> <a href="/sport/' + sports_data[i].name_slug + '">' + sports_data[i].name + '</a> </div>');
                 }
                 elem_count += sports_data.length;
 
