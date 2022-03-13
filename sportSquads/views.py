@@ -22,9 +22,9 @@ def home_get_10_more_sports(request, starting_idx):
     sport_list = (Sport.objects.all()[starting_idx: 10 + starting_idx]).values()
     return JsonResponse({'sports': list(sport_list)})
 
-
+@login_required
 def account_information(request):
-    context_dict = {}
+    context_dict = { 'user' : UserProfile.objects.get(user=request.user) }
     return render(request, "sportSquads/account_information.html", context=context_dict)
     
 def show_sport(request, sport_name_slug):
