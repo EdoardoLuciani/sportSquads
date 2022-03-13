@@ -26,7 +26,7 @@
 
         <div id="top-bar">
             <h1>{{ team.name }}</h1>
-            <img  src=" media {{team.image_path}}" alt= "Team Image"/>
+            <img  src="{{ team.image.url }}" alt= "Team Image"/>
             <p id="description"style=>{{ team.description }}</p>
 
         </div>
@@ -59,8 +59,8 @@
         {% endif %}
             {% if team.members_with_roles%}
             <p>1</p>
-                {% for tuple in team.members_with_roles.tuple%}
-                <p>2</p>
+                {% for member in team.teamusermembership_set.all %}
+                <p>{{ member.user }}: {{ member.role }}</p>
                 <!--{% for item in team.members_with_roles.items.user %}-->
 
                 <p>{{team.members_with_roles.tuple}}</p>
