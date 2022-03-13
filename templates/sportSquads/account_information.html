@@ -7,8 +7,34 @@
 {% endblock %}
 
 {% block top_block %}
-	<p>123</p>
+	<img class="icon centre profile" src="{{ user.profile }}" alt="Profile Picture" style="height:90px; width:90px; margin-top:5%;">
+	<p id="username">{{ user.name }}name</p>
+	<p id="username" style="font-size:12px;">{{ user.contact }}contact</p>
 {% endblock %}
 {% block bottom_block %}
+	<div class="tab half">
+		<h2>Teams</h2>
+		<br>
+		{% if user.teams %}
+		<ul>
+			{% for team in teams %}
+				<li>team <a href="">></a></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+	</div>
 	
+	<div class="tab half">
+		<h2>Team manager of</h2>
+		<br>
+		{% if user.owned_teams %}
+		<ul>
+			{% for team in owned_teams %}
+				<li>team <a href="">></a></li>
+			{% endfor %}
+		</ul>
+		{% endif %}
+
+	</div>
 {% endblock %}

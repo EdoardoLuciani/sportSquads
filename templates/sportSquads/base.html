@@ -19,8 +19,8 @@
 			<a class="icon left" href="{% url 'home' %}"><img src="home.jpg" alt="HOME"></a>
 			<img class="icon left" src="logo.jpg" alt="LOGO">
 			
-			<div class="dropdown icon right">
-				<button class="dropbtn"><img src="profile.jpg" alt="USER"</button>
+			<div class="dropdown icon right" style="padding:8px 24px">
+				<button class="dropbtn"><img class="profile" src="profile.jpg" alt="USER"</button>
 				<div class="dropdown-content  shadow">
 					{% if user.is_authenticated %}
 						<a href="{% url 'account_information'%}">Account Details</a>
