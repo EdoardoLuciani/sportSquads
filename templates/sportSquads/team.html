@@ -1,0 +1,75 @@
+{% extends 'sportSquads/base.html' %}
+{% load static %}
+
+{% block title_block %}
+
+    {% if team %}
+        {{ team.name }}
+    {% else %}
+        Unknown Team
+    {% endif %}
+
+{% endblock %}
+
+
+
+
+{% block body_block %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/team.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="{% static 'js/team.js' %}"></script>
+
+    <h1>sportSquads</h1>
+
+
+    {% if team %}
+
+        <div id="top-bar">
+            <h1>{{ team.name }}</h1>
+            <img  src=" media {{team.image_path}}" alt= "Team Image"/>
+            <p id="description"style=>{{ team.description }}</p>
+
+        </div>
+
+        {% if team.manager %}
+        <div id="manager">
+            <div id="manager2">
+            <p> Manager</p>
+            </div>
+            <p style=>{{ team.manager }}</p>
+            <p style=>Email:   {{ team.manager.user.email }}</p>
+            <br>
+            <div id="sport"
+            <p style=> Sport: {{ team.sport }}</p> </div>
+        </div>
+
+        {% else %}
+             <h2>Team does not exist.</h2>
+        {% endif %}
+
+    
+        <div id="roles">
+            <h1>Roles</h1>
+            {% if team.sport.roles %}
+            {% for role, value in team.sport.roles.items %}
+                <p>{{role}}: {{value}}</p>
+            {% endfor %}
+        {% else %}
+            <h2>This sport has no roles.</h2>
+        {% endif %}
+            {% if team.members_with_roles%}
+            <p>1</p>
+                {% for tuple in team.members_with_roles.tuple%}
+                <p>2</p>
+                <!--{% for item in team.members_with_roles.items.user %}-->
+
+                <p>{{team.members_with_roles.tuple}}</p>
+                {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+   
+
+    {%endif%}
+
+{% endblock %}

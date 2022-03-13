@@ -1,0 +1,58 @@
+#top-bar {
+    background: cadetblue;
+}
+
+#description {text-align:r=left;
+    font-size: large;
+    padding-right: 4%;
+    color: deeppink;
+}
+
+#manager {
+    line-height: 20%;
+    border: 3px solid cadetblue;
+    padding: 20px;
+    text-align:left;
+    font-size: medium;
+    padding-right: 4%;
+}
+
+#manager2 {
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: black;
+    text-align:left;
+    font-size: large;
+    color: deeppink;
+    padding-right: 4%;
+}
+
+#sport {
+    font-weight: bold;
+    text-align:right;
+    font-size: large;
+    text-decoration-color: deeppink;
+    padding-right: 4%;
+}
+
+
+/*div#teams {	
+	background: lightblue;
+    overflow-y: scroll;
+}*/
+
+/*#teamlist {
+    padding: 10px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    column-gap: 15px;
+    row-gap: 15px;
+    height: 700px;
+}*/
+
+/*.team {
+    border: 5px solid black;
+    padding: 20px;
+    font-size: 20px;
+    text-align: center;
+}*/
