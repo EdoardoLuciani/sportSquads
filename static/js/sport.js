@@ -16,7 +16,7 @@ $(document).ready(function() {
     function sport_get_more_teams_while_scroll_end() {
         if (!end_reached && !request_in_progress) {
             var request = $.ajax({
-                url: '/sport_get_10_more_teams/' + elem_count + "/" + sport_name,
+                url: '/sport_get_10_more_teams/' + sport_name + "/" + elem_count,
                 type: 'GET',
                 dataType: 'json',
             });
