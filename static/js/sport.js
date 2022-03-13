@@ -6,7 +6,10 @@ $(document).ready(function() {
         return (scrollerEndPoint - divScrollerTop < 100);
     }
 
-    //var sport_name = context_dict['sport'].name_slug; this doesn't work
+
+    var slugs = document.URL.split('/');
+    var sport_name = slugs[slugs.length - 2]
+
     var elem_count = 10;
     var end_reached = false;
     var request_in_progress = false;

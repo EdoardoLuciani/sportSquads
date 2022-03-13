@@ -40,9 +40,7 @@ def show_sport(request, sport_name_slug):
 
 
 def sport_get_10_more_teams(request, starting_team_no, sport_name):
-    print(sport_name)
     sport_name = Sport.objects.get(name_slug=sport_name)
-    print(sport_name)
     teams = (Team.objects.filter(sport=sport_name)[starting_team_no: 10 + starting_team_no]).values()
     return JsonResponse({'teams': list(teams)})
 
