@@ -67,6 +67,12 @@ def all_teams(request):
 
 def show_team(request, team_name_slug):
     context_dict = {}
+    
+    try:
+        context_dict['team'] = Team.objects.get(name_slug=team_name_slug)
+    except:
+        pass
+
     return render(request, 'sportSquads/team.html', context=context_dict)
 
 
