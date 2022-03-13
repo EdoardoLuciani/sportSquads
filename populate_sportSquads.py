@@ -118,8 +118,8 @@ def populate():
     ]
 
     for sport_data in sports_data:
-        # Adding each sport 30 times so that we can have a lot of teams and test the infinite scrolling
-        for i in range(30):
+        # Adding each sport 300 times so that we can have a lot of teams and test the infinite scrolling
+        for i in range(300):
             sport_data_to_add = sport_data.copy()
             sport_data_to_add["name"] = f"{sport_data['name']}-{i}"
             add_sport(**sport_data_to_add)
@@ -151,7 +151,10 @@ def populate():
         }
     ]
     for team_data in teams_data:
-        add_team(**team_data)
+        for x in range(300):
+            team_data_to_add = team_data.copy()
+            team_data_to_add['name'] = team_data_to_add['name'] + f"-{x}"
+            add_team(**team_data_to_add)
 
 
 if __name__ == "__main__":

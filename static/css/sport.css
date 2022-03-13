@@ -7,12 +7,12 @@
     padding-right: 4%;
 }
 
-div#teams {	
+div#box {	
 	background: lightblue;
     overflow-y: scroll;
 }
 
-#teamlist {
+#grid-container {
     padding: 10px;
     display: grid;
     grid-template-columns: auto auto auto auto;
