@@ -1,0 +1,16 @@
+{% extends 'sportSquads/base.html' %}
+
+{% load static %}
+
+{% block title_block %}
+    Add A New Team
+{% endblock %}
+
+{% block body_block %}
+    <h1>Add a New Team</h1>
+    <form id="add_new_team" method="post" action = "/{{ sport_name }}/add-team/">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" name="submit" value="Add New Team" />
+    </form>
+{% endblock %}
