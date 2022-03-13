@@ -151,7 +151,10 @@ def populate():
         }
     ]
     for team_data in teams_data:
-        add_team(**team_data)
+        for x in range(30):
+            team_data_to_add = team_data.copy()
+            team_data_to_add['name'] = team_data_to_add['name'] + f"-{x}"
+            add_team(**team_data_to_add)
 
 
 if __name__ == "__main__":

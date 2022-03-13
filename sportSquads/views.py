@@ -39,6 +39,14 @@ def show_sport(request, sport_name_slug):
     return render(request, 'sportSquads/sport.html', context=context_dict)
 
 
+def sport_get_10_more_teams(request, starting_team_no, sport_name):
+    print(sport_name)
+    sport_name = Sport.objects.get(name_slug=sport_name)
+    print(sport_name)
+    teams = (Team.objects.filter(sport=sport_name)[starting_team_no: 10 + starting_team_no]).values()
+    return JsonResponse({'teams': list(teams)})
+
+
 def all_teams(request):
     if request.method == 'POST':
         search_team_form = SearchTeamForm(request.POST)

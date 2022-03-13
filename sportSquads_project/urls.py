@@ -31,6 +31,7 @@ urlpatterns = [
     path('contact-us', views.contact_us, name='contact_us'),
     path('login/', views.user_login, name='login'),
     path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
+    path('sport_get_10_more_teams/<int:starting_team_no>/<str:sport_name>', views.sport_get_10_more_teams, name='sport_get_teams'),
 
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
     path('account', views.account_information, name='account_information'),

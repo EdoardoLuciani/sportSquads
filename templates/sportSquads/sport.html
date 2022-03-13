@@ -17,6 +17,7 @@
 {% block body_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/sport.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!--<script>var sport_name = context_dict['sport'].name_slug;</script> this also doesn't work-->
     <script src="{% static 'js/sport.js' %}"></script>
 
     <h1>sportSquads</h1>
@@ -35,13 +36,13 @@
             <h2>This sport has no roles.</h2>
         {% endif %}
 
-        <div id="teams">
+        <div id="box">
             <h1>Teams</h1>
             {% if teams %}
-                <div id="teamlist">
+                <div id="grid-container">
                     {% for team in teams %}
                         <div class="team">
-                            <a class="team" href="{% url 'show_team' team.name_slug %}">{{ team.name }}</a>
+                            <a href="{% url 'show_team' team.name_slug %}">{{ team.name }}</a>
                         </div>
                     {% endfor %}
                 </div>
