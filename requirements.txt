@@ -1,4 +1,4 @@
 # This file may be used to create an environment using:
 # $ conda create --name <env> --file <this file>
-pillow=8.4.0=py310h63577eb_0
-django=4.0.2=py310hff52083_0
+pillow==8.4.0
+django==4.0.2
