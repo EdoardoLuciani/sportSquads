@@ -3,14 +3,14 @@ $(document).ready(function() {
     function scrollbar_at_end() {
         var scrollerEndPoint = $("#box").prop('scrollHeight') - $("#box").height();
         var divScrollerTop =  $("#box").scrollTop();
-        return (scrollerEndPoint - divScrollerTop < 100);
+        return (scrollerEndPoint - divScrollerTop) < 150;
     }
 
     var elem_count = 10;
     var end_reached = false;
     var request_in_progress = false;
     function home_get_more_sports_while_scroll_end() {
-        if (!end_reached && !request_in_progress) {
+        if (!end_reached && !request_in_progress && scrollbar_at_end()) {
             var request = $.ajax({
                 url: '/home_get_10_more_sports/' + elem_count,
                 type: 'GET',

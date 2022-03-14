@@ -3,7 +3,7 @@ $(document).ready(function() {
     function scrollbar_at_end() {
         var scrollerEndPoint = $("#box").prop('scrollHeight') - $("#box").height();
         var divScrollerTop =  $("#box").scrollTop();
-        return (scrollerEndPoint - divScrollerTop < 100);
+        return (scrollerEndPoint - divScrollerTop) < 150;
     }
 
 
@@ -14,7 +14,7 @@ $(document).ready(function() {
     var end_reached = false;
     var request_in_progress = false;
     function sport_get_more_teams_while_scroll_end() {
-        if (!end_reached && !request_in_progress) {
+        if (!end_reached && !request_in_progress && scrollbar_at_end()) {
             var request = $.ajax({
                 url: '/sport_get_10_more_teams/' + sport_name + "/" + elem_count,
                 type: 'GET',
