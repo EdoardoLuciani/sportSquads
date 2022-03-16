@@ -155,7 +155,7 @@ def add_new_sport(request):
 
 @login_required
 def add_new_team(request, sport_name):
-    user_profile = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+    user_profile = UserProfile.objects.get(user=request.user)
     sport = Sport.objects.get(name=sport_name)
     available_roles = sport.roles
 

@@ -29,7 +29,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates')
 MEDIA_ROOT = MEDIA_DIR
 MEDIA_URL = '/media/'
 
-LOGIN_URL = 'sportSquads:login'
+LOGIN_URL = '/login/'
 
 
 # Quick-start development settings - unsuitable for production
