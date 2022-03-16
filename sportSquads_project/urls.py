@@ -38,5 +38,6 @@ urlpatterns = [
     path('account', views.account_information, name='account_information'),
     path('add-sport/', views.add_new_sport, name='add_new_sport'),
     path('logout/', views.user_logout, name='logout'),
+    path('<slug:sport_name>/add-team/', views.add_new_team, name='add_new_team')
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

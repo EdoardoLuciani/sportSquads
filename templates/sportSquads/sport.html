@@ -37,6 +37,11 @@
 
         <div id="box">
             <h1>Teams</h1>
+
+            {% if user.is_authenticated %}
+                <a href="{% url 'add_new_team'  sport.name  %}">Create Team</a> <br />
+            {% endif %}
+
             {% if teams %}
                 <div id="grid-container">
                     {% for team in teams %}

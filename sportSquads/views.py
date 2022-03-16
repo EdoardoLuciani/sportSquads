@@ -152,3 +152,25 @@ def add_new_sport(request):
 
     return render(request, "sportSquads/add_new_sport.html", {'form': SportForm(author=user_profile)})
 
+
+@login_required
+def add_new_team(request, sport_name):
+    user_profile = UserProfile.objects.get(user=request.user)
+    sport = Sport.objects.get(name=sport_name)
+    available_roles = sport.roles
+
+    if request.method == 'POST':
+        form = TeamForm(manager=user_profile, sport=sport, available_roles=available_roles,
+                        data=request.POST)
+
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.save()
+            return redirect(reverse('home'))
+        else:
+            print(form.errors)
+    context_dict = {'form': TeamForm(manager=user_profile, sport=sport),
+                    'sport_name': sport_name}
+
+    return render(request, "sportSquads/add_new_team.html", context=context_dict)
+

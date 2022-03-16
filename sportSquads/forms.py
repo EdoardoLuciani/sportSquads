@@ -44,11 +44,28 @@ class SportForm(forms.ModelForm):
 
     class Meta:
         model = Sport
-        fields = ('name', 'image', 'description')
+        fields = ('name', 'image', 'description',)
 
 
 class TeamForm(forms.ModelForm):
-    pass
+    def __init__(self, **kwargs):
+        self.manager = kwargs.pop('manager', None)
+        self.sport = kwargs.pop('sport', None)
+        self.available_roles = kwargs.pop('available_roles', None)
+        super(TeamForm, self).__init__(**kwargs)
+
+    def save(self, commit=True):
+        obj = super(TeamForm, self).save(commit=False)
+        obj.manager = self.manager
+        obj.sport = self.sport
+        obj.available_roles = self.available_roles
+        if commit:
+            obj.save()
+        return obj
+
+    class Meta:
+        model = Team
+        fields = ('name', 'image', 'description', 'location', )
 
 
 class UserForm(UserCreationForm):
