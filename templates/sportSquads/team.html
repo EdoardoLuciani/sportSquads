@@ -15,6 +15,7 @@
 
 
 {% block body_block %}
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/team.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/team.js' %}"></script>
@@ -26,7 +27,8 @@
 
         <div id="top-bar">
             <h1>{{ team.name }}</h1>
-            <img  src="{{ team.image.url }}" alt= "Team Image"/>
+            <div id="image">
+            <img  src="{{ team.image.url }}" alt= "Team Image"/></div>
             <p id="description"style=>{{ team.description }}</p>
 
         </div>
@@ -39,7 +41,7 @@
             <p style=>{{ team.manager }}</p>
             <p style=>Email:   {{ team.manager.user.email }}</p>
             <br>
-            <div id="sport"
+            <div id="sport">
             <p style=> Sport: {{ team.sport }}</p> </div>
         </div>
 
@@ -50,26 +52,38 @@
     
         <div id="roles">
             <h1>Roles</h1>
+
             {% if team.sport.roles %}
             {% for role, value in team.sport.roles.items %}
-                <p>{{role}}: {{value}}</p>
+                <p>{{role}} : {{value}}</p>
+                {% if team.members_with_roles%}
+                
+                <div id="a">
+                {% for member in team.teamusermembership_set.all %}
+                {%if  member.role == role %}
+                    <p>{{role}} : {{member.object}} / {{value}} </p>
+                    <div id="progress">
+                        <span class="progress-text"></span>
+                        <div class="progress-bar"></div>
+                    </div>
+            
+                {% endif %}
+                {% endfor %}
+            </div>
+            {%endif%}
+
             {% endfor %}
         {% else %}
             <h2>This sport has no roles.</h2>
         {% endif %}
-            {% if team.members_with_roles%}
-            <p>1</p>
-                {% for member in team.teamusermembership_set.all %}
-                <p>{{ member.user }}: {{ member.role }}</p>
-                <!--{% for item in team.members_with_roles.items.user %}-->
+            
+                
+            
 
-                <p>{{team.members_with_roles.tuple}}</p>
-                {% endfor %}
-                {% endfor %}
-            {% endif %}
+
         </div>
    
-
+    
     {%endif%}
 
 {% endblock %}

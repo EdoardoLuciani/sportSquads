@@ -35,6 +35,42 @@
     padding-right: 4%;
 }
 
+#image{
+    height: 20%;
+    width: 20%;
+}
+
+
+#progress {
+    position:relative;
+    width:250px;
+    height:20px;
+    border:1px solid red;
+}
+
+#progress .progress-bar {
+    background:blue;
+    height:20px;
+    width:0%;
+    display:inline-block;
+}
+
+#progress .progress-text {
+    position:absolute;
+    z-index:2;
+    right:0;
+}
+
+#myProgress {
+  width: 100%;
+  background-color: grey;
+}
+
+#myBar {
+  width: 1%;
+  height: 30px;
+  background-color: green;
+}
 
 /*div#teams {	
 	background: lightblue;

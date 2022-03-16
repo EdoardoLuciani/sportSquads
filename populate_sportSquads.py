@@ -106,7 +106,7 @@ def populate():
             "image_path": os.path.join(sport_images_initial_path, "football.jpg"),
             "description": "Football is a team sport",
             "author": User.objects.get(username="kracc bacc").userprofile,
-            "roles": {"manager": "1", "goalkeeper": "1"},
+            "roles": {"manager": "1", "goalkeeper": "2"},
         },
         {
             "name": "Volleyball",
