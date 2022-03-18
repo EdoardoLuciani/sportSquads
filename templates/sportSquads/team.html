@@ -44,7 +44,7 @@
 
 
         <div id="about">
-            <div id="aboutUS" ><h2>About us</h2></div>
+            <div id="title" ><h2>About us</h2></div>
             <p id="description"></pid>{{ team.description }}</p>
         </div>
 
@@ -52,7 +52,7 @@
 
         {% if team.manager %}
         <div id="manager">
-            <div id="manager2">
+            <div id="title">
             <h2> Manager</h2>
             </div>
             <p style=>{{ team.manager }}</p>
@@ -68,10 +68,13 @@
         
         
         <div id="roles"  style="width: 45%; float:left">
-            <h1>Roles </h1>
-        
+            <div id="title">
+                <br>
+            <h2>Role availability</h2>
+            </div>
         {% if team.sport.roles %}
             {% for role, value in team.sport.roles.items %}
+                <h3> {{role}} Role</h3>
                 <p>total {{role}} spots : {{value}}</p>
                 {% if team.members_with_roles%}
                     <div id="a">
@@ -96,13 +99,15 @@
         
         
         <div id="roles2"  style="width: 45%; float:right">
-            <h1>Roles</h1>
-
+            <div id="title">
+            <h2>Assigned roles</h2>
+            </div>  
+            <br>
             {% if team.sport.roles %}
             <div id="members">
             {% for member in team.teamusermembership_set.all %}
                 {%if member.user.profile_picture %}
-                <p>{{member.user}} : {{ member.role}}  <img src="{{ member.user.profile_picture.url }}" alt= "User Image"  width=5% height=5%/></p>
+                <p>{{member.user}} : {{ member.role}} <img src="{{ member.user.profile_picture.url }}" alt= "User Image"  width=5% height=5%/></p>
                {% else %}
                <p>{{member.user}} : {{ member.role}}</p>
             </div>
@@ -114,9 +119,7 @@
         <br style="clear:both;"/>
         </div>
     </div>
-
   {%endif%}
-
 
     <br style="clear:both;"/>
     <br><br>

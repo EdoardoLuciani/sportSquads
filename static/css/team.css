@@ -47,14 +47,14 @@
 
 }
 
-#manager2 {
+#title {
     position:relative;
     font-weight: bold;
     text-decoration: underline;
-    text-decoration-color: black;
+    text-decoration-color: deeppink;
     text-align:left;
     font-size: large;
-    color: deeppink;
+    color: black;
     padding-right: 4%;
 }
 
@@ -98,16 +98,10 @@
 
 
 
-/* #progress {
-    position:relative;
-    width:250px;
-    height:20px;
-    border:1px solid red;
-} */
 
 .progress .progress-bar {
-    background:blue;
-    height:20px;
+    background:deeppink;
+    height:30px;
     width:0%;
     display:inline-block;
 }
@@ -118,36 +112,3 @@
     left: 30;
 }
 
-/* #myProgress {
-  width: 100%;
-  background-color: grey;
-}
-
-#myBar {
-  width: 1%;
-  height: 30px;
-  background-color: green;
-} */
-
-
-
-/*div#teams {	
-	background: lightblue;
-    overflow-y: scl;
-}*/
-
-/*#teamlist {
-    padding: 10px;
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    column-gap: 15px;
-    row-gap: 15px;
-    height: 700px;
-}*/
-
-/*.team {
-    border: 5px solid black;
-    padding: 20px;
-    font-size: 20px;
-    text-align: center;
-}*/
