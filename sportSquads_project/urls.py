@@ -35,7 +35,7 @@ urlpatterns = [
     path('sport_get_10_more_teams/<slug:sport_name>/<int:starting_team_no>', views.sport_get_10_more_teams, name='sport_get_teams'),
 
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
-    path('join-team/<slug:sport_name>/', views.join_team, name='join_team'),
+    path('join-team/<slug:team_name>/', views.join_team, name='join_team'),
     path('account', views.account_information, name='account_information'),
     path('add-sport/', views.add_new_sport, name='add_new_sport'),
     path('logout/', views.user_logout, name='logout'),

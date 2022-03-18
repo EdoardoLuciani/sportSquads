@@ -13,5 +13,6 @@
 {% block body_block %}
     {% if team %}
         <h1>Join {{ team.name }}</h1>
+        {{ team.members_with_roles }}
     {% endif %}
 {% endblock %}
