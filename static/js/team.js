@@ -98,24 +98,25 @@
 
 
 $(document).ready(function() {
-    console.log("hello")
-    var name = JSON.parse("{{ sport.name|escapejs }}");
-    console.log(name)
-var interval = 0;
- var tot_val =  "{{sports.roles.value}}" - "{{ teams.members_with_roles[role] }}";
+//capacity per role    
+var data = capacity;
+//member names
+var data2 = m;
+var data3 = availability;
+console.log(availability)
+console.log(capacity);
 var interval = $('#pagejs_general_delete_wizardresultid').attr('data');;
-console.log(JSON.stringify(data))
+
 var progression = 0,
     progress = setInterval(function() 
     {
         $('#progress .progress-text').text(progression + '%');
         $('#progress .progress-bar').css({'width':progression+'%'});
-        if(progression == 100) {
-            clearInterval(progress);
-            alert('done');
+        if(progression == capacity) {
+        
         } else
-            progression += 10;
+            progression += (capacity-availability);
 
     }, 1000);
-});
+ });
 

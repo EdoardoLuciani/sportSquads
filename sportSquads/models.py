@@ -39,8 +39,8 @@ class Team(models.Model):
 
     # related name is so that django can distinguish between the two FKs
     manager = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name="manager")
-    members_with_roles = models.ManyToManyField(UserProfile, through="TeamUserMembership", related_name="member_with_roles")
-
+    members_with_roles = models.ManyToManyField(UserProfile, through="TeamUserMembership", related_name="members_with_roles")
+ 
     available_roles = models.JSONField()
     name_slug = models.SlugField(unique=True)   # team name appears in some urls so slugging it
 
