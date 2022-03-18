@@ -34,7 +34,9 @@
 
         <div id="top-bar" >
             <div >
+            {% if team.image %}
             <img id="image" src="{{ team.image.url }}" alt= "Team Image" width=20% height=20% />
+            {% endif %}
             <div id="team-name"><h1>{{ team.name }}</h1></div></div>
             
             

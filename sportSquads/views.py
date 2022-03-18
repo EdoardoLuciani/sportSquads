@@ -68,7 +68,7 @@ def all_teams(request):
     context_dict = {
         'search_team_form' : SearchTeamForm(initial = {'filters_team_name': search_team_form_filters[0]})
     }
-    return render(request, "sportSquads/all_teams.html", context={"context_dict": context_dict})
+    return render(request, "sportSquads/all_teams.html", context=context_dict)
 
 
 def show_team(request, team_name_slug):
