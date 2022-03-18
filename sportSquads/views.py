@@ -1,3 +1,4 @@
+from multiprocessing import context
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse
@@ -90,6 +91,22 @@ def show_team(request, team_name_slug):
 
     add_user_info_to_context(request, context_dict)
     return render(request, 'sportSquads/team.html', context=context_dict)
+
+
+@login_required
+def join_team(request, team_name_slug):
+    context_dict = {}
+
+    try:
+        context_dict['team'] = Team.objects.get(name_slug=team_name_slug)
+        context_dict['user'] = UserProfile.objects.get(user=request.user)
+
+        for member in Team.objects.get(name_slug=team_name_slug).members_with_roles:
+            print(member) 
+    except:
+        pass
+
+    return render(request, 'sportSquads/join_team.html', context=context_dict)
 
 
 def sign_up(request):
