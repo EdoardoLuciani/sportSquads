@@ -1,21 +1,27 @@
 div.h {
+    position:relative;
+    border-radius: 25px;
     border:  2px solid black;
 	margin:  20px;
 }
 
 div.s {	
+    position:relative;
+    border-radius: 25px;
     z-index: -1;
 	margin-bottom: 5px; 
 	height:  40px;
 	background: cadetblue;
 }
 
-div#box {	
+#box {	
 	background: lightblue;
     overflow-y: scroll;
 }
 
 #grid-container {
+    position:relative;
+    border-radius: 25px;
     padding: 10px;
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -25,6 +31,8 @@ div#box {
 }
 
 .sport {
+    position:relative;
+    border-radius: 25px;
     border: 5px solid black;
     padding: 20px;
     font-size: 20px;

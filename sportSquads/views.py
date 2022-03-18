@@ -50,7 +50,7 @@ def all_teams(request):
         search_team_form = SearchTeamForm(request.POST)
         if search_team_form.is_valid():
             form_filters_list = search_team_form.cleaned_data['filters_team_name']
-
+            
             teams_query_set = Team.objects.none()
             if '1' in form_filters_list:
                 teams_query_set |= Team.objects.filter(name__icontains=search_team_form.cleaned_data['search_text'])
@@ -73,6 +73,12 @@ def all_teams(request):
 
 def show_team(request, team_name_slug):
     context_dict = {}
+    
+    try:
+        context_dict['team'] = Team.objects.get(name_slug=team_name_slug)
+    except:
+        pass
+
     return render(request, 'sportSquads/team.html', context=context_dict)
 
 
@@ -115,7 +121,6 @@ def user_login(request):
                                 password=user_login_form.cleaned_data['password'])
             if user:
                 if user.is_active:
-
                     login(request, user)
                     return redirect(reverse('home'))
                 else:
