@@ -13,6 +13,8 @@
 {% block body_block %}
     {% if team %}
         <h1>Join {{ team.name }}</h1>
-        {{ team.members_with_roles }}
+        {% for elem in team.teamusermembership_set.all %}
+            <p>{{ elem.user }}</p>
+        {% endfor %}
     {% endif %}
 {% endblock %}
