@@ -1,0 +1,17 @@
+{% extends 'sportSquads/base.html' %}
+
+{% block title_block %}
+    {% if team %}
+        {{ team.name }}
+    {% else %}
+        Unknown Team
+    {% endif %}
+
+{% endblock %}
+
+
+{% block body_block %}
+    {% if team %}
+        <h1>Join {{ team.name }}</h1>
+    {% endif %}
+{% endblock %}
