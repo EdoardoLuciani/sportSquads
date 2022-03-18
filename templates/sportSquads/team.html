@@ -18,6 +18,10 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/team.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        var team_json_available_roles = "{{team.available_roles|escapejs}}";
+        var sport_json_roles = "{{team.sport.roles|escapejs}}";
+    </script>
     <script src="{% static 'js/team.js' %}"></script>
 
 
@@ -69,20 +73,14 @@
         {% if team.sport.roles %}
             {% for role, value in team.sport.roles.items %}
                 <p>total {{role}} spots : {{value}}</p>
-                <script>
-                    const capacity = "{{value}}" ;
-                </script>
                 {% if team.members_with_roles%}
                     <div id="a">
                     {%for role2, availability in team.available_roles.items %}
-                        <script>
-                            const availability = "{{availability}}" ;
-                        </script>
-                        {%if  role2 == role %}
+                        {%if role2 == role %}
                             <p>{{role}} spots left : {{availability}} </p>
                             <div id="progress">
-                                <span class="progress-text"></span>
-                                <div class="progress-bar"></div>
+                                <label id="{{role}}-label", for="{{role}}-bar"></label>
+                                <progress id="{{role}}-bar" max="100"></progress>
                             </div>
             
                         {% endif %}
@@ -103,9 +101,6 @@
             {% if team.sport.roles %}
             <div id="members">
             {% for member in team.teamusermembership_set.all %}
-            <script>
-            const m= "{{member}}";
-            </script>
                 {%if member.user.profile_picture %}
                 <p>{{member.user}} : {{ member.role}}  <img src="{{ member.user.profile_picture.url }}" alt= "User Image"  width=5% height=5%/></p>
                {% else %}

@@ -105,14 +105,14 @@
     border:1px solid red;
 } */
 
-#progress .progress-bar {
+.progress .progress-bar {
     background:blue;
     height:20px;
     width:0%;
     display:inline-block;
 }
 
-#progress .progress-text {
+.progress .progress-text {
     position:absolute;
     z-index:2;
     left: 30;
