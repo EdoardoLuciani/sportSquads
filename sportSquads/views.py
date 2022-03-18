@@ -78,14 +78,14 @@ def show_team(request, team_name_slug):
 
 
 @login_required
-def join_team(request, team_name_slug):
+def join_team(request, sport_name):
     context_dict = {}
 
     try:
-        context_dict['team'] = Team.objects.get(name_slug=team_name_slug)
+        context_dict['team'] = Team.objects.get(name_slug=sport_name)
         context_dict['user'] = UserProfile.objects.get(user=request.user)
 
-        for member in Team.objects.get(name_slug=team_name_slug).members_with_roles:
+        for member in Team.objects.get(name_slug=sport_name).members_with_roles:
             print(member) 
     except:
         pass
