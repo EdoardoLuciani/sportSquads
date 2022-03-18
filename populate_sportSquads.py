@@ -44,7 +44,7 @@ def add_sport(name, image_path, description, author, roles):
 
 
 def add_team(name, image_path, description, location, sport, manager, members_with_roles):
-    available_roles_json = sport.roles
+    available_roles_json = sport.roles.copy()
     for (member, role) in members_with_roles:
         available_roles_json[role] = str(int(available_roles_json[role]) - 1)
 
