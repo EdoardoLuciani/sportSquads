@@ -8,12 +8,14 @@ from sportSquads.forms import *
 from sportSquads.models import Sport, Team, UserProfile
 from django.contrib.auth.decorators import login_required
 
-
+    
 def home(request):
     sport_list = Sport.objects.all()[:10]
 
     context_dict = {}
-    context_dict['sports'] = sport_list
+    context_dict['sports'] = sport_list 
+    if request.user.is_authenticated:
+        context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
 
     return render(request, "sportSquads/home.html", context=context_dict)
 
@@ -24,7 +26,8 @@ def home_get_10_more_sports(request, starting_idx):
 
 @login_required
 def account_information(request):
-    context_dict = { 'user' : UserProfile.objects.get(user=request.user) }
+    context_dict = {}
+    context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
     return render(request, "sportSquads/account_information.html", context=context_dict)
     
 def show_sport(request, sport_name_slug):
@@ -35,7 +38,10 @@ def show_sport(request, sport_name_slug):
         context_dict['teams'] = Team.objects.filter(sport=context_dict['sport'])[:10]
     except:
         pass
-
+    
+    if request.user.is_authenticated:
+        context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
+        
     return render(request, 'sportSquads/sport.html', context=context_dict)
 
 
@@ -68,11 +74,17 @@ def all_teams(request):
     context_dict = {
         'search_team_form' : SearchTeamForm(initial = {'filters_team_name': search_team_form_filters[0]})
     }
+    
+    if request.user.is_authenticated:
+        context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
+        
     return render(request, "sportSquads/all_teams.html", context=context_dict)
 
 
 def show_team(request, team_name_slug):
     context_dict = {}
+    if request.user.is_authenticated:
+        context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
     return render(request, 'sportSquads/team.html', context=context_dict)
 
 
@@ -133,12 +145,17 @@ def user_logout(request):
 
 
 def contact_us(request):
-    return render(request, 'sportSquads/contact_us.html')
+    context_dict = {}
+    if request.user.is_authenticated:
+        context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
+    return render(request, 'sportSquads/contact_us.html', context=context_dict)
 
 
 @login_required
 def add_new_sport(request):
     user_profile = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+    context_dict = {'form': SportForm(author=user_profile)}
+    context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
 
     if request.method == 'POST':
         form = SportForm(author=user_profile, data=request.POST)
@@ -150,7 +167,7 @@ def add_new_sport(request):
         else:
             print(form.errors)
 
-    return render(request, "sportSquads/add_new_sport.html", {'form': SportForm(author=user_profile)})
+    return render(request, "sportSquads/add_new_sport.html",context = context_dict)
 
 
 @login_required
@@ -171,6 +188,9 @@ def add_new_team(request, sport_name):
             print(form.errors)
     context_dict = {'form': TeamForm(manager=user_profile, sport=sport),
                     'sport_name': sport_name}
+                    
+
+    context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
 
     return render(request, "sportSquads/add_new_team.html", context=context_dict)
 

@@ -20,14 +20,20 @@
 			<img class="icon left" src="logo.jpg" alt="LOGO">
 			
 			<div class="dropdown icon right" style="padding:8px 24px">
-				<button class="dropbtn"><img class="profile" src="profile.jpg" alt="USER"</button>
-				<div class="dropdown-content  shadow">
+				<button class="dropbtn">
+				{% if user.is_authenticated %}
+				<img class="profile" src={{ userInfo.profile_picture.url }} alt="USER">
+				{% else %}
+				<img class="profile" src="defaultIcon.jpg" alt="USER">
+				{% endif %}
+				</button>
+				<div class="dropdown-content shadow">
 					{% if user.is_authenticated %}
 						<a href="{% url 'account_information'%}">Account Details</a>
 						<a href="logout/">Sign out</a>
 					{% else %}
 						<a href="{% url 'login'%}">Login</a>
-					<a href="{% url 'sign_up'%}">Sign up</a>
+						<a href="{% url 'sign_up'%}">Sign up</a>
 					{% endif %}
 				</div>
 			</div>
@@ -36,7 +42,7 @@
 			
 			<div class="dropdown icon right">
 				<button class="dropbtn">=</button>
-				<div class="dropdown-content  shadow">
+				<div class="dropdown-content shadow">
 					<a href="{% url 'all_teams'%}">All Teams</a>
 					<a href="{% url 'contact_us'%}">Contact Us</a>
 				</div>
