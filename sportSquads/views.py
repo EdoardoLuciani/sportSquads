@@ -159,6 +159,9 @@ def add_new_sport(request):
     context_dict = {'form': SportForm(author=user_profile)}
     add_user_info_to_context(request, context_dict)
 
+    user_profile = UserProfile.objects.get(user=request.user)
+
+
     if request.method == 'POST':
         form = SportForm(author=user_profile, data=request.POST)
         
