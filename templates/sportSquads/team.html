@@ -11,9 +11,6 @@
 
 {% endblock %}
 
-
-
-
 {% block body_block %}
 
     <link rel="stylesheet" type="text/css" href="{% static 'css/team.css' %}">
@@ -24,105 +21,88 @@
     </script>
     <script src="{% static 'js/team.js' %}"></script>
 
-
-
-
     <h1>sportSquads</h1>
 
-
     {% if team %}
-
-        <div id="top-bar" >
-            <div >
+        <div id="top-bar">
             {% if team.image %}
-            <img id="image" src="{{ team.image.url }}" alt= "Team Image" width=20% height=20% />
+                <img id="image" src="{{ team.image.url }}" alt= "Team Image" width=20% height=20% />
             {% endif %}
-            <div id="team-name"><h1>{{ team.name }}</h1></div></div>
-            
-            
-
+            <div id="team-name"><h1>{{ team.name }}</h1></div>
         </div>
         
-
-
         <div id="about">
             <div id="title" ><h2>About us</h2></div>
-            <p id="description"></pid>{{ team.description }}</p>
+            <p id="description">{{ team.description }}</p>
         </div>
 
         <br style="clear:both;"/>
 
         {% if team.manager %}
-        <div id="manager">
-            <div id="title">
-            <h2> Manager</h2>
+            <div id="manager">
+                <div id="title">
+                    <h2> Manager</h2>
+                </div>
+                <p>{{ team.manager }}</p>
+                <p>Email:   {{ team.manager.user.email }}</p>
+                <br>
+                <div id="sport">
+                    <p> Sport: {{ team.sport }}</p>
+                </div>
             </div>
-            <p style=>{{ team.manager }}</p>
-            <p style=>Email:   {{ team.manager.user.email }}</p>
-            <br>
-            <div id="sport">
-            <p style=> Sport: {{ team.sport }}</p> </div>
-        </div>
-        
         {% else %}
-             <h2>Team does not exist.</h2>
+            <h2>Team does not exist.</h2>
         {% endif %}
         
         
-        <div id="roles"  style="width: 45%; float:left">
+        <div id="roles" style="width: 45%; float:left">
             <div id="title">
                 <br>
-            <h2>Role availability</h2>
+                <h2>Role availability</h2>
             </div>
-        {% if team.sport.roles %}
-            {% for role, value in team.sport.roles.items %}
-                <h3> {{role}} Role</h3>
-                <p>total {{role}} spots : {{value}}</p>
-                {% if team.members_with_roles%}
-                    <div id="a">
-                    {%for role2, availability in team.available_roles.items %}
-                        {%if role2 == role %}
-                            <p>{{role}} spots left : {{availability}} </p>
-                            <div id="progress">
-                                <label id="{{role}}-label", for="{{role}}-bar"></label>
-                                <progress id="{{role}}-bar" max="100"></progress>
-                            </div>
-            
-                        {% endif %}
-                    {% endfor %}
-                    </div>
-                {% endif %}
-             
-            {% endfor %}
-        {% else %}
-            <h2>This sport has no roles.</h2>
-        {% endif %}
+            {% if team.sport.roles %}
+                {% for role, value in team.sport.roles.items %}
+                    <h3>{{role}} Role</h3>
+                    <p>total {{role}} spots : {{value}}</p>
+                    {% if team.members_with_roles%}
+                        <div id="a">
+                        {% for role2, availability in team.available_roles.items %}
+                            {% if role2 == role %}
+                                <p>{{role}} spots left : {{availability}} </p>
+                                <div id="progress">
+                                    <label id="{{role}}-label", for="{{role}}-bar"></label>
+                                    <progress id="{{role}}-bar" max="100"></progress>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <h2>This sport has no roles.</h2>
+            {% endif %}
         </div>
         
         
         <div id="roles2"  style="width: 45%; float:right">
             <div id="title">
-            <h2>Assigned roles</h2>
+                <h2>Assigned roles</h2>
             </div>  
             <br>
             {% if team.sport.roles %}
-            <div id="members">
-            {% for member in team.teamusermembership_set.all %}
-                {%if member.user.profile_picture %}
-                <p>{{member.user}} : {{ member.role}} <img src="{{ member.user.profile_picture.url }}" alt= "User Image"  width=5% height=5%/></p>
-               {% else %}
-               <p>{{member.user}} : {{ member.role}}</p>
-            </div>
+                <div id="members">
+                    {% for member in team.teamusermembership_set.all %}
+                        {% if member.user.profile_picture %}
+                            <p>{{member.user}} : {{ member.role}} <img src="{{ member.user.profile_picture.url }}" alt= "User Image" width=5% height=5%/></p>
+                        {% else %}
+                            <p>{{member.user}} : {{ member.role}}</p>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% else %}
+                <h2>This sport has no roles.</h2>
             {% endif %}
-            {% endfor %}
-        {% else %}
-            <h2>This sport has no roles.</h2>
-        {% endif %}
-        <br style="clear:both;"/>
+            <br style="clear:both;"/>
         </div>
-    </div>
-  {%endif%}
-
-    <br style="clear:both;"/>
-    <br><br>
+    {% endif %}
 {% endblock %}

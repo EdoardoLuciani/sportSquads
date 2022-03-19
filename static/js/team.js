@@ -9,8 +9,5 @@ $(document).ready(function() {
 
         $('#' + key + '-label').text(progress + '%');
     }
-
-    console.log(team_json_available_roles);
-    console.log(sport_json_roles);
 });
 
