@@ -22,7 +22,7 @@ $(document).ready(function() {
 
                 sports_data = data["sports"];
                 for (var i = 0; i < sports_data.length; i++) {
-                    $('#grid-container').append('<div class="sport"> <a href="/sport/' + sports_data[i].name_slug + '">' + sports_data[i].name + '</a> </div>');
+                    $('#grid-container').append('<a class="sport shadow" style="background-image:'sports_data[i].image'" href="/sport/' + sports_data[i].name_slug + '">' + sports_data[i].name + '</a>');
                 }
                 elem_count += sports_data.length;
 

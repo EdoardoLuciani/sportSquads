@@ -96,7 +96,7 @@ img.profile {
 }
 
 .dropdown-content a:hover {
-	background-color: var(--secondary_colour);
+	background-color: var(--secondary_colour2);
 }
 
 .dropdown:hover .dropdown-content {

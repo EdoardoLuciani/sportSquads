@@ -44,7 +44,7 @@ def add_sport(name, image_path, description, author, roles):
 
 
 def add_team(name, image_path, description, location, sport, manager, members_with_roles):
-    available_roles_json = sport.roles
+    available_roles_json = sport.roles.copy()
     for (member, role) in members_with_roles:
         available_roles_json[role] = str(int(available_roles_json[role]) - 1)
 
@@ -106,7 +106,7 @@ def populate():
             "image_path": os.path.join(sport_images_initial_path, "football.jpg"),
             "description": "Football is a team sport",
             "author": User.objects.get(username="kracc bacc").userprofile,
-            "roles": {"manager": "1", "goalkeeper": "1"},
+            "roles": {"manager": "1", "goalkeeper": "5"},
         },
         {
             "name": "Volleyball",

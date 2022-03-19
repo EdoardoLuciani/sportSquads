@@ -1,0 +1,114 @@
+#top-bar {
+    border-radius: 25px;
+    background: cadetblue;
+    left: 50px;
+    text-decoration-color: deeppink;
+}
+
+
+
+#team-name{
+    position: relative;
+    left: 20px;
+}
+
+
+#about{
+    border-radius: 25px;
+    position: relative;
+    border: 3px solid cadetblue;
+    padding: 20px;
+    bottom: 10px;
+    padding-right: 4%;
+    text-align:left;
+    
+}
+
+
+#aboutUS{
+    text-decoration: underline;
+}
+
+
+#description {
+    font-size: medium;
+    text-align:r=left;
+    font-size: large;
+    color: deeppink;
+}
+
+#manager {
+    border-radius: 25px;
+    line-height: 20%;
+    border: 3px solid cadetblue;
+    padding: 20px;
+    text-align:left;
+    font-size: medium;
+
+}
+
+#title {
+    position:relative;
+    font-weight: bold;
+    text-decoration: underline;
+    text-decoration-color: deeppink;
+    text-align:left;
+    font-size: large;
+    color: black;
+    padding-right: 4%;
+}
+
+#sport {
+    font-weight: bold;
+    text-align:right;
+    font-size: large;
+    text-decoration-color: deeppink;
+    padding-right: 4%;
+}
+
+#image{
+    position:relative;
+    top: 20px;
+    line-height: 20%;
+    border: 3px solid deeppink;
+    left: 20px;
+}
+
+#roles{
+    position:relative;
+    border-radius: 25px;
+    top: 20px;
+    line-height: 20%;
+    border: 3px solid cadetblue;
+    padding: 20px;
+    text-align:left;
+    font-size: medium;
+}
+
+#roles2{
+    position:relative;
+    border-radius: 25px;
+    top: 20px;
+    line-height: 20%;
+    border: 3px solid cadetblue;
+    padding: 20px;
+    text-align:left;
+    font-size: medium;
+}
+
+
+
+
+.progress .progress-bar {
+    background:deeppink;
+    height:30px;
+    width:0%;
+    display:inline-block;
+}
+
+.progress .progress-text {
+    position:absolute;
+    z-index:2;
+    left: 30;
+}
+

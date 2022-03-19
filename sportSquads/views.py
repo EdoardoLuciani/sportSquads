@@ -56,7 +56,7 @@ def all_teams(request):
         search_team_form = SearchTeamForm(request.POST)
         if search_team_form.is_valid():
             form_filters_list = search_team_form.cleaned_data['filters_team_name']
-
+            
             teams_query_set = Team.objects.none()
             if '1' in form_filters_list:
                 teams_query_set |= Team.objects.filter(name__icontains=search_team_form.cleaned_data['search_text'])
@@ -64,6 +64,8 @@ def all_teams(request):
                 teams_query_set |= Team.objects.filter(description__icontains=search_team_form.cleaned_data['search_text'])
             if '3' in form_filters_list:
                 teams_query_set |= Team.objects.filter(location__icontains=search_team_form.cleaned_data['search_text'])
+            if '4' in form_filters_list:
+                teams_query_set |= Team.objects.filter(sport__name__icontains=search_team_form.cleaned_data['search_text'])
 
             context_dict = {
                 'search_team_form' : search_team_form,
@@ -83,8 +85,14 @@ def all_teams(request):
 
 def show_team(request, team_name_slug):
     context_dict = {}
+
     if request.user.is_authenticated:
         context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
+
+    try:
+        context_dict['team'] = Team.objects.get(name_slug=team_name_slug)
+    except:
+        pass
     return render(request, 'sportSquads/team.html', context=context_dict)
 
 
@@ -127,7 +135,6 @@ def user_login(request):
                                 password=user_login_form.cleaned_data['password'])
             if user:
                 if user.is_active:
-
                     login(request, user)
                     return redirect(reverse('home'))
                 else:
@@ -153,9 +160,13 @@ def contact_us(request):
 
 @login_required
 def add_new_sport(request):
+
     user_profile = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
     context_dict = {'form': SportForm(author=user_profile)}
     context_dict['userInfo'] = UserProfile.objects.get(user=request.user)
+
+    user_profile = UserProfile.objects.get(user=request.user)
+
 
     if request.method == 'POST':
         form = SportForm(author=user_profile, data=request.POST)

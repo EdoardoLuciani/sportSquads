@@ -1,7 +1,7 @@
 :root{
-	--main_colour: #f5b942;
-	--secondary_colour: #7b33d4;
-	--secondary_colour2: #6b1ec9;
+	--main_colour: #FBF6EF;
+	--secondary_colour: #0C6E7D;
+	--secondary_colour2: #cc0066;
 }
 
 
@@ -10,3 +10,7 @@ body {
 	font-family: Verdana;
 }
 
+#WebTitle {
+	font-size: 50px;
+	text-shadow: 1px 1px #ccc;
+}
