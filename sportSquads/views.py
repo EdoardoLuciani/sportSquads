@@ -79,10 +79,15 @@ def show_team(request, team_name_slug):
 
 @login_required
 def join_team(request, team_name):
+    for member in Team.objects.get(name_slug=team_name).teamusermembership_set.all():
+        print(member.user)
     context_dict = {}
+    context_dict['team'] = Team.objects.get(name_slug=team_name)
+    roles = context_dict['team'].available_roles
+    context_dict['user'] = UserProfile.objects.get(user=request.user)
 
     if request.method == 'POST':
-        form = JoinTeamForm(team=context_dict['team'], roles=roles, data=request.POST)
+        form = JoinTeamForm(team=context_dict['team'], user=context_dict['user'], data=request.POST)
 
         if form.is_valid():
             print(form.cleaned_data)

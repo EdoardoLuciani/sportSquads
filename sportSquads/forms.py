@@ -81,8 +81,20 @@ class JoinTeamForm(forms.ModelForm):
         self.fields['role'] = forms.TypedChoiceField(choices=roles_list)
 
     def clean(self):
-        # Check that the role is available, (even with a typedchoicefield users can enter a role that is not in the available_roles modifying html)
-        pass
+        valid = False
+        roles_list = []
+        for role in filter(lambda e: e[1] != '0', self.team.available_roles.items()):
+            roles_list.append(role)
+
+        obj = super(JoinTeamForm, self).save(commit=False)
+        for role in roles_list:
+            if self.fields['role'] == role:
+                valid = True
+            
+        if valid:
+            self.cleaned_data['role'] = self.fields['role']
+        else:
+            pass
     
     def save(self, commit=True):
         obj = super(JoinTeamForm, self).save(commit=False)
@@ -91,6 +103,8 @@ class JoinTeamForm(forms.ModelForm):
         obj.role = self.cleaned_data['role']
         if commit:
             # update the json for self.team
+            self.team.available_roles[obj.role] -= 1
+            self.team.teamusermembership_set.all().append(obj.user)
             obj.save()
         return obj
     
