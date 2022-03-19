@@ -82,13 +82,32 @@ def join_team(request, team_name):
     context_dict = {}
 
     try:
+        already_member = False
         context_dict['team'] = Team.objects.get(name_slug=team_name)
         context_dict['user'] = UserProfile.objects.get(user=request.user)
+        roles = context_dict['team'].available_roles
 
-        for member in Team.objects.get(name_slug=team_name).members_with_roles:
-            print(member) 
+        for member in context_dict['team'].teamusermembership_set.all():
+            if member.user == context_dict['user']:
+                already_member = True
+                break
+        
+        context_dict['member'] = already_member
+        context_dict['form'] = JoinTeamForm(roles)
+
     except:
         pass
+
+    if request.method == 'POST':
+        form = JoinTeamForm(team=context_dict['team'], roles=roles, data=request.POST)
+
+        if form.is_valid():
+            print(form.cleaned_data)
+            form.save()
+            context_dict['member'] = True
+            return render(request, 'sportSquads/join_team.html', context=context_dict)
+        else:
+            print(form.errors)
 
     return render(request, 'sportSquads/join_team.html', context=context_dict)
 

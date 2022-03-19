@@ -1,4 +1,5 @@
 {% extends 'sportSquads/base.html' %}
+{% load static %}
 
 {% block title_block %}
     {% if team %}
@@ -13,8 +14,14 @@
 {% block body_block %}
     {% if team %}
         <h1>Join {{ team.name }}</h1>
-        {% for elem in team.teamusermembership_set.all %}
-            <p>{{ elem.user }}</p>
-        {% endfor %}
+
+        {% if not member %}
+            <form id="join_team_form" method="post" action="/{{ sport_name }}/join-team/">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" name="submit" value="Join Team" />
+            </form>
+
+        {% endif %}
     {% endif %}
 {% endblock %}
