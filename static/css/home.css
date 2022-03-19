@@ -5,18 +5,22 @@ div.h {
 	margin:  20px;
 }
 
-div.s {	
+div.banner {	
     position:relative;
-    border-radius: 25px;
     z-index: -1;
+	width:100%;
+	padding: 15px;
 	margin-bottom: 5px; 
-	height:  40px;
-	background: cadetblue;
+	height: 80px;
+	background: var(--secondary_colour);
 }
 
 #box {	
 	background: lightblue;
     overflow-y: scroll;
+	width: 80%;
+	margin: auto;
+	padding: 20px;
 }
 
 #grid-container {
@@ -43,9 +47,28 @@ div.s {
 	text-decoration: none;
 	text-shadow: -2px 3px #444;
 	color: #ddd;
-	opacity: 0.9;
+	opacity: 1;
 }
 
-a.sport {
-	
+a.sport:hover {
+	opacity: 0.8;
+	transform: scale(1.1);
+}
+
+.link {
+	width: 80%;
+	height: 30px;
+	margin: auto;
+	padding: 10px;
+}
+
+.link a {
+	text-transform: uppercase;
+	color: #222;
+	border-radius: 2px;
+	padding: 5px;
+}
+
+.link a:hover{
+	color: #aaa;
 }

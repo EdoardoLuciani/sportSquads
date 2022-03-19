@@ -10,7 +10,15 @@ body {
 	font-family: Verdana;
 }
 
-#WebTitle {
+#web-title {
 	font-size: 50px;
-	text-shadow: 1px 1px #ccc;
+	text-shadow: 1px 1px var(--secondary_colour);
 }
+
+#category-title {
+	font-size:32px;
+	margin: auto;
+	text-align: center;
+	text-shadow: 1px 1px var(--secondary_colour);
+}
+	
