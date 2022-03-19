@@ -80,38 +80,35 @@ class TeamForm(forms.ModelForm):
 
 
 
-class JoinTeamForm(forms.ModelForm):
+class JoinTeamForm(forms.Form):
     def __init__(self, **kwargs):
         self.user = kwargs.pop('user')
         self.team = kwargs.pop('team')
         super(JoinTeamForm, self).__init__(**kwargs)
 
-        roles_list = []
+        self.roles_list = [('', 'Select Role')]
         for i,elem in enumerate(filter(lambda e: e[1] != '0', self.team.available_roles.items())):
-            roles_list.append((i, elem[0]))
-        self.fields['role'] = forms.TypedChoiceField(choices=roles_list)
+            self.roles_list.append((i, elem[0]))
+        self.fields['role'] = forms.TypedChoiceField(choices=self.roles_list, coerce=int)
 
-    def clean(self):
-        chosen_role_count = self.team.available_roles.get(self.fields['role'])
-        if chosen_role_count and chosen_role_count <= 0:
+    def clean_role(self):
+        filtered_roles = list(filter(lambda e: e[0] == self.cleaned_data['role'], self.roles_list))
+        if len(filtered_roles) == 1:
+            return filtered_roles[0][1]
+        else:
             raise forms.ValidationError('Role is not available')
-
-        self.cleaned_data['role'] = self.fields['role']
     
     def save(self, commit=True):
-        obj = super(JoinTeamForm, self).save(commit=False)
-        obj.user = self.user
-        obj.team = self.team
-        obj.role = self.cleaned_data['role']
         if commit:
-            # update the json for self.team
-            self.team.available_roles[obj.role] -= 1
-            obj.save()
-        return obj
-    
-    class Meta:
-        model = TeamUserMembership
-        fields = ()
+            member_with_role_relation = TeamUserMembership(
+            user=self.user, team=self.team, role=self.cleaned_data['role'])
+            member_with_role_relation.save()
+
+            current_role_count = int(self.team.available_roles[self.cleaned_data['role']])
+            self.team.available_roles[self.cleaned_data['role']] = str(current_role_count - 1)
+            self.team.save()
+
+        return self
         
 
 class UserForm(UserCreationForm):

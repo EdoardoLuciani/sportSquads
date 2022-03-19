@@ -95,18 +95,14 @@ def show_team(request, team_name_slug):
 
 @login_required
 def join_team(request, team_name):
-    for member in Team.objects.get(name_slug=team_name).teamusermembership_set.all():
-        print(member.user)
     context_dict = {}
     context_dict['team'] = Team.objects.get(name_slug=team_name)
-    roles = context_dict['team'].available_roles
-    context_dict['user'] = UserProfile.objects.get(user=request.user)
+    add_user_info_to_context(request, context_dict)
 
     if request.method == 'POST':
-        form = JoinTeamForm(team=context_dict['team'], user=context_dict['user'], data=request.POST)
+        form = JoinTeamForm(team=context_dict['team'], user=context_dict['user_info'], data=request.POST)
 
         if form.is_valid():
-            print(form.cleaned_data)
             form.save()
             context_dict['member'] = True
             return render(request, 'sportSquads/join_team.html', context=context_dict)
@@ -116,15 +112,13 @@ def join_team(request, team_name):
         try:
             context_dict['member'] = False
             context_dict['team'] = Team.objects.get(name_slug=team_name)
-            context_dict['user'] = UserProfile.objects.get(user=request.user)
-            roles = context_dict['team'].available_roles
 
             for member in context_dict['team'].teamusermembership_set.all():
-                if request.user == context_dict['user']:
+                if member.user == context_dict['user_info']:
                     context_dict['member'] = True
                     break
-        
-            context_dict['form'] = JoinTeamForm(user=request.user, team=context_dict['team'])
+            
+            context_dict['form'] = JoinTeamForm(user=context_dict['user_info'], team=context_dict['team'])
 
         except Exception as e:
             print(e)        
