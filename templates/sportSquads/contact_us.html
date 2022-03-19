@@ -1,12 +1,14 @@
 {% extends 'sportSquads/base.html' %}
+{% load static %}
 
 {% block title_block %}
     Contact Us
 {% endblock %}
 
 {% block body_block %}
-    <h1>Contact Us</h1>
-    <div>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/information_display.css' %}">
+    <h1 id="web-title">Contact Us</h1>
+    <div class="info">
         <h2>
             If you have any questions, please feel free to contact us at one of the following places:
         </h2>
@@ -15,4 +17,4 @@
             <li>Phone: +44 1632 960247</li>
         </ul>
     </div>
-<{% endblock %}
+{% endblock %}
