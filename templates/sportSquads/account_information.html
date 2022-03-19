@@ -7,11 +7,11 @@
 {% endblock %}
 
 {% block top_block %}
-	{% if user_profile_picture %}
-		<img class="icon centre profile" src={{ user.profile_picture.url }} alt="Profile Picture" style="height:90px; width:90px; margin-top:5%;">
+	{% if user_info.profile_picture %}
+		<img class="icon centre profile" src={{ user_info.profile_picture.url }} alt="Profile Picture" style="height:90px; width:90px; margin-top:5%;">
 	{% endif %}
-	<p id="username">{{ user.user.username }}</p>
-	<p id="username" style="font-size:12px;">{{ user.user.email }}</p>
+	<p id="username">{{ user_info.user.username }}</p>
+	<p id="username" style="font-size:12px;">{{ user_info.user.email }}</p>
 {% endblock %}
 {% block bottom_block %}
 	<div class="tab half">

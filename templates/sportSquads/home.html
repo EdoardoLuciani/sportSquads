@@ -22,7 +22,7 @@
     </div>
     <div id="box">
         <h2>Sports</h2>
-        {% if user.is_authenticated %}
+        {% if user_info %}
             <a href="{% url 'add_new_sport'  %}">Add New Sport</a> <br />
         {% endif %}
 
