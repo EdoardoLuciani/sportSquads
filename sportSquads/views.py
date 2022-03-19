@@ -58,6 +58,8 @@ def all_teams(request):
                 teams_query_set |= Team.objects.filter(description__icontains=search_team_form.cleaned_data['search_text'])
             if '3' in form_filters_list:
                 teams_query_set |= Team.objects.filter(location__icontains=search_team_form.cleaned_data['search_text'])
+            if '4' in form_filters_list:
+                teams_query_set |= Team.objects.filter(sport__name__icontains=search_team_form.cleaned_data['search_text'])
 
             context_dict = {
                 'search_team_form' : search_team_form,

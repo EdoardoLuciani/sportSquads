@@ -93,6 +93,7 @@ search_team_form_filters = [
     ('1', 'Team name'),
     ('2', 'Team description'),
     ('3', 'Team location'),
+    ('4', 'Sport name')
 ]
 class SearchTeamForm(forms.Form):
     search_text = forms.CharField(label='Write here your search words', max_length=100)
