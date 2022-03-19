@@ -62,7 +62,7 @@ img.profile {
 }
 			
 .dropdown:hover{
-	background-color: var(--main_colour);
+	background-color: var(--secondary_colour2);
 }
 			
 .dropdown-content {

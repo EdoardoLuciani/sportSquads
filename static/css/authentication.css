@@ -1,0 +1,20 @@
+div.box {
+	width:25%;
+	height: 200px;
+	margin: auto;
+	margin-top:100px;
+	padding: 50px 15px 50px 15px;
+	background-color: var(--main_colour2);
+	text-align: center;
+	border-radius: 15px;
+}
+
+div.box input {
+	margin: 5px;
+}
+#submit {
+	width: 30%;
+}
+
+
+
