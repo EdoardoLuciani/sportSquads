@@ -48,17 +48,26 @@ class SportForm(forms.ModelForm):
 
 
 class TeamForm(forms.ModelForm):
+    initial_role = forms.CharField(max_length=64, required=True)
+
     def __init__(self, **kwargs):
         self.manager = kwargs.pop('manager', None)
         self.sport = kwargs.pop('sport', None)
         self.available_roles = kwargs.pop('available_roles', None)
         super(TeamForm, self).__init__(**kwargs)
 
+    def clean(self):        
+        if self.cleaned_data['initial_role'] in self.available_roles:
+            self.available_roles[self.cleaned_data['initial_role']] -= 1
+            self.cleaned_data['available_roles'] = self.available_roles
+        else:
+            raise forms.ValidationError('Role not available')
+
     def save(self, commit=True):
         obj = super(TeamForm, self).save(commit=False)
         obj.manager = self.manager
         obj.sport = self.sport
-        obj.available_roles = self.available_roles
+        obj.available_roles = self.cleaned_data['available_roles']
         if commit:
             obj.save()
         return obj
