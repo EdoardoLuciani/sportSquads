@@ -39,7 +39,7 @@
         <br style="clear:both;"/>
 
         {% if team.manager %}
-            <div id="manager">
+            <div id="manager", style="width: 75%; float:left">
                 <div id="title">
                     <h2> Manager</h2>
                 </div>
@@ -52,6 +52,14 @@
             </div>
         {% else %}
             <h2>Team does not exist.</h2>
+        {% endif %}
+
+        {% if team %}
+            <div id="join">
+                <h2 id="title">Join Link</h2>
+                <br><br>
+                <a id="link" href="{% url 'join_team' team.name_slug %}">Join {{ team.name }}</a>
+            </div>
         {% endif %}
         
         

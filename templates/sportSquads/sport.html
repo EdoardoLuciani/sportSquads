@@ -46,7 +46,6 @@
                 <div id="grid-container">
                     {% for team in teams %}
                         <div class="team">
-                            <a href="{% url 'join_team' team.name_slug %}">join</a>
                             <a href="{% url 'show_team' team.name_slug %}">{{ team.name }}</a>
                         </div>
                     {% endfor %}
