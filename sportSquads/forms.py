@@ -81,16 +81,33 @@ class TeamForm(forms.ModelForm):
 
 class JoinTeamForm(forms.ModelForm):
     def __init__(self, **kwargs):
+        self.user = kwargs.pop('user')
         self.team = kwargs.pop('team')
-        self.roles = kwargs.pop('roles', None)
-        role = forms.TypedChoiceField(self.roles)
-        
+        super(JoinTeamForm, self).__init__(**kwargs)
 
+        roles_list = []
+        for i,elem in enumerate(filter(lambda e: e[1] != '0', self.team.available_roles.items())):
+            roles_list.append((i, elem[0]))
+        self.fields['role'] = forms.TypedChoiceField(choices=roles_list)
+
+    def clean(self):
+        # Check that the role is available, (even with a typedchoicefield users can enter a role that is not in the available_roles modifying html)
+        pass
+    
     def save(self, commit=True):
         obj = super(JoinTeamForm, self).save(commit=False)
-        #TODO
+        obj.user = self.user
+        obj.team = self.team
+        obj.role = self.cleaned_data['role']
+        if commit:
+            # update the json for self.team
+            obj.save()
+        return obj
+    
+    class Meta:
+        model = TeamUserMembership
+        fields = ()
         
-
 
 class UserForm(UserCreationForm):
     class Meta:
