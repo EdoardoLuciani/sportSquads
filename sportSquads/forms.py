@@ -78,6 +78,18 @@ class TeamForm(forms.ModelForm):
         fields = ('name', 'image', 'description', 'location', )
 
 
+
+class JoinTeamForm(forms.ModelForm):
+    def __init__(self, **kwargs):
+        self.team = kwargs.pop('team')
+        self.roles = kwargs.pop('roles', None)
+        role = forms.TypedChoiceField(self.roles)
+        
+
+    #def save(self, commit=True):
+        
+
+
 class UserForm(UserCreationForm):
     class Meta:
         model = User
