@@ -1,3 +1,4 @@
+from itertools import count
 from django import forms
 from sportSquads.models import *
 from django.contrib.auth.models import User
@@ -91,20 +92,11 @@ class JoinTeamForm(forms.ModelForm):
         self.fields['role'] = forms.TypedChoiceField(choices=roles_list)
 
     def clean(self):
-        valid = False
-        roles_list = []
-        for role in filter(lambda e: e[1] != '0', self.team.available_roles.items()):
-            roles_list.append(role)
+        chosen_role_count = self.team.available_roles.get(self.fields['role'])
+        if chosen_role_count and chosen_role_count <= 0:
+            raise forms.ValidationError('Role is not available')
 
-        obj = super(JoinTeamForm, self).save(commit=False)
-        for role in roles_list:
-            if self.fields['role'] == role:
-                valid = True
-            
-        if valid:
-            self.cleaned_data['role'] = self.fields['role']
-        else:
-            pass
+        self.cleaned_data['role'] = self.fields['role']
     
     def save(self, commit=True):
         obj = super(JoinTeamForm, self).save(commit=False)
@@ -114,7 +106,6 @@ class JoinTeamForm(forms.ModelForm):
         if commit:
             # update the json for self.team
             self.team.available_roles[obj.role] -= 1
-            self.team.teamusermembership_set.all().append(obj.user)
             obj.save()
         return obj
     
