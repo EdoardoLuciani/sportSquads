@@ -76,7 +76,9 @@ class JoinTeamForm(forms.ModelForm):
         role = forms.TypedChoiceField(self.roles)
         
 
-    #def save(self, commit=True):
+    def save(self, commit=True):
+        obj = super(JoinTeamForm, self).save(commit=False)
+        #TODO
         
 
 

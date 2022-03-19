@@ -93,7 +93,7 @@ def join_team(request, team_name):
                 break
         
         context_dict['member'] = already_member
-        context_dict['form'] = JoinTeamForm(roles)
+        context_dict['form'] = JoinTeamForm(team=context_dict['team'], roles=roles)
 
     except:
         pass
