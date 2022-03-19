@@ -143,7 +143,7 @@ def contact_us(request):
 
 @login_required
 def add_new_sport(request):
-    user_profile = UserProfile.objects.get(user=User.objects.get(id=request.user.id))
+    user_profile = UserProfile.objects.get(user=request.user)
 
     if request.method == 'POST':
         form = SportForm(author=user_profile, data=request.POST)

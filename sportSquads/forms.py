@@ -1,6 +1,5 @@
 from django import forms
-
-from sportSquads.models import Sport, Team, UserProfile
+from sportSquads.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 
@@ -70,6 +69,8 @@ class TeamForm(forms.ModelForm):
         obj.available_roles = self.cleaned_data['available_roles']
         if commit:
             obj.save()
+            team_user_membership = TeamUserMembership(user=self.manager, team=obj, role=self.cleaned_data['initial_role'])
+            team_user_membership.save()
         return obj
 
     class Meta:
