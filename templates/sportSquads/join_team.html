@@ -16,12 +16,14 @@
         <h1>Join {{ team.name }}</h1>
 
         {% if not member %}
-            <form id="join_team_form" method="post" action="/{{ sport_name }}/join-team/">
+            <form id="join_team_form" method="post" action="{% url 'home' %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" name="submit" value="Join Team" />
             </form>
-
+        
+        {% else %}
+            <h2>You are already a member of this team.</h2>
         {% endif %}
     {% endif %}
 {% endblock %}
