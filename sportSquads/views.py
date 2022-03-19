@@ -81,23 +81,6 @@ def show_team(request, team_name_slug):
 def join_team(request, team_name):
     context_dict = {}
 
-    try:
-        already_member = False
-        context_dict['team'] = Team.objects.get(name_slug=team_name)
-        context_dict['user'] = UserProfile.objects.get(user=request.user)
-        roles = context_dict['team'].available_roles
-
-        for member in context_dict['team'].teamusermembership_set.all():
-            if member.user == context_dict['user']:
-                already_member = True
-                break
-        
-        context_dict['member'] = already_member
-        context_dict['form'] = JoinTeamForm(team=context_dict['team'], roles=roles)
-
-    except:
-        pass
-
     if request.method == 'POST':
         form = JoinTeamForm(team=context_dict['team'], roles=roles, data=request.POST)
 
@@ -108,6 +91,22 @@ def join_team(request, team_name):
             return render(request, 'sportSquads/join_team.html', context=context_dict)
         else:
             print(form.errors)
+    else:
+        try:
+            context_dict['member'] = False
+            context_dict['team'] = Team.objects.get(name_slug=team_name)
+            context_dict['user'] = UserProfile.objects.get(user=request.user)
+            roles = context_dict['team'].available_roles
+
+            for member in context_dict['team'].teamusermembership_set.all():
+                if request.user == context_dict['user']:
+                    context_dict['member'] = True
+                    break
+        
+            context_dict['form'] = JoinTeamForm(user=request.user, team=context_dict['team'])
+
+        except Exception as e:
+            print(e)        
 
     return render(request, 'sportSquads/join_team.html', context=context_dict)
 
