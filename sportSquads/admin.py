@@ -1,8 +1,17 @@
 from django.contrib import admin
-from sportSquads.models import UserProfile, Sport, Team
+from sportSquads.models import *
 
+class TeamUserMembershipInline(admin.TabularInline):
+    model = TeamUserMembership
+    extra = 1
 
-admin.site.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    inlines = (TeamUserMembershipInline,)
+
+class TeamAdmin(admin.ModelAdmin):
+    inlines = (TeamUserMembershipInline,)
+
+admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(Sport)
-admin.site.register(Team)
+admin.site.register(Team, TeamAdmin)
 
