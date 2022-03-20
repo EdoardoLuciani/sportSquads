@@ -11,27 +11,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/home.js' %}"></script>
 
-    <h1>sportSquads</h1>
-    <div class=s>
+    <h1 id = "web-title">sportSquads</h1>
+    <div class="banner">
         <h2>
-            <p style="text-align:center">Sports</p>
+            <p id="category-title">Sports</p>
         </h2>
     </div>
-    <div>
-        <a href="{% url 'all_teams'%}">View all Teams</a>
-    </div>
-    <div id="box">
-        <h2>Sports</h2>
-        {% if user_info %}
-            <a href="{% url 'add_new_sport'  %}">Add New Sport</a> <br />
+    <div class="link">
+        <a class="left" href="{% url 'all_teams'%}">View all Teams</a>
+		{% if user_info %}
+            <a class="right" href="{% url 'add_new_sport'  %}">Add New Sport</a> <br />
         {% endif %}
+    </div>
+	
+    <div id="box">
 
         {% if sports %}
             <div id="grid-container">
-                {% for sport in sports %}
-                    <div class="sport">
-                        <a href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
-                    </div>
+                {% for sport in sports %}       
+                    <a class="sport shadow" style="background-image:url({{ sport.image.url }})" href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
                 {% endfor %}
             </div>
         {% else %}

@@ -18,13 +18,18 @@ $(document).ready(function() {
             });
             request_in_progress = true;
             request.done(function(data) {
-                request_in_progress = false;
-
                 sports_data = data["sports"];
                 for (var i = 0; i < sports_data.length; i++) {
-                    $('#grid-container').append('<div class="sport"> <a href="/sport/' + sports_data[i].name_slug + '">' + sports_data[i].name + '</a> </div>');
+                    var new_sport = $('.sport ').last().clone();
+                    new_sport.text(sports_data[i].name);
+                    new_sport.attr('href', '/sport/' + sports_data[i].name_slug);
+                    new_sport.css('background-image', 'url(/media/' + sports_data[i].image +')');
+
+                    $('#grid-container').append(new_sport);
                 }
                 elem_count += sports_data.length;
+
+                request_in_progress = false;
 
                 if (sports_data.length < 10) {
                     end_reached = true;

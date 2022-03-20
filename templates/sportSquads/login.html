@@ -6,11 +6,14 @@
 {% endblock %}
 
 {% block body_block %}
-<h1>Login to sportSquads</h1>
-<form id="user_login_form" method="post" action="{% url 'login' %}" enctype="multipart/form-data">
-	{% csrf_token %}
-	{{ user_login_form.as_p }}
-	<input type="submit" name="submit" value="Login" />
-</form>
-<p>Don't have an account? <a href="{% url 'sign_up' %}">Sign Up</a> </p>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/authentication.css' %}">
+	<h1 id="web-title">Login to sportSquads</h1>
+	<div class="box">
+		<form id="user_login_form" method="post" action="{% url 'login' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ user_login_form.as_p }}
+		<input id="submit" type="submit" name="submit" value="Login" />
+		</form>
+		<p>Don't have an account? <a href="{% url 'sign_up' %}">Sign Up</a> </p>
+	</div>
 {% endblock %}

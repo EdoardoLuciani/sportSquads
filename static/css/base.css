@@ -96,13 +96,15 @@ img.profile {
 }
 
 .dropdown-content a:hover {
-	background-color: var(--secondary_colour);
+	opacity: 0.8;
 }
 
 .dropdown:hover .dropdown-content {
 	display: block;
 	top: 40px;
 }
+
+
 
 
 

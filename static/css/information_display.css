@@ -4,7 +4,7 @@ div.info {
 	margin: auto;
 	margin-top:10px;
 	padding: 15px;
-	background-color: lightgray;
+	background-color: var(--main_colour2);
 }
 
 

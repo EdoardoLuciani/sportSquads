@@ -5,18 +5,22 @@ div.h {
 	margin:  20px;
 }
 
-div.s {	
+div.banner {	
     position:relative;
-    border-radius: 25px;
     z-index: -1;
+	width:100%;
+	padding: 15px;
 	margin-bottom: 5px; 
-	height:  40px;
-	background: cadetblue;
+	height: 80px;
+	background: var(--secondary_colour);
 }
 
 #box {	
 	background: lightblue;
     overflow-y: scroll;
+	width: 80%;
+	margin: auto;
+	padding: 20px;
 }
 
 #grid-container {
@@ -24,17 +28,47 @@ div.s {
     border-radius: 25px;
     padding: 10px;
     display: grid;
-    grid-template-columns: auto auto auto auto;
-    column-gap: 15px;
-    row-gap: 15px;
+    grid-template-columns: auto auto auto;
+    column-gap: 30px;
+    row-gap: 30px;
     height: 700px;
 }
 
 .sport {
     position:relative;
-    border-radius: 25px;
-    border: 5px solid black;
-    padding: 20px;
-    font-size: 20px;
-    text-align: center;
+    border-radius: 10px;
+    padding: 90px; 
+	text-align: center;
+	font-size: 40px;
+	background-position: center;
+	background-size: contain;
+	background-color: var(--secondary_colour);
+	text-transform: uppercase;
+	text-decoration: none;
+	text-shadow: -2px 3px #444;
+	color: #ddd;
+	opacity: 1;
+}
+
+a.sport:hover {
+	opacity: 0.8;
+	transform: scale(1.1);
+}
+
+.link {
+	width: 80%;
+	height: 30px;
+	margin: auto;
+	padding: 10px;
+}
+
+.link a {
+	text-transform: uppercase;
+	color: #222;
+	border-radius: 2px;
+	padding: 5px;
+}
+
+.link a:hover{
+	color: #aaa;
 }
