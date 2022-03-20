@@ -1,4 +1,3 @@
-from itertools import count
 from django import forms
 from sportSquads.models import *
 from django.contrib.auth.models import User
