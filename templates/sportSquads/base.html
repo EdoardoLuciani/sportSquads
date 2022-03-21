@@ -24,7 +24,7 @@
 				{% if user_info.profile_picture %}
 					<img class="profile" src={{ user_info.profile_picture.url }} alt="USER">
 				{% else %}
-					<img class="profile" src="defaultIcon.jpg" alt="USER">
+					<img class="profile" src="{% static 'images/default_image.svg' %}" alt="USER">
 				{% endif %}
 				</button>
 				<div class="dropdown-content shadow">
