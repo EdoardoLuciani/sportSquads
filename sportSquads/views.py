@@ -221,8 +221,7 @@ def add_new_team(request, sport_name):
     sport = Sport.objects.get(name=sport_name)
 
     if request.method == 'POST':
-        form = TeamForm(manager=user_profile, sport=sport, available_roles=sport.roles,
-                        data=request.POST, files=request.FILES)
+        form = TeamForm(manager=user_profile, sport=sport, data=request.POST, files=request.FILES)
 
         if form.is_valid():
             form.save()
