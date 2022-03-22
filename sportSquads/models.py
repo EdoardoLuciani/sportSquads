@@ -7,7 +7,7 @@ from django.conf import settings
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_picture = models.ImageField(upload_to='profile_images', blank=True)
-    bio = models.TextField()
+    bio = models.TextField(blank=True)
 
     def __str__(self):
         return self.user.username
@@ -16,7 +16,7 @@ class UserProfile(models.Model):
 class Sport(models.Model):
     name = models.CharField(max_length=64, unique=True)
     image = models.ImageField(upload_to='sport_images', blank=True)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     author = models.ForeignKey(UserProfile, on_delete=models.SET_NULL, null=True)
     roles = models.JSONField()
     name_slug = models.SlugField(unique=True)   # sport name appears in some urls so slugging it
@@ -33,7 +33,7 @@ class Sport(models.Model):
 class Team(models.Model):
     name = models.CharField(max_length=64, unique=True)
     image = models.ImageField(upload_to='team_images', blank=True)
-    description = models.TextField()
+    description = models.TextField(blank=True)
     location = models.CharField(max_length=128)
     sport = models.ForeignKey(Sport, on_delete=models.PROTECT)
 
