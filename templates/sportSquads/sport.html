@@ -49,9 +49,7 @@
             {% if teams %}
                 <div id="grid-container">
                     {% for team in teams %}
-                        <div class="team">
-                            <a href="{% url 'show_team' team.name_slug %}">{{ team.name }}</a>
-                        </div>
+                           <a class="link_box shadow" style="background-image:url({{ team.image.url }})" href="{% url 'show_team' team.name_slug %}">{{ team.name }}</a>
                     {% endfor %}
                 </div>
             {% else %}

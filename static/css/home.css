@@ -50,7 +50,9 @@ div.banner {
 	padding: 15px;
 }
 
-.sport {
+.link_box {
+	width: 250px;
+	height: 80px;
     position:relative;
     border-radius: 10px;
     padding: 90px; 
@@ -66,7 +68,7 @@ div.banner {
 	opacity: 1;
 }
 
-a.sport:hover {
+a.link_box:hover {
 	opacity: 0.8;
 	transform: scale(1.1);
 }

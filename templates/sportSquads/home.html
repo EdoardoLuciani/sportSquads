@@ -29,7 +29,7 @@
         {% if sports %}
             <div id="grid-container">
                 {% for sport in sports %}       
-                    <a class="sport shadow" style="background-image:url({{ sport.image.url }})" href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
+                    <a class="link_box shadow" style="background-image:url({{ sport.image.url }})" href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
                 {% endfor %}
             </div>
         {% else %}
