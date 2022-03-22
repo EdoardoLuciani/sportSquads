@@ -31,10 +31,10 @@ img.profile {
 }
 
 #username {
-	margin-top: 0;
+	margin-top: 5px;
 	text-align: center;
-	font-size: 18px;
-	text-shadow: 0.2px 0.2px 1px blue;
+	font-size: 24px;
+	text-shadow: 0.05px 0.05px 1px ;
 }	
 
 	

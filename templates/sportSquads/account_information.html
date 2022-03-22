@@ -14,26 +14,30 @@
 	<p id="username" style="font-size:12px;">{{ user_info.user.email }}</p>
 {% endblock %}
 {% block bottom_block %}
-	<div class="tab half">
+	<div class="tab half left shadow">
 		<h2>Teams</h2>
 		<br>
-		{% if user.teams %}
+		{% if user_info.teamusermembership_set %}
 		<ul>
-			{% for team in teams %}
-				<li>team <a href="">></a></li>
+			{% for team_user_relation in user_info.teamusermembership_set.all %}
+				{% if team_user_relation.manager != team_user_relation.user %}
+					<li><a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a></li>
+				{% endif %}
 			{% endfor %}
 		</ul>
 		{% endif %}
 
 	</div>
 	
-	<div class="tab half">
+	<div class="tab half right shadow">
 		<h2>Team manager of</h2>
 		<br>
-		{% if user.owned_teams %}
+		{% if user_info.teamusermembership_set %}
 		<ul>
-			{% for team in owned_teams %}
-				<li>team <a href="">></a></li>
+			{% for team_user_relation in user_info.teamusermembership_set.all %}
+				{% if team_user_relation.team.manager == team_user_relation.user %}
+					<li><a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a></li>
+				{% endif %}
 			{% endfor %}
 		</ul>
 		{% endif %}

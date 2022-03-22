@@ -6,6 +6,9 @@ $(document).ready(function() {
     
             var last_elem = $(this).next().after('<p> <label for="id_role_'+ idx +'">Role '+ idx +':</label> <input type="text" name="role_'+ idx +'" maxlength="64" id="id_role_'+ idx +'"> </p>');
             $(last_elem).next().after('<p> <label for="id_role_'+ idx +'_count">Role '+ idx +' count:</label> <input type="number" name="role_'+ idx +'_count" min="1" id="id_role_'+ idx +'_count"> </p>');
+            
+            var current_height = parseInt($('.input-box').css('height').slice(0, -2));
+            $('.input-box').css('height', current_height + 90 + 'px');
         }
     });
 

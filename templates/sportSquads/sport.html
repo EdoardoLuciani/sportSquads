@@ -15,25 +15,29 @@
 
 
 {% block body_block %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/sport.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="{% static 'js/sport.js' %}"></script>
 
-    <h1>sportSquads</h1>
+    <h1 id = "web-title">sportSquads</h1>
 
     {% if sport %}
-        <div id="top-bar">
-            <h1>{{ sport.name }}</h1>
+        <div class="banner">
+            <h1 id="category-title">{{ sport.name }}</h1>
             <p id="description"style=>{{ sport.description }}</p>
         </div>
-        <h2>Roles</h2>
+		<div class="banner" style="background-color: var(--main_colour); margin-bottom: 40px;">
+        <h2 id="category-title">Roles</h2>
         {% if sport.roles %}
+			<ul class ="roles">
             {% for role, value in sport.roles.items %}
-                <p>{{role}}: {{value}}</p>
+                <li>{{role}}: {{value}}</li>
             {% endfor %}
+			</ul>
         {% else %}
             <h2>This sport has no roles.</h2>
         {% endif %}
+		</div>
 
         <div id="box">
             <h1>Teams</h1>
@@ -45,9 +49,11 @@
             {% if teams %}
                 <div id="grid-container">
                     {% for team in teams %}
-                        <div class="team">
-                            <a href="{% url 'show_team' team.name_slug %}">{{ team.name }}</a>
-                        </div>
+                           <a class="link-box shadow" 
+						   {% if team.image %}
+						   style="background-image:url({{ team.image.url }});" 
+						   {% endif %}
+						   href="{% url 'show_team' team.name_slug %}">{{ team.name }}</a>
                     {% endfor %}
                 </div>
             {% else %}
