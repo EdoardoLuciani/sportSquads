@@ -236,3 +236,17 @@ def add_new_team(request, sport_name):
     add_user_info_to_context(request, context_dict)
     return render(request, "sportSquads/add_new_team.html", context=context_dict)
 
+
+@login_required
+def manage_team(request, team_name_slug):
+    context_dict = {}
+    add_user_info_to_context(request, context_dict)
+
+    if (request.user == Team.objects.get(name_slug=team_name_slug).manager.user):
+        return HttpResponse("You are the manager of this team")
+    elif TeamUserMembership.objects.filter(user=UserProfile.objects.get(user=request.user), team=Team.objects.get(name_slug=team_name_slug)).exists():
+        return HttpResponse("You are a member of this team")
+
+    return render(request, "sportSquads/manage_team.html", context=context_dict)
+
+
