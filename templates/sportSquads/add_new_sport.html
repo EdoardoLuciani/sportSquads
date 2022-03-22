@@ -14,7 +14,7 @@
     <h1 id="web-title">Add a New Sport</h1>
 	
 	<div class="input-box" style="height:420px">
-		<form id="add_new_sport" method="post" action = "/add-sport/">
+		<form id="add_new_sport" method="post" action = "/add-sport/" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form.as_p }}
 			<input type="submit" name="submit" value="Add New Sport" />

@@ -1,3 +1,4 @@
+from importlib.resources import files
 from django.shortcuts import render, redirect
 from django.http import JsonResponse, HttpResponse
 from django.urls import reverse
@@ -193,10 +194,9 @@ def add_new_sport(request):
     add_user_info_to_context(request, context_dict)
 
     if request.method == 'POST':
-        form = SportForm(author=user_profile, data=request.POST)
+        form = SportForm(author=user_profile, data=request.POST, files=request.FILES)
         
         if form.is_valid():
-            print(form.cleaned_data)
             form.save()
             return redirect(reverse('home'))
         else:
@@ -212,17 +212,17 @@ def add_new_team(request, sport_name):
 
     if request.method == 'POST':
         form = TeamForm(manager=user_profile, sport=sport, available_roles=sport.roles,
-                        data=request.POST)
+                        data=request.POST, files=request.FILES)
 
         if form.is_valid():
-            print(form.cleaned_data)
             form.save()
             return redirect(reverse('home'))
         else:
             print(form.errors)
+
     context_dict = {'form': TeamForm(manager=user_profile, sport=sport),
                     'sport_name': sport_name}
-                    
+
     add_user_info_to_context(request, context_dict)
     return render(request, "sportSquads/add_new_team.html", context=context_dict)
 
