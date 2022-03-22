@@ -26,7 +26,12 @@ $(document).ready(function() {
 
                 teams_data = data["teams"];
                 for (var i = 0; i < teams_data.length; i++) {
-                    $('#grid-container').append('<div class="team"> <a href="/team/' + teams_data[i].name_slug + '">' + teams_data[i].name + '</a> </div>');
+                    var new_team = $('.link_box ').last().clone();
+                    new_team.text(teams_data[i].name);
+                    new_team.attr('href', '/team/' + teams_data[i].name_slug);
+                    new_team.css('background-image', 'url(/media/' + teams_data[i].image +')');
+
+                    $('#grid-container').append(new_team);
                 }
                 elem_count += teams_data.length;
 
