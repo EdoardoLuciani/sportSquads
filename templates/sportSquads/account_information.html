@@ -21,7 +21,10 @@
 		<ul>
 			{% for team_user_relation in user_info.teamusermembership_set.all %}
 				{% if team_user_relation.manager != team_user_relation.user %}
-					<li><a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a></li>
+					<li>
+						<a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a>
+						<a href="/team/{{team_user_relation.team.name_slug}}/manage">Manage</a>
+					</li>
 				{% endif %}
 			{% endfor %}
 		</ul>
@@ -36,7 +39,10 @@
 		<ul>
 			{% for team_user_relation in user_info.teamusermembership_set.all %}
 				{% if team_user_relation.team.manager == team_user_relation.user %}
-					<li><a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a></li>
+					<li>
+						<a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a>
+						<a href="/team/{{team_user_relation.team.name_slug}}/manage">Manage</a>
+					</li>
 				{% endif %}
 			{% endfor %}
 		</ul>

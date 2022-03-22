@@ -2,7 +2,7 @@ from django import forms
 from sportSquads.models import *
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
-
+from enum import Enum
 
 class SportForm(forms.ModelForm):
     def __init__(self, **kwargs):
@@ -135,5 +135,54 @@ class SearchTeamForm(forms.Form):
     search_text = forms.CharField(label='Write here your search words', max_length=100)
     filters_team_name = forms.MultipleChoiceField(label='Select at least one filter', choices=search_teams_form_filters, widget=forms.CheckboxSelectMultiple())
 
+
 class SearchSportForm(forms.Form):
     search_text = forms.CharField(label='Filter by sport name', max_length=100, required=False)
+
+
+class ManageTeamForm(forms.Form):
+    class AuthLevel(Enum):
+        MANAGER = 0
+        MEMBER = 1
+
+    def manager_delete_team(user, team):
+        team.delete()
+
+    def member_leave_team(user, team):
+        membership = TeamUserMembership.objects.get(user=user, team=team)
+        team.available_roles[membership.role] = str(int(team.available_roles[membership.role]) + 1)
+        team.save()
+        membership.delete()
+
+    allowed_action_list = {
+        AuthLevel.MANAGER: {
+            'Delete team':  manager_delete_team
+        },
+        AuthLevel.MEMBER: {
+            'Leave team': member_leave_team
+        }
+    }
+
+    def __init__(self, **kwargs):
+        self.user = kwargs.pop('user')
+        self.team = kwargs.pop('team')
+
+        actions = [('', 'Select action')]
+        if (self.user == self.team.manager):
+            actions.append(('Delete team', 'Delete team'))
+            self.auth_level = self.AuthLevel.MANAGER
+        elif TeamUserMembership.objects.filter(user=self.user, team=self.team).exists():
+            actions.append(('Leave team', 'Leave team'))
+            self.auth_level = self.AuthLevel.MEMBER
+        else:
+            raise forms.ValidationError('You cannot manage this team')
+            
+        super(ManageTeamForm, self).__init__(**kwargs)
+        self.fields['action'] = forms.TypedChoiceField(choices=actions)
+    
+
+    def save(self, commit=True):
+        if commit:
+            self.allowed_action_list[self.auth_level][self.cleaned_data['action']](self.user, self.team)
+
+    
