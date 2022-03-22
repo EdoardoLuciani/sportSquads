@@ -5,8 +5,10 @@ from sportSquads.models import *
 from django.core.files import File
 
 TEST_FILES_DIR = os.path.join(os.path.dirname(__file__), 'test_files')
-
 ALL_TEST_FILE_NAMES = [ f for f in os.listdir(TEST_FILES_DIR) ]
+
+# Create the media dir if it doesn't exist
+os.makedirs(os.path.join(settings.BASE_DIR, 'media'), exist_ok=True)
 
 def find_and_remove_files(dir, files_to_remove):
     local_directories = []
@@ -24,16 +26,16 @@ def find_and_remove_files(dir, files_to_remove):
         for local_dir in local_directories:
             find_and_remove_files(local_dir, files_to_remove)
 
-def cleanup():
+def reset_media_dir():
     find_and_remove_files(settings.MEDIA_DIR, ALL_TEST_FILE_NAMES.copy())
         
 
 class UserProfileTestCase(TestCase):
     def setUp(self):
-        cleanup()
+        reset_media_dir()
 
     def tearDown(self):
-        cleanup()
+        reset_media_dir()
 
     def test_user_profile_creation_with_pfp(self):
         user = User.objects.create(username="testuser", password="testpassword")
@@ -55,12 +57,13 @@ class UserProfileTestCase(TestCase):
         self.assertEqual(user_profile.profile_picture, None)
         self.assertEqual(user_profile.bio, '')
 
+
 class SportTestCase(TestCase):
     def setUp(self):
-        cleanup()
+        reset_media_dir()
 
     def tearDown(self):
-        cleanup()
+        reset_media_dir()
 
     def test_sport_creation(self):
         user = User.objects.create(username="testuser", password="testpassword")
@@ -85,12 +88,13 @@ class SportTestCase(TestCase):
         self.assertEqual(sport.description, '')
         self.assertEqual(sport.image.url, "/media/sport_images/sport.jpg")
 
+
 class TeamTestCase(TestCase):
     def setUp(self):
-        cleanup()
+        reset_media_dir()
 
     def tearDown(self):
-        cleanup()
+        reset_media_dir()
 
     def test_team_creation(self):
         user = User.objects.create(username="testuser", password="testpassword")
@@ -117,6 +121,7 @@ class TeamTestCase(TestCase):
             team = Team.objects.create(name="test team", image=File(f, name="sport.jpg"), sport=sport, manager=user_profile, available_roles=sport.roles)
 
         self.assertEquals(team.image.url, "/media/team_images/sport.jpg")
+
 
 class TeamUserMembershipTestCase(TestCase):
     def test_team_user_membership_creation(self):
