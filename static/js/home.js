@@ -20,7 +20,7 @@ $(document).ready(function() {
             request.done(function(data) {
                 sports_data = data["sports"];
                 for (var i = 0; i < sports_data.length; i++) {
-                    var new_sport = $('.sport ').last().clone();
+                    var new_sport = $('.link_box ').last().clone();
                     new_sport.text(sports_data[i].name);
                     new_sport.attr('href', '/sport/' + sports_data[i].name_slug);
                     new_sport.css('background-image', 'url(/media/' + sports_data[i].image +')');
