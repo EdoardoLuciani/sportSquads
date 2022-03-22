@@ -240,12 +240,18 @@ def add_new_team(request, sport_name):
 def manage_team(request, team_name_slug):
     context_dict = {}
     add_user_info_to_context(request, context_dict)
-
-    if (request.user == Team.objects.get(name_slug=team_name_slug).manager.user):
-        return HttpResponse("You are the manager of this team")
-    elif TeamUserMembership.objects.filter(user=UserProfile.objects.get(user=request.user), team=Team.objects.get(name_slug=team_name_slug)).exists():
-        return HttpResponse("You are a member of this team")
-
-    return render(request, "sportSquads/manage_team.html", context=context_dict)
+    context_dict['team'] = Team.objects.get(name_slug=team_name_slug)
+    
+    if request.method == 'POST':
+        manage_team_form = ManageTeamForm(user=context_dict['user_info'], team=context_dict['team'], data=request.POST)
+        if (manage_team_form.is_valid()):
+            manage_team_form.save()
+        return redirect(reverse('home'))
+    else:
+        try:
+            context_dict['manage_team_form'] = ManageTeamForm(user=context_dict['user_info'], team=context_dict['team'])
+            return render(request, "sportSquads/manage_team.html", context=context_dict)
+        except:
+            return redirect(reverse('home'))
 
 
