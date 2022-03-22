@@ -28,7 +28,7 @@ urlpatterns = [
     path('home_get_10_more_sports/<int:starting_idx>', views.home_get_10_more_sports, name='home_get_sports'),
 
     path('sign-up', views.sign_up, name='sign_up'),
-    path('all-teams', views.all_teams, name='all_teams'),
+    path('search-teams', views.search_teams, name='search_teams'),
     path('contact-us', views.contact_us, name='contact_us'),
     path('login/', views.user_login, name='login'),
     path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),

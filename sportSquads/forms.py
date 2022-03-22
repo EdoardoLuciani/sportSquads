@@ -121,7 +121,7 @@ class UserProfileForm(forms.ModelForm):
         model = UserProfile
         fields = ('profile_picture', 'bio')
 
-search_team_form_filters = [
+search_teams_form_filters = [
     ('1', 'Team name'),
     ('2', 'Team description'),
     ('3', 'Team location'),
@@ -129,4 +129,4 @@ search_team_form_filters = [
 ]
 class SearchTeamForm(forms.Form):
     search_text = forms.CharField(label='Write here your search words', max_length=100)
-    filters_team_name = forms.MultipleChoiceField(label='Select at least one filter', choices=search_team_form_filters, widget=forms.CheckboxSelectMultiple())
+    filters_team_name = forms.MultipleChoiceField(label='Select at least one filter', choices=search_teams_form_filters, widget=forms.CheckboxSelectMultiple())

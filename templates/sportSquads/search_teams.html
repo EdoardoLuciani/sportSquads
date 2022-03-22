@@ -3,18 +3,18 @@
 {% load static %}
 
 {% block title_block %}
-    All teams
+    Search teams
 {% endblock %}
 
 {% block body_block %}
 	<link rel="stylesheet" type="text/css" href="{% static 'css/authentication.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 	<h1 id="web-title">sportSquads</h1>
-	<h2 id="category-title">All Teams</h2>
+	<h2 id="category-title">Search teams</h2>
 	<div class="input-box" style="background-color: var(--main_colour); margin-top:0px;">		
-		<form method="post" action="{% url 'all_teams' %}" enctype="multipart/form-data">
+		<form method="post" action="{% url 'search_teams' %}" enctype="multipart/form-data">
 		{% csrf_token %}
-		{{ search_team_form.as_p }}
+		{{ search_teams_form.as_p }}
 		<input id="submit" type="submit" name="submit" value="Search" />
 		
 	</div>

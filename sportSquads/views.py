@@ -51,34 +51,34 @@ def sport_get_10_more_teams(request, sport_name, starting_team_no):
     return JsonResponse({'teams': list(teams)})
 
 
-def all_teams(request):
+def search_teams(request):
     if request.method == 'POST':
-        search_team_form = SearchTeamForm(request.POST)
-        if search_team_form.is_valid():
-            form_filters_list = search_team_form.cleaned_data['filters_team_name']
+        search_teams_form = SearchTeamForm(request.POST)
+        if search_teams_form.is_valid():
+            form_filters_list = search_teams_form.cleaned_data['filters_team_name']
             
             teams_query_set = Team.objects.none()
             if '1' in form_filters_list:
-                teams_query_set |= Team.objects.filter(name__icontains=search_team_form.cleaned_data['search_text'])
+                teams_query_set |= Team.objects.filter(name__icontains=search_teams_form.cleaned_data['search_text'])
             if '2' in form_filters_list:
-                teams_query_set |= Team.objects.filter(description__icontains=search_team_form.cleaned_data['search_text'])
+                teams_query_set |= Team.objects.filter(description__icontains=search_teams_form.cleaned_data['search_text'])
             if '3' in form_filters_list:
-                teams_query_set |= Team.objects.filter(location__icontains=search_team_form.cleaned_data['search_text'])
+                teams_query_set |= Team.objects.filter(location__icontains=search_teams_form.cleaned_data['search_text'])
             if '4' in form_filters_list:
-                teams_query_set |= Team.objects.filter(sport__name__icontains=search_team_form.cleaned_data['search_text'])
+                teams_query_set |= Team.objects.filter(sport__name__icontains=search_teams_form.cleaned_data['search_text'])
 
             context_dict = {
-                'search_team_form' : search_team_form,
+                'search_teams_form' : search_teams_form,
                 'teams' : teams_query_set
             }
-            return render(request, "sportSquads/all_teams.html", context=context_dict)
+            return render(request, "sportSquads/search_teams.html", context=context_dict)
     
     context_dict = {
-        'search_team_form' : SearchTeamForm(initial = {'filters_team_name': search_team_form_filters[0]})
+        'search_teams_form' : SearchTeamForm(initial = {'filters_team_name': search_teams_form_filters[0]})
     }
     
     add_user_info_to_context(request, context_dict)        
-    return render(request, "sportSquads/all_teams.html", context=context_dict)
+    return render(request, "sportSquads/search_teams.html", context=context_dict)
 
 
 def show_team(request, team_name_slug):
