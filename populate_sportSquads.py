@@ -92,6 +92,15 @@ def populate():
             "bio": "I am an actor",
             "pfp_path": "",
         },
+        {
+            "username": "NikocadoAvocado",
+            "password": "fssjqw43258",
+            "email": "info@nikocadoavocado.com",
+            "first_name": "Nikocado",
+            "last_name": "Avocado",
+            "bio": "",
+            "pfp_path": "",
+        },
     ]
     for user_data in users_data:
         add_user(**user_data)
@@ -112,11 +121,18 @@ def populate():
             "author": None,
             "roles": {"opposite": "1", "setter": "1"},
         },
+        {
+            "name": "Tennis",
+            "image_path": os.path.join(sport_images_initial_path, "tennis.jpg"),
+            "description": "",
+            "author": User.objects.get(username="NikocadoAvocado").userprofile,
+            "roles": {"player1": "1", "player2": "1"},
+        },
     ]
 
     for sport_data in sports_data:
         # Adding each sport 300 times so that we can have a lot of teams and test the infinite scrolling
-        for i in range(300):
+        for i in range(100):
             sport_data_to_add = sport_data.copy()
             sport_data_to_add["name"] = f"{sport_data['name']}-{i}"
             add_sport(**sport_data_to_add)
@@ -126,7 +142,7 @@ def populate():
         {
             "name": "YoMama meme",
             "image_path": os.path.join(team_images_initial_path, "yo_mama.jpg"),
-            "description": "We are NOT motivated",
+            "description": "",
             "location": "somewhere",
             "sport": Sport.objects.get(name="Football-0"),
             "manager": User.objects.get(username="Willem_Dafoe").userprofile,
@@ -145,10 +161,21 @@ def populate():
             "members_with_roles": [
                 (User.objects.get(username="JohnWilliamson69").userprofile, "opposite")
             ],
+        },
+        {
+            "name": "IamReallyTired",
+            "image_path": os.path.join(team_images_initial_path, "really_tired.jpg"),
+            "description": "Tomorrow I have a morning lecture",
+            "location": "glasgow",
+            "sport": Sport.objects.get(name="Tennis-0"),
+            "manager": User.objects.get(username="NikocadoAvocado").userprofile,
+            "members_with_roles": [
+                (User.objects.get(username="NikocadoAvocado").userprofile, "player1")
+            ],
         }
     ]
     for team_data in teams_data:
-        for x in range(300):
+        for x in range(200):
             team_data_to_add = team_data.copy()
             team_data_to_add['name'] = team_data_to_add['name'] + f"-{x}"
             add_team(**team_data_to_add)
