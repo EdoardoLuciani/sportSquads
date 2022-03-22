@@ -1,4 +1,4 @@
-div.box {
+div.input-box {
 	width:25%;
 	height: 200px;
 	margin: auto;
@@ -9,9 +9,10 @@ div.box {
 	border-radius: 15px;
 }
 
-div.box input {
+div.input-box input {
 	margin: 5px;
 }
+
 #submit {
 	width: 30%;
 }

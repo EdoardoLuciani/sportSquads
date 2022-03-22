@@ -50,7 +50,7 @@ div.banner {
 	padding: 15px;
 }
 
-.link_box {
+.link-box {
 	width: 275px;
 	height: 80px;
     position:relative;
@@ -68,7 +68,7 @@ div.banner {
 	opacity: 1;
 }
 
-a.link_box:hover {
+a.link-box:hover {
 	opacity: 0.8;
 	transform: scale(1.1);
 }

@@ -6,34 +6,34 @@
     All teams
 {% endblock %}
 
-<link rel="stylesheet" type="text/css" href="{% static 'css/test.css' %}">
-
 {% block body_block %}
-    <body>
-        <h1>sportSquads</h1>
-        <div class=s>
-            <h2>All Teams</h2>
-        </div>
-
-        <form id="search_team_form" method="post" action="{% url 'all_teams' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ search_team_form.as_p }}
-            <input type="submit" name="submit" value="Search" />
-        </form>
-
-        <div>
-            {% if teams %}
-            <ul>
-                {% for team in teams %}
-                <li>
-                    <a href="{% url 'show_team' team.name_slug %}">
-                    {{ team.name }}
-                </li>
-                {% endfor %}
-            </ul>
-            {% else %}
-                <strong>No teams match your search criteria</strong>
-            {% endif %}
-        </div>
-    </body>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/authentication.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
+	<h1 id="web-title">sportSquads</h1>
+	<h2 id="category-title">All Teams</h2>
+	<div class="input-box" style="background-color: var(--main_colour); margin-top:0px;">		
+		<form method="post" action="{% url 'all_teams' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ search_team_form.as_p }}
+		<input id="submit" type="submit" name="submit" value="Search" />
+		
+	</div>
+	{% if teams %}
+	<div id="box">
+		<div id="grid-container">
+				{% for team in teams %}
+					<a class="link-box shadow" 
+					{% if team.image %}
+					style="background-image:url({{ team.image.url }});" 
+					{% endif %}
+					href="{% url 'show_team' team.name_slug %}">
+					{{ team.name }}
+					</a>
+				{% endfor %}
+			</ul>
+			{% else %}
+				<strong>No teams match your search criteria</strong>
+			{% endif %}
+		</div>
+	</div>
 {% endblock %}

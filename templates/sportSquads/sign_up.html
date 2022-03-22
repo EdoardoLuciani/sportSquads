@@ -12,7 +12,7 @@
         <a href="{% url 'home' %}">Return to the homepage.</a><br />
     {% else %}
 		<h1 id="web-title">Create a new account</h1>
-		<div class="box" style="height:730px; margin-top:0px;">
+		<div class="input-box" style="height:730px; margin-top:0px;">
 			<form id="user_form" method="post" action="{% url 'sign_up' %}" enctype="multipart/form-data">
 				{% csrf_token %}
 				{{ user_form.as_p }}
