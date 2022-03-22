@@ -38,18 +38,97 @@ class UserProfileTestCase(TestCase):
     def test_user_profile_creation_with_pfp(self):
         user = User.objects.create(username="testuser", password="testpassword")
 
-        with open(os.path.join(TEST_FILES_DIR, "test_pfp.jpg"), "rb") as f:
-            user_profile = UserProfile.objects.create(user=user, profile_picture=File(f, name="test_pfp.jpg"), bio="test bio")
+        with open(os.path.join(TEST_FILES_DIR, "pfp.jpg"), "rb") as f:
+            user_profile = UserProfile.objects.create(user=user, profile_picture=File(f, name="pfp.jpg"), bio="test bio")
 
         self.assertEqual(user_profile.user.username, "testuser")
+        self.assertEqual(str(user_profile), "testuser")
         self.assertEqual(user_profile.user.password, "testpassword")
-        self.assertEqual(user_profile.profile_picture.url, "/media/profile_images/test_pfp.jpg")
         self.assertEqual(user_profile.bio, "test bio")
 
-    def test_user_profile_creation_without_pfp(self):
+        self.assertEqual(user_profile.profile_picture.url, "/media/profile_images/pfp.jpg")
+
+    def test_user_profile_creation(self):
         user = User.objects.create(username="testuser", password="testpassword")
         user_profile = UserProfile.objects.create(user=user, profile_picture=None)
 
-        self.assertEqual(user_profile.user.username, "testuser")
         self.assertEqual(user_profile.profile_picture, None)
         self.assertEqual(user_profile.bio, '')
+
+class SportTestCase(TestCase):
+    def setUp(self):
+        cleanup()
+
+    def tearDown(self):
+        cleanup()
+
+    def test_sport_creation(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description", author=user_profile, roles={'test role': 'test role description'})
+
+        self.assertEqual(sport.name, "test sport")
+        self.assertEqual(sport.image, None)
+        self.assertEqual(sport.description, "test description")
+        self.assertEqual(sport.author, user_profile)
+        self.assertEqual(sport.roles, {'test role': 'test role description'})
+        self.assertEqual(sport.name_slug, "test-sport")
+
+    def test_sport_creation_with_picture(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        with open(os.path.join(TEST_FILES_DIR, "sport.jpg"), "rb") as f:
+            sport = Sport.objects.create(name="test sport", image=File(f, name="sport.jpg"), author=user_profile, roles={'test role': 'test role description'})
+
+        self.assertEqual(sport.description, '')
+        self.assertEqual(sport.image.url, "/media/sport_images/sport.jpg")
+
+class TeamTestCase(TestCase):
+    def setUp(self):
+        cleanup()
+
+    def tearDown(self):
+        cleanup()
+
+    def test_team_creation(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description", author=user_profile, roles={'test role': 'test role description'})
+
+        team = Team.objects.create(name="test team", sport=sport, description="test description", manager=user_profile, available_roles=sport.roles)
+
+        self.assertEqual(team.name, "test team")
+        self.assertEqual(team.sport, sport)
+        self.assertEqual(team.description, "test description")
+        self.assertEqual(team.manager, user_profile)
+        self.assertEqual(team.available_roles, sport.roles)
+        self.assertEqual(team.name_slug, "test-team")
+
+    def test_team_creation_with_picture(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description", author=user_profile, roles={'test role': 'test role description'})
+
+        with open(os.path.join(TEST_FILES_DIR, "sport.jpg"), "rb") as f:
+            team = Team.objects.create(name="test team", image=File(f, name="sport.jpg"), sport=sport, manager=user_profile, available_roles=sport.roles)
+
+        self.assertEquals(team.image.url, "/media/team_images/sport.jpg")
+
+class TeamUserMembershipTestCase(TestCase):
+    def test_team_user_membership_creation(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description", author=user_profile, roles={'test role': 'test role description'})
+
+        team = Team.objects.create(name="test team", sport=sport, description="test description", manager=user_profile, available_roles=sport.roles)
+
+        team_user_membership = TeamUserMembership.objects.create(team=team, user=user_profile, role='test role')
+
+        self.assertEqual(team_user_membership.team, team)
+        self.assertEqual(team_user_membership.user, user_profile)
+        self.assertEqual(team_user_membership.role, 'test role')
