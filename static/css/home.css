@@ -11,16 +11,26 @@ div.banner {
 	width:100%;
 	padding: 15px;
 	margin-bottom: 5px; 
-	height: 80px;
 	background: var(--secondary_colour);
 }
 
+.roles {
+	margin: 0 15% 0 15%;
+}
+
+.roles li {
+	padding: 10px; 
+	display: block; 
+	float:left;
+}
+
 #box {	
-	background: lightblue;
+	background: var(--main_colour2);
     overflow-y: scroll;
 	width: 80%;
 	margin: auto;
 	padding: 20px;
+	border-radius: 10px;
 }
 
 #grid-container {
@@ -32,6 +42,12 @@ div.banner {
     column-gap: 30px;
     row-gap: 30px;
     height: 700px;
+}
+
+#description {
+	text-align: center;
+    font-size: large;
+	padding: 15px;
 }
 
 .sport {
