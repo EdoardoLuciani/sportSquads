@@ -7,7 +7,6 @@ $(document).ready(function() {
     }
 
     var elem_count = 10;
-    var end_reached = false;
     var request_in_progress = false;
     function home_get_more_sports_while_scroll_end() {
         if (!end_reached && !request_in_progress && scrollbar_at_end()) {

@@ -130,3 +130,6 @@ search_teams_form_filters = [
 class SearchTeamForm(forms.Form):
     search_text = forms.CharField(label='Write here your search words', max_length=100)
     filters_team_name = forms.MultipleChoiceField(label='Select at least one filter', choices=search_teams_form_filters, widget=forms.CheckboxSelectMultiple())
+
+class SearchSportForm(forms.Form):
+    search_text = forms.CharField(label='Filter by team name', max_length=100, required=False)

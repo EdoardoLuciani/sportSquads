@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
 	<h1 id="web-title">sportSquads</h1>
 	<h2 id="category-title">Search teams</h2>
-	<div class="input-box" style="background-color: var(--main_colour); margin-top:0px;">		
+	<div class="input-box" style="background-color: var(--main_colour); margin-top:0px;">	
 		<form method="post" action="{% url 'search_teams' %}" enctype="multipart/form-data">
 		{% csrf_token %}
 		{{ search_teams_form.as_p }}

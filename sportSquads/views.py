@@ -17,8 +17,19 @@ def add_user_info_to_context(request, context_dict):
 
 def home(request):
     context_dict = {}
-    context_dict['sports'] = Sport.objects.all()[:10]
     add_user_info_to_context(request, context_dict)
+
+    if request.method == 'POST':
+        search_sport_form = SearchSportForm(request.POST)
+
+        if search_sport_form.is_valid() and search_sport_form.cleaned_data['search_text']:
+            context_dict['search_sport_form'] = search_sport_form
+            context_dict['sports'] = Sport.objects.filter(name__icontains=search_sport_form.cleaned_data['search_text'])
+            context_dict['searching'] = True
+            return render(request, "sportSquads/home.html", context=context_dict)
+    
+    context_dict['sports'] = Sport.objects.all()[:10]
+    context_dict['search_sport_form'] = SearchSportForm()
     return render(request, "sportSquads/home.html", context=context_dict)
 
 

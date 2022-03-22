@@ -9,6 +9,13 @@
 {% block body_block %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/home.css' %}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script>
+        var end_reached = false;
+        {% if searching %}
+            end_reached = true;
+        {% endif %}
+    </script>
     <script src="{% static 'js/home.js' %}"></script>
 
     <h1 id = "web-title">sportSquads</h1>
@@ -25,6 +32,10 @@
     </div>
 	
     <div id="box">
+        <form method="post" action="{% url 'home' %}">
+            {% csrf_token %}
+            {{ search_sport_form.as_p }}
+        <input id="submit" type="submit" name="submit" value="Search" />
 
         {% if sports %}
             <div id="grid-container">
