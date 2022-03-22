@@ -7,5 +7,17 @@ div.info {
 	background-color: var(--main_colour2);
 }
 
+div.tab {
+	margin: 15px;
+	padding: 15px;
+	background-color: var(--main_colour);
+	border-radius: 10px;
+	height: 600px;
+}
+
+div.half {
+	width: 45%;
+}
+
 
 
