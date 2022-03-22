@@ -59,10 +59,7 @@ def add_team(name, image_path, description, location, sport, manager, members_wi
     assign_file_and_save(team, "image", image_path)
 
     for (member, role) in members_with_roles:
-        member_with_role_relation = TeamUserMembership(
-            user=member, team=team, role=role
-        )
-        member_with_role_relation.save()
+        TeamUserMembership.objects.get_or_create(user=member, team=team, role=role)
 
 
 def populate():

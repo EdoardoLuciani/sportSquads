@@ -31,10 +31,10 @@ $(document).ready(function() {
                     new_team.attr('href', '/team/' + teams_data[i].name_slug);
 
                     if (teams_data[i].image != '') {
-                        new_sport.css('background-image', 'url(/media/' + teams_data[i].image +')');
+                        new_team.css('background-image', 'url(/media/' + teams_data[i].image +')');
                     }
                     else {
-                        new_sport.css('background-image', '');
+                        new_team.css('background-image', '');
                     }
 
                     $('#grid-container').append(new_team);
