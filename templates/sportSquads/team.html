@@ -47,7 +47,7 @@
                 <p>Email:   {{ team.manager.user.email }}</p>
                 <br>
                 <div id="sport">
-                    <p> Sport: {{ team.sport }}</p>
+                    <a href="{% url 'show_sport' team.sport.name_slug %}"><p> Sport: {{ team.sport }}</p></a>
                 </div>
             </div>
         {% else %}
