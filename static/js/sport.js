@@ -26,7 +26,7 @@ $(document).ready(function() {
 
                 teams_data = data["teams"];
                 for (var i = 0; i < teams_data.length; i++) {
-                    var new_team = $('.link_box ').last().clone();
+                    var new_team = $('.link-box ').last().clone();
                     new_team.text(teams_data[i].name);
                     new_team.attr('href', '/team/' + teams_data[i].name_slug);
                     new_team.css('background-image', 'url(/media/' + teams_data[i].image +')');

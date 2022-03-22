@@ -18,9 +18,10 @@
 		<input id="submit" type="submit" name="submit" value="Search" />
 		
 	</div>
-	{% if teams %}
+	
 	<div id="box">
 		<div id="grid-container">
+			{% if teams %}
 				{% for team in teams %}
 					<a class="link-box shadow" 
 					{% if team.image %}
