@@ -5,6 +5,7 @@ div.info {
 	margin-top:10px;
 	padding: 15px;
 	background-color: var(--main_colour2);
+	border-radius: 5px;
 }
 
 div.tab {
