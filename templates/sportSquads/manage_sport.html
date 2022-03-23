@@ -1,0 +1,22 @@
+{% extends 'sportSquads/base.html' %}
+{% load static %}
+
+{% block title_block %}
+    {% if sport %}
+        {{ sport.name }}
+    {% else %}
+        Unknown Sport
+    {% endif %}
+{% endblock %}
+
+
+{% block body_block %}
+    {% if sport %}
+        <h1>Manage {{ sport.name }}</h1>
+        <form id="manage_sport_form" method="post" action="/sport/{{sport.name_slug}}/manage">
+            {% csrf_token %}
+            {{ manage_sport_form.as_p }}
+            <input type="submit" name="submit" value="Execute" />
+        </form>
+    {% endif %}
+{% endblock %}

@@ -185,4 +185,34 @@ class ManageTeamForm(forms.Form):
         if commit:
             self.allowed_action_list[self.auth_level][self.cleaned_data['action']](self.user, self.team)
 
+class ManageSportForm(forms.Form):
+    def delete_sport(user, sport):
+        if Team.objects.filter(sport=sport).exists():
+            sport.author = None
+            sport.save()
+        else:
+            sport.delete()
+
+    allowed_action_list = {
+        'Delete sport':  delete_sport
+    }
+
+    def __init__(self, **kwargs):
+        self.user = kwargs.pop('user')
+        self.sport = kwargs.pop('sport')
+
+        actions = [('', 'Select action')]
+        if (self.user == self.sport.author):
+            actions.append(('Delete sport', 'Delete sport'))
+        else:
+            raise forms.ValidationError('You cannot manage this sport')
+            
+        super(ManageSportForm, self).__init__(**kwargs)
+        self.fields['action'] = forms.TypedChoiceField(choices=actions)
+    
+
+    def save(self, commit=True):
+        if commit:
+            self.allowed_action_list[self.cleaned_data['action']](self.user, self.sport)
+
     

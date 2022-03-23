@@ -254,4 +254,17 @@ def manage_team(request, team_name_slug):
         except:
             return redirect(reverse('home'))
 
+@login_required
+def manage_sport(request, sport_name_slug):
+    context_dict = {}
+    add_user_info_to_context(request, context_dict)
+    context_dict['sport'] = Sport.objects.get(name_slug=sport_name_slug)
 
+    if (request.method == 'POST'):
+        manage_sport_form = ManageSportForm(user=context_dict['user_info'], sport=context_dict['sport'], data=request.POST)
+        if (manage_sport_form.is_valid()):
+            manage_sport_form.save()
+        return redirect(reverse('home'))
+    else:
+        context_dict['manage_sport_form'] = ManageSportForm(user=context_dict['user_info'], sport=context_dict['sport'])
+        return render(request, "sportSquads/manage_sport.html", context=context_dict)
