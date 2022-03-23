@@ -30,6 +30,9 @@ class SportForm(forms.ModelForm):
                 roles[role_name] = role_count
             i += 1
 
+        if not roles:
+            raise forms.ValidationError('No roles created')
+
         self.cleaned_data['roles'] = roles
 
     def save(self, commit=True):

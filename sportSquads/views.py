@@ -216,9 +216,9 @@ def add_new_sport(request):
 
 
 @login_required
-def add_new_team(request, sport_name):
+def add_new_team(request, sport_name_slug):
     user_profile = UserProfile.objects.get(user=request.user)
-    sport = Sport.objects.get(name=sport_name)
+    sport = Sport.objects.get(name_slug=sport_name_slug)
 
     if request.method == 'POST':
         form = TeamForm(manager=user_profile, sport=sport, data=request.POST, files=request.FILES)
@@ -230,7 +230,7 @@ def add_new_team(request, sport_name):
             print(form.errors)
 
     context_dict = {'form': TeamForm(manager=user_profile, sport=sport),
-                    'sport_name': sport_name}
+                    'sport_name_slug': sport_name_slug}
 
     add_user_info_to_context(request, context_dict)
     return render(request, "sportSquads/add_new_team.html", context=context_dict)
