@@ -25,21 +25,24 @@ django==4.0.2`
 
 ### Initialize the database (SQLite)
 
-Starting from scratch, these are the command needed to create and setup the underlying database:
+Once you cloned the repo, navigate to the newly created directory, and input these commands to create and setup the underlying database:
 
 `python manage.py migrate`
 
 `python manage.py createsuperuser`
 
-`python manage.py makemigations sportSquads`
+Then run the population script to populate it with sample data (it takes a while so give it a little bit of time)
 
-`python manage.py migrate`
+`python populate_sportSquads.py`
 
 ### Usage
 
 At this point everything should be good to go! Start the server by typing:
 
 `python manage.py runserver`
+
+Note: In order to access all website's features (create/delete team and create/delete sport) an account is needed. The admin account created earlier
+does not count.
 
 ## Tests
 
