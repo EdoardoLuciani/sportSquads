@@ -11,17 +11,17 @@ TEST_FILES_DIR = os.path.join(os.path.dirname(__file__), 'test_files')
 class SportFormTests(TestCase):
 
     def test_form_valid_no_image(self):
-        form = SportForm(data={'name': 'New Sport', 'description': 'A team desc', 'role_0': 'yes a role'})
-        form_just_name = SportForm(data={'name': 'New Sport'})
+        form = SportForm(data={'name': 'New Sport', 'description': 'A team desc', 'role_0': 'yes a role',
+                               'role_0_count': 3})
 
         self.assertTrue(form.is_valid())
-        self.assertTrue(form_just_name.is_valid())
 
     def test_form_valid_with_image(self):
         with open(os.path.join(TEST_FILES_DIR, "sport.jpg"), "rb") as f:
             profile_picture = File(f, name="sport.jpg")
 
-        form = SportForm(data={'name': 'New Sport', 'description': 'A team desc', 'image': profile_picture})
+        form = SportForm(data={'name': 'New Sport', 'description': 'A team desc', 'image': profile_picture,
+                               'role_0': 'yes a role', 'role_0_count': 3})
 
         self.assertTrue(form.is_valid())
 
@@ -88,7 +88,6 @@ class JoinTeamFormTests(TestCase):
         form = JoinTeamForm(team=team, user=user, data={'role': '0'})
         self.assertTrue(form.is_valid())
 
-
     def test_role_not_picked_invalid(self):
         user = User.objects.create(username="testuser", password="testpassword")
         user_profile = UserProfile.objects.create(user=user, profile_picture=None)
@@ -105,20 +104,23 @@ class JoinTeamFormTests(TestCase):
 
 class UserAndUserProfileFormTests(TestCase):
     def test_user_form_valid(self):
-        form = UserForm(data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
-                                'email': 'test@test.com', 'password1': 'Testpassword123', 'password2': 'Testpassword123'})
+        form = UserForm(
+            data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
+                  'email': 'test@test.com', 'password1': 'Testpassword123', 'password2': 'Testpassword123'})
 
         self.assertTrue(form.is_valid())
 
     def test_user_form_different_passwords_invalid(self):
-        form = UserForm(data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
-                                'email': 'test@test.com', 'password1': 'Testpassword123', 'password2': 'Test'})
+        form = UserForm(
+            data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
+                  'email': 'test@test.com', 'password1': 'Testpassword123', 'password2': 'Test'})
 
         self.assertFalse(form.is_valid())
 
     def test_user_form_invalid_email(self):
-        form = UserForm(data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
-                                'email': 'test', 'password1': 'Testpassword123', 'password2': 'Testpassword123'})
+        form = UserForm(
+            data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
+                  'email': 'test', 'password1': 'Testpassword123', 'password2': 'Testpassword123'})
 
         self.assertFalse(form.is_valid())
 
