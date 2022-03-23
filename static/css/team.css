@@ -10,6 +10,8 @@
 #team-name{
     position: relative;
     left: 20px;
+    color:  deeppink;
+
 }
 
 
@@ -34,7 +36,7 @@
     font-size: medium;
     text-align:r=left;
     font-size: large;
-    color: deeppink;
+    color: var(--secondary_colour2);
 }
 
 #manager {
@@ -69,7 +71,7 @@
     position:relative;
     font-weight: bold;
     text-decoration: underline;
-    text-decoration-color: deeppink;
+    text-decoration-color: var(--secondary_colour2);
     text-align:left;
     font-size: large;
     color: black;
@@ -80,7 +82,7 @@
     font-weight: bold;
     text-align:right;
     font-size: large;
-    text-decoration-color: deeppink;
+    text-decoration-color: var(--secondary_colour2);
     padding-right: 4%;
 }
 
@@ -88,7 +90,7 @@
     position:relative;
     top: 20px;
     line-height: 20%;
-    border: 3px solid deeppink;
+    border: 3px solid var(--secondary_colour2);
     left: 20px;
 }
 
@@ -118,7 +120,7 @@
 
 
 .progress .progress-bar {
-    background:deeppink;
+    background:var(--secondary_colour2);
     height:30px;
     width:0%;
     display:inline-block;

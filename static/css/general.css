@@ -1,8 +1,8 @@
 :root{
 	--main_colour: #FBF6EF;
-	--main_colour2: lightgray;
+	--main_colour2: rgb(181, 212, 221);
 	--secondary_colour: #0C6E7D;
-	--secondary_colour2: #cc0066;
+	--secondary_colour2: deeppink;
 }
 
 
@@ -20,6 +20,22 @@ body {
 	font-size:32px;
 	margin: auto;
 	text-align: center;
-	text-shadow: 1px 1px var(--secondary_colour);
+	color: var(--secondary_colour);
+	-webkit-text-stroke: 2px deeppink;
+}
+
+#category-title2 {
+	font-size:32px;
+	margin: auto;
+	text-align: center;
+	color: var(--secondary_colour);
+	
+}
+
+#category-title3 {
+	font-size:32px;
+	margin: auto;
+	color: var(--secondary_colour);
+	
 }
 	

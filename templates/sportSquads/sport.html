@@ -27,7 +27,7 @@
             <p id="description"style=>{{ sport.description }}</p>
         </div>
 		<div class="banner" style="background-color: var(--main_colour); margin-bottom: 40px;">
-        <h2 id="category-title">Roles</h2>
+        <h2 id="category-title2">Roles</h2>
         {% if sport.roles %}
 			<ul class ="roles">
             {% for role, value in sport.roles.items %}
@@ -40,7 +40,7 @@
 		</div>
 
         <div id="box">
-            <h1>Teams</h1>
+            <h1 id ="category-title3">Teams</h1>
 
             {% if user_info %}
                 <a href="{% url 'add_new_team'  sport.name  %}">Create Team</a> <br />
