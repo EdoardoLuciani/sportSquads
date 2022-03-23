@@ -25,6 +25,10 @@ img#home-icon {
 	width: 25px;
 }
 
+img#logo-icon {
+	height: 35px;
+}
+
 img.profile {
 	display: block;
     position: relative;
