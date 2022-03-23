@@ -15,12 +15,12 @@
 {% endblock %}
 {% block bottom_block %}
 	<div class="tab half left shadow">
-		<h2>Teams</h2>
+		<h2>Joined Teams</h2>
 		<br>
 		{% if user_info.teamusermembership_set %}
 		<ul>
 			{% for team_user_relation in user_info.teamusermembership_set.all %}
-				{% if team_user_relation.manager != team_user_relation.user %}
+				{% if team_user_relation.team.manager != team_user_relation.user %}
 					<li>
 						<a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a>
 						<a href="/team/{{team_user_relation.team.name_slug}}/manage">Manage</a>
