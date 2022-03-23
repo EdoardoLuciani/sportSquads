@@ -33,6 +33,7 @@ urlpatterns = [
     path('login/', views.user_login, name='login'),
 
     path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
+    path('sport/<slug:sport_name_slug>/manage', views.manage_sport, name='manage_sport'),
     path('sport_get_10_more_teams/<slug:sport_name>/<int:starting_team_no>', views.sport_get_10_more_teams, name='sport_get_teams'),
 
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),

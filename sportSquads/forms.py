@@ -185,4 +185,6 @@ class ManageTeamForm(forms.Form):
         if commit:
             self.allowed_action_list[self.auth_level][self.cleaned_data['action']](self.user, self.team)
 
+class ManageSportForm(forms.Form):
+    pass
     
