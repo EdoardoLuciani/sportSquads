@@ -166,3 +166,31 @@ class SearchTeamFormTests(TestCase):
         self.assertFalse(form_search_no_filters.is_valid())
 
 
+class ManageTeamFormTests(TestCase):
+    def test_nothing_selected_invalid(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description",
+                                     author=user_profile, roles={'test role': 3})
+
+        team = Team.objects.create(name="test team", sport=sport, manager=user_profile,
+                                   available_roles=sport.roles)
+
+        manage_team_form = ManageTeamForm(user=user_profile, team=team, data={})
+
+        self.assertFalse(manage_team_form.is_valid())
+
+    def test_delete_team_selected_valid(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description",
+                                     author=user_profile, roles={'test role': 3})
+
+        team = Team.objects.create(name="test team", sport=sport, manager=user_profile,
+                                   available_roles=sport.roles)
+
+        manage_team_form = ManageTeamForm(user=user_profile, team=team, data={'action': 'Delete team'})
+
+        self.assertTrue(manage_team_form.is_valid())
