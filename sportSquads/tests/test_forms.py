@@ -194,3 +194,27 @@ class ManageTeamFormTests(TestCase):
         manage_team_form = ManageTeamForm(user=user_profile, team=team, data={'action': 'Delete team'})
 
         self.assertTrue(manage_team_form.is_valid())
+
+
+class ManageSportFormTests(TestCase):
+    def test_nothing_selected_invalid(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description",
+                                     author=user_profile, roles={'test role': 3})
+
+        manage_sport_form = ManageSportForm(user=user_profile, sport=sport, data={})
+
+        self.assertFalse(manage_sport_form.is_valid())
+
+    def test_delete_team_selected_valid(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description",
+                                     author=user_profile, roles={'test role': 3})
+
+        manage_sport_form = ManageSportForm(user=user_profile, sport=sport, data={'action': 'Delete sport'})
+
+        self.assertTrue(manage_sport_form.is_valid())
