@@ -49,7 +49,10 @@
 		{% endif %}
 		<h2>Created sport categories</h2>
 		{% for sport in user_info.sport_set.all %}
-			<li><a href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a></li>
+			<li>
+				<a href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
+				<a href="/sport/{{sport.name_slug}}/manage">Manage</a>
+			</li>
 		{% endfor %}
 	</div>
 
