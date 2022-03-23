@@ -69,7 +69,7 @@ class TeamFormTests(TestCase):
         self.assertRaises(KeyError, form.is_valid)
 
 
-class JoinTeamTests(TestCase):
+class JoinTeamFormTests(TestCase):
     def test_role_picked_valid(self):
         user = User.objects.create(username="testuser", password="testpassword")
         user_profile = UserProfile.objects.create(user=user, profile_picture=None)
@@ -97,3 +97,45 @@ class JoinTeamTests(TestCase):
         form = JoinTeamForm(team=team, user=user, data={})
         self.assertFalse(form.is_valid())
 
+
+class UserAndUserProfileFormTests(TestCase):
+    def test_user_form_valid(self):
+        form = UserForm(data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
+                                'email': 'test@test.com', 'password1': 'Testpassword123', 'password2': 'Testpassword123'})
+
+        self.assertTrue(form.is_valid())
+
+    def test_user_form_different_passwords_invalid(self):
+        form = UserForm(data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
+                                'email': 'test@test.com', 'password1': 'Testpassword123', 'password2': 'Test'})
+
+        self.assertFalse(form.is_valid())
+
+    def test_user_form_invalid_email(self):
+        form = UserForm(data={'username': 'test_username', 'first_name': 'test_first_name', 'last_name': 'test_last_name',
+                                'email': 'test', 'password1': 'Testpassword123', 'password2': 'Testpassword123'})
+
+        self.assertFalse(form.is_valid())
+
+    def test_user_form_null_invalid(self):
+        form = UserForm()
+
+        self.assertFalse(form.is_valid())
+
+    def test_user_profile_form_with_image_valid(self):
+        with open(os.path.join(TEST_FILES_DIR, "sport.jpg"), "rb") as f:
+            profile_picture = File(f, name="sport.jpg")
+
+        form = UserProfileForm(data={'profile_picture': profile_picture, 'bio': 'test text'})
+
+        self.assertTrue(form.is_valid())
+
+    def test_user_profile_form_without_image_valid(self):
+        form = UserProfileForm(data={'bio': 'test text'})
+
+        self.assertTrue(form.is_valid())
+
+    def test_user_profile_form_null_invalid(self):
+        form = UserProfileForm()
+
+        self.assertFalse(form.is_valid())
