@@ -62,13 +62,14 @@ class TeamFormTests(TestCase):
 
         sport = Sport.objects.create(name="test sport", image=None, description="test description",
                                      author=user_profile, roles={'test role': 3})
-        form = TeamForm(manager=user_profile, sport=sport, data={'initial_role': '0'})
+        form = TeamForm(manager=user_profile, sport=sport, data={})
+        form_with_role_chosen = TeamForm(manager=user_profile, sport=sport, data={'initial_role': '0'})
 
-        self.assertFalse(form.is_valid())
+        self.assertFalse(form_with_role_chosen.is_valid())
+        self.assertRaises(KeyError, form.is_valid)
 
 
 class JoinTeamTests(TestCase):
-
     def test_role_picked_valid(self):
         user = User.objects.create(username="testuser", password="testpassword")
         user_profile = UserProfile.objects.create(user=user, profile_picture=None)
@@ -80,5 +81,19 @@ class JoinTeamTests(TestCase):
                                    available_roles=sport.roles)
 
         form = JoinTeamForm(team=team, user=user, data={'role': '0'})
-
         self.assertTrue(form.is_valid())
+
+
+    def test_role_not_picked_invalid(self):
+        user = User.objects.create(username="testuser", password="testpassword")
+        user_profile = UserProfile.objects.create(user=user, profile_picture=None)
+
+        sport = Sport.objects.create(name="test sport", image=None, description="test description",
+                                     author=user_profile, roles={'test role': 3})
+
+        team = Team.objects.create(name="test team", sport=sport, manager=user_profile,
+                                   available_roles=sport.roles)
+
+        form = JoinTeamForm(team=team, user=user, data={})
+        self.assertFalse(form.is_valid())
+
