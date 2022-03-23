@@ -63,8 +63,8 @@ div.banner {
 	background-color: var(--secondary_colour);
 	text-transform: uppercase;
 	text-decoration: none;
-	text-shadow: -2px 3px #444;
-	color: #ddd;
+	text-shadow: -2px 3px deeppink;
+	color:var(--main_colour2);
 	opacity: 1;
 }
 

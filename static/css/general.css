@@ -2,7 +2,7 @@
 	--main_colour: #FBF6EF;
 	--main_colour2: rgb(181, 212, 221);
 	--secondary_colour: #0C6E7D;
-	--secondary_colour2: rgb(2, 64, 75);
+	--secondary_colour2: deeppink;
 }
 
 
@@ -20,7 +20,22 @@ body {
 	font-size:32px;
 	margin: auto;
 	text-align: center;
-	color: rgb(2, 64, 75);
-	-webkit-text-stroke: 1px var(--main_colour2);
+	color: var(--secondary_colour);
+	-webkit-text-stroke: 2px deeppink;
+}
+
+#category-title2 {
+	font-size:32px;
+	margin: auto;
+	text-align: center;
+	color: var(--secondary_colour);
+	
+}
+
+#category-title3 {
+	font-size:32px;
+	margin: auto;
+	color: var(--secondary_colour);
+	
 }
 	
