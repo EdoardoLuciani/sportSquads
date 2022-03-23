@@ -164,3 +164,5 @@ class SearchTeamFormTests(TestCase):
         form_search_no_filters = SearchTeamForm(data={'search_text': 'g'})
 
         self.assertFalse(form_search_no_filters.is_valid())
+
+
