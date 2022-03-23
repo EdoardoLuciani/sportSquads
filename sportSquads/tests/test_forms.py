@@ -12,8 +12,10 @@ class SportFormTests(TestCase):
 
     def test_form_valid_no_image(self):
         form = SportForm(data={'name': 'New Sport', 'description': 'A team desc', 'role_0': 'yes a role'})
+        form_just_name = SportForm(data={'name': 'New Sport'})
 
         self.assertTrue(form.is_valid())
+        self.assertTrue(form_just_name.is_valid())
 
     def test_form_valid_with_image(self):
         with open(os.path.join(TEST_FILES_DIR, "sport.jpg"), "rb") as f:
@@ -24,8 +26,11 @@ class SportFormTests(TestCase):
         self.assertTrue(form.is_valid())
 
     def test_null_form_invalid(self):
-        form = SportForm(data={})
-        self.assertFalse(form.is_valid())
+        form_all_null = SportForm(data={})
+        form_name_null = SportForm(data={'description': 'good desc'})
+
+        self.assertFalse(form_all_null.is_valid())
+        self.assertFalse(form_name_null.is_valid())
 
 
 class TeamFormTests(TestCase):
