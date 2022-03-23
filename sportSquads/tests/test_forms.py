@@ -139,3 +139,28 @@ class UserAndUserProfileFormTests(TestCase):
         form = UserProfileForm()
 
         self.assertFalse(form.is_valid())
+
+
+class SearchTeamFormTests(TestCase):
+    def test_search_with_text_input_valid(self):
+        form_search_team_name = SearchTeamForm(data={'search_text': 'g', 'filters_team_name': ['1']})
+        form_search_description = SearchTeamForm(data={'search_text': 'g', 'filters_team_name': ['2']})
+        form_search_location = SearchTeamForm(data={'search_text': 'g', 'filters_team_name': ['3']})
+        form_search_sport_name = SearchTeamForm(data={'search_text': 'g', 'filters_team_name': ['4']})
+        form_search_description_location = SearchTeamForm(data={'search_text': 'g', 'filters_team_name': ['2', '3']})
+
+        self.assertTrue(form_search_team_name.is_valid())
+        self.assertTrue(form_search_description.is_valid())
+        self.assertTrue(form_search_location.is_valid())
+        self.assertTrue(form_search_sport_name.is_valid())
+        self.assertTrue(form_search_description_location.is_valid())
+
+    def test_search_without_text_input_invalid(self):
+        form_search_no_text = SearchTeamForm(data={'filters_team_name': ['2']})
+
+        self.assertFalse(form_search_no_text.is_valid())
+
+    def test_search_without_filters_invalid(self):
+        form_search_no_filters = SearchTeamForm(data={'search_text': 'g'})
+
+        self.assertFalse(form_search_no_filters.is_valid())
