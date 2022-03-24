@@ -43,7 +43,7 @@
             <h1 id ="category-title3">Teams</h1>
 
             {% if user_info %}
-                <a href="{% url 'add_new_team'  sport.name_slug  %}">Create Team</a> <br />
+                <a href="{% url 'add_new_team' sport.name_slug %}">Create Team</a> <br />
             {% endif %}
 
             {% if teams %}

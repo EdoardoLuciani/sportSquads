@@ -23,7 +23,7 @@
 				{% if team_user_relation.team.manager != team_user_relation.user %}
 					<li>
 						<a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a>
-						<a href="/team/{{team_user_relation.team.name_slug}}/manage">Manage</a>
+						<a href="{% url 'manage_team' team_user_relation.team.name_slug %}">Manage</a>
 					</li>
 				{% endif %}
 			{% endfor %}
@@ -41,7 +41,7 @@
 				{% if team_user_relation.team.manager == team_user_relation.user %}
 					<li>
 						<a href="{% url 'show_team' team_user_relation.team.name_slug %}">{{ team_user_relation.team }} - {{ team_user_relation.role }}</a>
-						<a href="/team/{{team_user_relation.team.name_slug}}/manage">Manage</a>
+						<a href="{% url 'manage_team' team_user_relation.team.name_slug %}">Manage</a>
 					</li>
 				{% endif %}
 			{% endfor %}
@@ -51,7 +51,7 @@
 		{% for sport in user_info.sport_set.all %}
 			<li>
 				<a href="{% url 'show_sport' sport.name_slug %}">{{ sport.name }}</a>
-				<a href="/sport/{{sport.name_slug}}/manage">Manage</a>
+				<a href="{% url 'manage_sport' sport.name_slug %}">Manage</a>
 			</li>
 		{% endfor %}
 	</div>
