@@ -16,7 +16,7 @@
         <h1>Join {{ team.name }}</h1>
 
         {% if not member %}
-            <form id="join_team_form" method="post" action="/join-team/{{ team.name_slug }}/">
+            <form id="join_team_form" method="post" action="{% url 'join_team' team.name_slug %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" name="submit" value="Join Team" />

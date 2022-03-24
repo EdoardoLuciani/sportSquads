@@ -10,7 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/authentication.css' %}">
     <h1 id="web-title">Add a New Team</h1>
 	<div class="input-box" style="height:420px">
-		<form id="add_new_team" method="post" action = "/{{ sport_name_slug }}/add-team/" enctype="multipart/form-data">
+		<form id="add_new_team" method="post" action = "{% url 'add_new_team' sport_name_slug %}" enctype="multipart/form-data">
 			{% csrf_token %}
 			{{ form.as_p }}
 			<input type="submit" name="submit" value="Add New Team" />
