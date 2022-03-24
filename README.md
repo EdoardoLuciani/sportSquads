@@ -14,6 +14,9 @@ give a shot to a different team or even sport!
 Users can also join an unlimited number of teams through their
 account and try new sports along the way
 
+## Website walkthrough
+A website walkthrough is available on youtube [Video Link](https://youtu.be/L1i0CMaSGms)
+
 ## Getting started
 
 ### Dependencies
