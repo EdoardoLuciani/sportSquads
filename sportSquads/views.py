@@ -120,13 +120,13 @@ def join_team(request, team_name):
             print(form.errors)
     else:
         try:
-            context_dict['member'] = False
-            context_dict['team'] = Team.objects.get(name_slug=team_name)
-
             for member in context_dict['team'].teamusermembership_set.all():
                 if member.user == context_dict['user_info']:
                     context_dict['member'] = True
                     break
+            
+            if 'member' not in context_dict and not any(filter(lambda v: v != '0', context_dict['team'].available_roles.values())):
+                context_dict['full'] = True
             
             context_dict['form'] = JoinTeamForm(user=context_dict['user_info'], team=context_dict['team'])
 
@@ -205,10 +205,9 @@ def add_new_sport(request):
 
     if request.method == 'POST':
         form = SportForm(author=user_profile, data=request.POST, files=request.FILES)
-        
         if form.is_valid():
             form.save()
-            return redirect(reverse('home'))
+            return redirect(reverse('show_sport', args=(slugify(request.POST['name']),)))
         else:
             print(form.errors)
 
@@ -225,7 +224,7 @@ def add_new_team(request, sport_name_slug):
 
         if form.is_valid():
             form.save()
-            return redirect(reverse('home'))
+            return redirect(reverse('show_team', args=(slugify(request.POST['name']),)))
         else:
             print(form.errors)
 
@@ -246,13 +245,13 @@ def manage_team(request, team_name_slug):
         manage_team_form = ManageTeamForm(user=context_dict['user_info'], team=context_dict['team'], data=request.POST)
         if (manage_team_form.is_valid()):
             manage_team_form.save()
-        return redirect(reverse('home'))
+        return redirect(reverse('account_information'))
     else:
         try:
             context_dict['manage_team_form'] = ManageTeamForm(user=context_dict['user_info'], team=context_dict['team'])
             return render(request, "sportSquads/manage_team.html", context=context_dict)
         except:
-            return redirect(reverse('home'))
+            return redirect(reverse('account_information'))
 
 @login_required
 def manage_sport(request, sport_name_slug):
@@ -264,10 +263,10 @@ def manage_sport(request, sport_name_slug):
         manage_sport_form = ManageSportForm(user=context_dict['user_info'], sport=context_dict['sport'], data=request.POST)
         if (manage_sport_form.is_valid()):
             manage_sport_form.save()
-        return redirect(reverse('home'))
+        return redirect(reverse('account_information'))
     else:
         try:
             context_dict['manage_sport_form'] = ManageSportForm(user=context_dict['user_info'], sport=context_dict['sport'])
             return render(request, "sportSquads/manage_sport.html", context=context_dict)
         except:
-            return redirect(reverse('home'))
+            return redirect(reverse('account_information'))

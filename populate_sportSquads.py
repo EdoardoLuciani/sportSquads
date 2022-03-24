@@ -126,7 +126,7 @@ def populate():
             "image_path": os.path.join(sport_images_initial_path, "tennis.jpg"),
             "description": "",
             "author": User.objects.get(username="NikocadoAvocado").userprofile,
-            "roles": {"player1": "1", "player2": "1"},
+            "roles": {"player1": "1"},
         },
     ]
 

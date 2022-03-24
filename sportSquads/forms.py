@@ -33,6 +33,9 @@ class SportForm(forms.ModelForm):
         if not roles:
             raise forms.ValidationError('No roles created')
 
+        if Sport.objects.filter(name=self.cleaned_data['name']).exists():
+            raise forms.ValidationError('Sport with this name already exists')
+
         self.cleaned_data['roles'] = roles
 
     def save(self, commit=True):
@@ -68,6 +71,9 @@ class TeamForm(forms.ModelForm):
             self.cleaned_data['initial_role'] = filtered_roles[0][1]
         else:
             raise forms.ValidationError('Role is not available')
+
+        if Team.objects.filter(name=self.cleaned_data['name']).exists():
+            raise forms.ValidationError('Team with this name already exists')
 
     def save(self, commit=True):
         obj = super(TeamForm, self).save(commit=False)

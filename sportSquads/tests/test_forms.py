@@ -67,8 +67,8 @@ class TeamFormTests(TestCase):
 
         sport = Sport.objects.create(name="test sport", image=None, description="test description",
                                      author=user_profile, roles={'test role': 3})
-        form = TeamForm(manager=user_profile, sport=sport, data={})
-        form_with_role_chosen = TeamForm(manager=user_profile, sport=sport, data={'initial_role': '0'})
+        form = TeamForm(manager=user_profile, sport=sport, data={'name': 'test form1'})
+        form_with_role_chosen = TeamForm(manager=user_profile, sport=sport, data={'name': 'test form2', 'initial_role': '0'})
 
         self.assertFalse(form_with_role_chosen.is_valid())
         self.assertRaises(KeyError, form.is_valid)
