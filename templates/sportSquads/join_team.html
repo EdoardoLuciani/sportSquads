@@ -15,15 +15,16 @@
     {% if team %}
         <h1>Join {{ team.name }}</h1>
 
-        {% if not member %}
+        {% if member %}
+            <h2>You are already a member of this team.</h2>
+        {% elif full %}
+            <h2>No spaces left in the team.</h2>
+        {% else %}
             <form id="join_team_form" method="post" action="{% url 'join_team' team.name_slug %}">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input type="submit" name="submit" value="Join Team" />
             </form>
-        
-        {% else %}
-            <h2>You are already a member of this team.</h2>
         {% endif %}
     {% endif %}
 {% endblock %}
