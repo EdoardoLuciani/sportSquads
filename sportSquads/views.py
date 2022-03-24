@@ -205,10 +205,9 @@ def add_new_sport(request):
 
     if request.method == 'POST':
         form = SportForm(author=user_profile, data=request.POST, files=request.FILES)
-        
         if form.is_valid():
             form.save()
-            return redirect(reverse('home'))
+            return redirect(reverse('show_sport', args=(slugify(request.POST['name']),)))
         else:
             print(form.errors)
 
@@ -225,7 +224,7 @@ def add_new_team(request, sport_name_slug):
 
         if form.is_valid():
             form.save()
-            return redirect(reverse('home'))
+            return redirect(reverse('show_team', args=(slugify(request.POST['name']),)))
         else:
             print(form.errors)
 
