@@ -36,12 +36,12 @@ LOGIN_URL = '/login/'
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-007t%c6vul&i552hjc$1t14lrqwy$2%ip6201hd)#9ze!a@bj#'
+SECRET_KEY = 'j1ptz_z0hgk_d7m=k$f1*ti4sdce5k)#_1q&&mfx-_e&k=#f0t'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
