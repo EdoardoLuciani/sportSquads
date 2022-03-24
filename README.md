@@ -25,7 +25,7 @@ django==4.0.2`
 
 ### Initialize the database (SQLite)
 
-Once you cloned the repo, navigate to the newly created directory, and input these commands to create and setup the underlying database:
+Once you cloned the repo, navigate to the newly created directory, and input the following command to create and setup the underlying database:
 
 `python manage.py migrate`
 
@@ -33,7 +33,7 @@ Once you cloned the repo, navigate to the newly created directory, and input the
 
 `python manage.py createsuperuser`
 
-Then run the population script to populate it with sample data (it takes a while so give it a little bit of time)
+(Optional) Run the population script to populate it with sample data (it takes a while so give it a little bit of time)
 
 `python populate_sportSquads.py`
 
