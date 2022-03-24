@@ -125,7 +125,7 @@ def join_team(request, team_name):
                     context_dict['member'] = True
                     break
             
-            if 'member' not in context_dict and not any(filter(lambda v: v != '0', context_dict['team'].available_roles.values())):
+            if 'member' not in context_dict and not next((v for v in context_dict['team'].available_roles.values() if v != '0'), None):
                 context_dict['full'] = True
             
             context_dict['form'] = JoinTeamForm(user=context_dict['user_info'], team=context_dict['team'])
