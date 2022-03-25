@@ -40,7 +40,7 @@ urlpatterns = [
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
     path('team/<slug:team_name_slug>/manage', views.manage_team, name='manage_team'),
     path('join-team/<slug:team_name>/', views.join_team, name='join_team'),
-    path('<slug:sport_name_slug>/add-team/', views.add_new_team, name='add_new_team'),
+    path('add-team/<slug:sport_name_slug>', views.add_new_team, name='add_new_team'),
 
     path('account', views.account_information, name='account_information'),
     path('logout/', views.user_logout, name='logout'),
