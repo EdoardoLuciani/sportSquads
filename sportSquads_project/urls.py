@@ -32,6 +32,7 @@ urlpatterns = [
     path('contact-us', views.contact_us, name='contact_us'),
     path('login/', views.user_login, name='login'),
 
+    path('add-sport/', views.add_new_sport, name='add_new_sport'),
     path('sport/<slug:sport_name_slug>/', views.show_sport, name='show_sport'),
     path('sport/<slug:sport_name_slug>/manage', views.manage_sport, name='manage_sport'),
     path('sport_get_10_more_teams/<slug:sport_name>/<int:starting_team_no>', views.sport_get_10_more_teams, name='sport_get_teams'),
@@ -39,10 +40,9 @@ urlpatterns = [
     path('team/<slug:team_name_slug>/', views.show_team, name='show_team'),
     path('team/<slug:team_name_slug>/manage', views.manage_team, name='manage_team'),
     path('join-team/<slug:team_name>/', views.join_team, name='join_team'),
+    path('<slug:sport_name_slug>/add-team/', views.add_new_team, name='add_new_team'),
 
     path('account', views.account_information, name='account_information'),
-    path('add-sport/', views.add_new_sport, name='add_new_sport'),
     path('logout/', views.user_logout, name='logout'),
-    path('<slug:sport_name_slug>/add-team/', views.add_new_team, name='add_new_team'),
     
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
